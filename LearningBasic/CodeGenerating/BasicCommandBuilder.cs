@@ -1,4 +1,4 @@
-﻿namespace Basic.CodeGenerating
+﻿namespace LearningBasic.CodeGenerating
 {
     using System;
     using System.Collections.Generic;

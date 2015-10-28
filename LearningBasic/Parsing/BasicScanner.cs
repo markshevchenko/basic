@@ -1,7 +1,6 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Text;
 

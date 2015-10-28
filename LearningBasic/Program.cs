@@ -1,8 +1,8 @@
-﻿namespace Basic
+﻿namespace LearningBasic
 {
     using System.Reflection;
-    using Basic.CodeGenerating;
-    using Basic.Parsing;
+    using LearningBasic.CodeGenerating;
+    using LearningBasic.Parsing;
 
     class Program
     {

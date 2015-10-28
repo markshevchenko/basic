@@ -1,4 +1,4 @@
-﻿namespace Basic
+﻿namespace LearningBasic
 {
     /// <summary>
     /// Declares the interface of the syntax analyzer (parser) of a line-based language.

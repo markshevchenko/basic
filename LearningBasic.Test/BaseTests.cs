@@ -1,7 +1,7 @@
-﻿namespace Basic.Test
+﻿namespace LearningBasic.Test
 {
     using System.IO;
-    using Basic.Parsing;
+    using LearningBasic.Parsing;
 
     public abstract class BaseTests
     {

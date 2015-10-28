@@ -1,4 +1,4 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using System;
     using System.Collections.Generic;
@@ -73,7 +73,7 @@
             var result = parser(scanner);
 
             if (result == null)
-                throw new ParserException(errorFormat, errorArgs);
+                throw new ParserException(string.Format(errorFormat, errorArgs));
 
             return result;
         }

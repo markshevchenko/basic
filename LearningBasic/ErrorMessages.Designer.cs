@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Basic {
+namespace LearningBasic
+{
     using System;
     
     

@@ -1,8 +1,6 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using System;
-
-    public class UnexpectedEndOfFileException : ParserException
+    public sealed class UnexpectedEndOfFileException : ParserException
     {
         public UnexpectedEndOfFileException()
             : base(ErrorMessages.UnexpectedEndOfFile)

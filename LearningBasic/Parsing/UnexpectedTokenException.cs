@@ -1,11 +1,9 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using System;
-
-    public class UnexpectedTokenException : ParserException
+    public sealed class UnexpectedTokenException : ParserException
     {
         public UnexpectedTokenException(object expectedToken, object actualToken)
-            : base(ErrorMessages.UnexpectedToken, expectedToken, actualToken)
+            : base(string.Format(ErrorMessages.UnexpectedToken, expectedToken, actualToken))
         { }
     }
 }

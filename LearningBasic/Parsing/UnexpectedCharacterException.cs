@@ -1,8 +1,6 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using System;
-
-    public class UnexpectedCharacterException : ParserException
+    public sealed class UnexpectedCharacterException : ParserException
     {
         public UnexpectedCharacterException(char character)
             : base(string.Format(ErrorMessages.UnexpectedCharacter, character))

@@ -1,4 +1,4 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using System;
     using System.IO;

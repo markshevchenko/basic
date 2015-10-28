@@ -1,8 +1,7 @@
-﻿namespace Basic.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using System;
-using System.Collections.Generic;
-    using System.Linq;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Incapsulates syntax rule.
@@ -70,7 +69,7 @@ using System.Collections.Generic;
             if (this.IsSuccessful)
             {
                 if (!this.scanner.TryReadToken(token))
-                    throw new ParserException(exceptionFormat, exceptionArgs);
+                    throw new ParserException(string.Format(exceptionFormat, exceptionArgs));
             }
 
             return this;
@@ -81,7 +80,7 @@ using System.Collections.Generic;
             if (this.IsSuccessful)
             {
                 if (!this.scanner.TryReadToken(token, out text))
-                    throw new ParserException(exceptionFormat, exceptionArgs);
+                    throw new ParserException(string.Format(exceptionFormat, exceptionArgs));
             }
             else
                 text = null;
@@ -94,7 +93,7 @@ using System.Collections.Generic;
             if (this.IsSuccessful)
             {
                 if (!this.scanner.TryReadNode(parser, out node))
-                    throw new ParserException(exceptionFormat, exceptionArgs);
+                    throw new ParserException(string.Format(exceptionFormat, exceptionArgs));
             }
             else
                 node = null;
@@ -109,7 +108,7 @@ using System.Collections.Generic;
                 nodeList = listParser(this.scanner);
 
                 if (nodeList == null || nodeList.Count == 0)
-                    throw new ParserException(exceptionFormat, exceptionArgs);
+                    throw new ParserException(string.Format(exceptionFormat, exceptionArgs));
             }
             else
                 nodeList = new List<AstNode<TTag>>();
