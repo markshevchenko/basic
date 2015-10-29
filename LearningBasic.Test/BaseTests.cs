@@ -2,6 +2,7 @@
 {
     using System.IO;
     using LearningBasic.Parsing;
+    using LearningBasic.Test.Mocks;
 
     public abstract class BaseTests
     {
@@ -20,6 +21,11 @@
         protected static IParser<Tag> MakeParser()
         {
             return new BasicParser(new BasicScannerFactory());
+        }
+
+        protected static MockInputOutput MakeInputOutput(string inputString)
+        {
+            return new MockInputOutput(inputString);
         }
     }
 }
