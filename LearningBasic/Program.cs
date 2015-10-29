@@ -4,8 +4,6 @@
     using LearningBasic.Compiling;
     using LearningBasic.Parsing;
     using LearningBasic.RunTime;
-    using LearningBasic.Evaluating;
-    using System;
 
     class Program
     {

@@ -48,9 +48,13 @@
                 var result = Evaluate(line);
                 Print(result);
             }
-            catch (Exception exception)
+            catch (BasicException exception)
             {
                 rte.InputOutput.WriteLine(exception.Message);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

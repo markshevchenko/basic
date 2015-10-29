@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class CompilerException : Exception
+    public class CompilerException : BasicException
     {
         public CompilerException()
             : base()

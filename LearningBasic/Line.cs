@@ -55,7 +55,7 @@
             if (number < MinNumber || number > MaxNumber)
             {
                 var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
-                throw new Exception(message);
+                throw new BasicException(message);
             }
 
             return number;
@@ -76,7 +76,7 @@
             catch (Exception exception)
             {
                 var message = string.Format(ErrorMessages.CantParseLineNumber, s);
-                throw new Exception(message, exception);
+                throw new BasicException(message, exception);
             }
         }
     }

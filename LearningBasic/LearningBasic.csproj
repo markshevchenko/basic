@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AstNode.cs" />
-    <Compile Include="Evaluating\EvaluatorException.cs" />
+    <Compile Include="BasicException.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="IStatement.cs" />
     <Compile Include="RunTime\BuiltInFunctions.cs" />

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ParserException : Exception
+    public class ParserException : BasicException
     {
         public ParserException()
             : base()
