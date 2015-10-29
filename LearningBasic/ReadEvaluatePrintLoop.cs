@@ -11,7 +11,8 @@
     {
         private readonly IRunTimeEnvironment rte;
         private readonly IParser<TTag> parser;
-        private readonly ICompiler<TTag> compiler;
+        private readonly ICodeGenerator<TTag> codeGenerator;
+        private readonly ICodeFormatter<TTag> codeFormatter;
 
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified loop has been terminated.
@@ -23,8 +24,13 @@
         /// </summary>
         /// <param name="rte"></param>
         /// <param name="parser"></param>
-        /// <param name="compiler"></param>
-        public ReadEvaluatePrintLoop(IRunTimeEnvironment rte, IParser<TTag> parser, ICompiler<TTag> compiler)
+        /// <param name="codeGenerator"></param>
+        /// <param name="codeFormatter"></param>
+        public ReadEvaluatePrintLoop(
+            IRunTimeEnvironment rte,
+            IParser<TTag> parser,
+            ICodeGenerator<TTag> codeGenerator,
+            ICodeFormatter<TTag> codeFormatter)
         {
             if (rte == null)
                 throw new ArgumentNullException("rte");
@@ -32,12 +38,16 @@
             if (parser == null)
                 throw new ArgumentNullException("parser");
 
-            if (compiler == null)
-                throw new ArgumentNullException("compiler");
+            if (codeGenerator == null)
+                throw new ArgumentNullException("codeGenerator");
+
+            if (codeFormatter == null)
+                throw new ArgumentNullException("codeFormatter");
 
             this.rte = rte;
             this.parser = parser;
-            this.compiler = compiler;
+            this.codeGenerator = codeGenerator;
+            this.codeFormatter = codeFormatter;
         }
 
         public void TakeStep()
@@ -67,15 +77,16 @@
 
         public string Evaluate(Line<TTag> line)
         {
-            var statement = compiler.Compile(line.Statement);
+            var compiledStatement = codeGenerator.Generate(line.Statement);
 
             if (line.Number.HasValue)
             {
-                rte.Statements[line.Number.Value] = statement;
-                return statement.ToString();
+                var sourceCode = codeFormatter.Format(line.Statement);
+                rte.Statements[line.Number.Value] = new Statement(sourceCode, compiledStatement);
+                return compiledStatement.ToString();
             }
             else
-                return statement.Run(rte);
+                return compiledStatement(rte);
         }
 
         public void Print(string result)

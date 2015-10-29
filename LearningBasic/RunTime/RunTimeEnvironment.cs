@@ -19,10 +19,10 @@
             InputOutput = inputOutput;
             IsClosed = false;
             Variables = new Dictionary<string, dynamic>();
-            Statements = new SortedList<int, IStatement>();
+            Statements = new SortedList<int, Statement>();
         }
 
-        public SortedList<int, IStatement> Statements { get; private set; }
+        public SortedList<int, Statement> Statements { get; private set; }
 
         public void Close()
         {

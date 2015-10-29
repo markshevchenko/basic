@@ -25,7 +25,7 @@
         /// <summary>
         /// Gets the sorted statements' list.
         /// </summary>
-        SortedList<int, IStatement> Statements { get; }
+        SortedList<int, Statement> Statements { get; }
 
         /// <summary>
         /// Closes the run-time environment.

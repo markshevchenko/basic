@@ -13,15 +13,9 @@
     /// <summary>
     /// Implements the <see cref="Command">command</see> builder (code generator).
     /// </summary>
-    public class BasicCompiler : ICompiler<Tag>
+    public class BasicCodeGenerator : ICodeGenerator<Tag>
     {
-        public IStatement Compile(AstNode<Tag> statement)
-        {
-            var function = CompileToFunction(statement);
-            return new BasicStatement(statement, function);
-        }
-
-        public Func<IRunTimeEnvironment, string> CompileToFunction(AstNode<Tag> statement)
+        public Func<IRunTimeEnvironment, string> Generate(AstNode<Tag> statement)
         {
             switch (statement.Tag)
             {
@@ -215,7 +209,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand"),
                 };
 
-                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCompiler), operandInfos);
+                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCodeGenerator), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), operand);
             };
         }
@@ -234,7 +228,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand2"),
                 };
 
-                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCompiler), operandInfos);
+                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCodeGenerator), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), leftOperand, rightOperand);
             };
         }

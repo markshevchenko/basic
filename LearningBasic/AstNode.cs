@@ -28,6 +28,12 @@
         /// </summary>
         public IReadOnlyList<AstNode<TTag>> Children { get; private set; }
 
+        /// <summary>
+        /// Creates an instance of <see cref="AstNode{TTag}"/>.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="text">The text assiciated with the node.</param>
+        /// <param name="children">The children nodes.</param>
         public AstNode(TTag tag, string text, params AstNode<TTag>[] children)
         {
             Tag = tag;
@@ -35,6 +41,12 @@
             Children = children;
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="AstNode{TTag}"/>.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="text">The text assiciated with the node.</param>
+        /// <param name="children">The children nodes.</param>
         public AstNode(TTag tag, string text, IEnumerable<AstNode<TTag>> children)
         {
             Tag = tag;
@@ -42,14 +54,28 @@
             Children = (children ?? new AstNode<TTag>[0]).ToList();
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="AstNode{TTag}"/>.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="children">The children nodes.</param>
         public AstNode(TTag tag, params AstNode<TTag>[] children)
             : this(tag, null, children)
         { }
 
+        /// <summary>
+        /// Creates an instance of <see cref="AstNode{TTag}"/>.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="children">The children nodes.</param>
         public AstNode(TTag tag, IEnumerable<AstNode<TTag>> children)
             : this(tag, null, children)
         { }
 
+        /// <summary>
+        /// Creates an instance of <see cref="AstNode{TTag}"/>.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
         public AstNode(TTag tag)
             : this(tag, (string)null)
         { }

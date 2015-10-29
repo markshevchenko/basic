@@ -13,8 +13,9 @@
             var rte = new RunTimeEnvironment(inputOutput);
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
-            var commandBuilder = new BasicCompiler();
-            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop<Tag>(rte, parser, commandBuilder);
+            var codeGenerator = new BasicCodeGenerator();
+            var codeFormatter = new BasicCodeFormatter();
+            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop<Tag>(rte, parser, codeGenerator, codeFormatter);
 
             PrintSalute(inputOutput);
             Run(readEvaluatePrintLoop);
