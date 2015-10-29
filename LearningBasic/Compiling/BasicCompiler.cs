@@ -13,14 +13,20 @@
     /// <summary>
     /// Implements the <see cref="Command">command</see> builder (code generator).
     /// </summary>
-    public class BasicStatementCompiler : IStatementCompiler<Tag>
+    public class BasicCompiler : ICompiler<Tag>
     {
-        public Action<IRunTimeEnvironment> Compile(AstNode<Tag> statement)
+        public IStatement Compile(AstNode<Tag> statement)
+        {
+            var function = CompileToFunction(statement);
+            return new BasicStatement(statement, function);
+        }
+
+        public Func<IRunTimeEnvironment, string> CompileToFunction(AstNode<Tag> statement)
         {
             switch (statement.Tag)
             {
                 case Tag.Quit:
-                    return (rte) => rte.Close();
+                    return (rte) => { rte.Close(); return string.Empty; };
 
                 case Tag.Let:
                     return BuildLet(statement);
@@ -39,7 +45,7 @@
             }
         }
 
-        private static Action<IRunTimeEnvironment> BuildPrint(AstNode<Tag> statement)
+        private static Func<IRunTimeEnvironment, string> BuildPrint(AstNode<Tag> statement)
         {
             return (rte) =>
             {
@@ -53,28 +59,33 @@
                     var stringExpression = Expression.Call(convertibleExpression, toStringMethod, invariantCultureExpression);
                     var getValue = Expression.Lambda<Func<string>>(stringExpression)
                                              .Compile();
+
                     rte.InputOutput.Write(getValue());
                 }
+
+                return string.Empty;
             };
         }
 
-        private static Action<IRunTimeEnvironment> BuildPrintLine(AstNode<Tag> statement)
+        private static Func<IRunTimeEnvironment, string> BuildPrintLine(AstNode<Tag> statement)
         {
             var printCommand = BuildPrint(statement);
 
             return (rte) =>
             {
-                printCommand(rte);
+                var result = printCommand(rte);
                 rte.InputOutput.WriteLine();
+                return result;
             };
         }
 
-        private static Action<IRunTimeEnvironment> BuildInput(AstNode<Tag> statement)
+        private static Func<IRunTimeEnvironment, string> BuildInput(AstNode<Tag> statement)
         {
             return (rte) =>
             {
                 rte.InputOutput.Write(statement.Text);
                 var line = rte.InputOutput.ReadLine();
+                var inputValues = new List<object>();
 
                 foreach (var lValueNode in statement.Children)
                 {
@@ -93,17 +104,20 @@
                         constant = Expression.Constant(line);
                     var objectConstant = Expression.Convert(constant, typeof(object));
                     var assignment = Expression.Assign(lValue, objectConstant);
-                    var compiledAssignment = Expression.Lambda<Action>(assignment)
+                    var compiledAssignment = Expression.Lambda<Func<object>>(assignment)
                                                        .Compile();
-                    compiledAssignment();
+
+                    inputValues.Add(compiledAssignment());
                 }
+
+                return string.Join(", ", inputValues);
             };
         }
 
         private delegate Expression CommandExpression(IRunTimeEnvironment runtimeSystem);
         private static readonly PropertyInfo dictionaryItemPropertyInfo = typeof(IDictionary<string, dynamic>).GetProperty("Item");
 
-        public static Action<IRunTimeEnvironment> BuildLet(AstNode<Tag> statement)
+        public static Func<IRunTimeEnvironment, string> BuildLet(AstNode<Tag> statement)
         {
             var leftNode = statement.Children[0];
             var rightNode = statement.Children[1];
@@ -115,9 +129,10 @@
                 var leftExpression = leftCommandExpression(rte);
                 var rightExpression = rightCommandExpression(rte);
                 var assignment = Expression.Assign(leftExpression, rightExpression);
-                var compiledAssignment = Expression.Lambda<Action>(assignment)
+                var compiledAssignment = Expression.Lambda<Func<object>>(assignment)
                                                    .Compile();
-                compiledAssignment();
+                var value = compiledAssignment();
+                return value.ToString();
             };
         }
 
@@ -200,7 +215,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand"),
                 };
 
-                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicStatementCompiler), operandInfos);
+                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCompiler), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), operand);
             };
         }
@@ -219,7 +234,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand2"),
                 };
 
-                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicStatementCompiler), operandInfos);
+                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCompiler), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), leftOperand, rightOperand);
             };
         }

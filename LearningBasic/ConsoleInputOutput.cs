@@ -1,4 +1,4 @@
-﻿namespace LearningBasic.Console
+﻿namespace LearningBasic
 {
     using System;
 

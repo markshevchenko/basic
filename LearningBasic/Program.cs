@@ -4,21 +4,22 @@
     using LearningBasic.Compiling;
     using LearningBasic.Parsing;
     using LearningBasic.RunTime;
-    using LearningBasic.Console;
+    using LearningBasic.Evaluating;
+    using System;
 
     class Program
     {
         private static void Main(string[] args)
         {
             var inputOutput = new ConsoleInputOutput();
-            var runtimeSystem = new RunTimeEnvironment(inputOutput);
+            var rte = new RunTimeEnvironment(inputOutput);
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
-            var commandBuilder = new BasicStatementCompiler();
-            var repl = new ReadEvaluatePrintLoop(runtimeSystem, parser, commandBuilder);
+            var commandBuilder = new BasicCompiler();
+            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop<Tag>(rte, parser, commandBuilder);
 
             PrintSalute(inputOutput);
-            repl.Run();
+            Run(readEvaluatePrintLoop);
         }
 
         private static void PrintSalute(IInputOutput inputOutput)
@@ -37,10 +38,17 @@
         private static void PrintCopyright(IInputOutput inputOutput, Assembly assembly)
         {
             var attribute = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
-            if (attribute == null)
-                return;
+            if (attribute != null)
+                inputOutput.WriteLine(attribute.Copyright);
+        }
 
-            inputOutput.WriteLine(attribute.Copyright);
+        private static void Run(ReadEvaluatePrintLoop<Tag> readEvaluatePrintLoop)
+        {
+            do
+            {
+                readEvaluatePrintLoop.TakeStep();
+            }
+            while (!readEvaluatePrintLoop.IsTerminated);
         }
     }
 }

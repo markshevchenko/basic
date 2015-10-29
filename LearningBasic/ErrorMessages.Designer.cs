@@ -61,6 +61,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t parse line number &apos;{0}&apos;..
+        /// </summary>
+        internal static string CantParseLineNumber {
+            get {
+                return ResourceManager.GetString("CantParseLineNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must specify at least one variable in the INPUT statement..
         /// </summary>
         internal static string EmptyVariableListInInput {
@@ -88,7 +97,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The line number must belong to the range of 1 to 99999..
+        ///   Looks up a localized string similar to The line number must belong to the range of {0} to {1}..
         /// </summary>
         internal static string LineNumberOutOfRange {
             get {
