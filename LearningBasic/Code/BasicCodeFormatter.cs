@@ -1,4 +1,4 @@
-﻿namespace LearningBasic.Compiling
+﻿namespace LearningBasic.Code
 {
     using System;
 

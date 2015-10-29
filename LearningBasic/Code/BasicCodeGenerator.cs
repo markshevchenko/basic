@@ -1,11 +1,10 @@
-﻿namespace LearningBasic.Compiling
+﻿namespace LearningBasic.Code
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq.Expressions;
     using System.Reflection;
-    using LearningBasic.RunTime;
     using Microsoft.CSharp.RuntimeBinder;
 
     using CSharpBinder = Microsoft.CSharp.RuntimeBinder.Binder;
@@ -35,7 +34,7 @@
                     return BuildInput(statement);
 
                 default:
-                    throw new CompilerException(string.Format(ErrorMessages.UnrecognizedStatement, statement.Tag));
+                    throw new CodeException(string.Format(ErrorMessages.UnrecognizedStatement, statement.Tag));
             }
         }
 

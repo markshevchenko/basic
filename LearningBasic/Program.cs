@@ -1,7 +1,7 @@
 ﻿namespace LearningBasic
 {
     using System.Reflection;
-    using LearningBasic.Compiling;
+    using LearningBasic.Code;
     using LearningBasic.Parsing;
     using LearningBasic.RunTime;
 
