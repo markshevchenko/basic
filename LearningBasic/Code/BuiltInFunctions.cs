@@ -1,4 +1,4 @@
-﻿namespace LearningBasic.RunTime
+﻿namespace LearningBasic.Code
 {
     using System;
 

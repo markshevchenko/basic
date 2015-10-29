@@ -57,12 +57,12 @@
   <ItemGroup>
     <Compile Include="AstNode.cs" />
     <Compile Include="BasicException.cs" />
-    <Compile Include="Compiling\BasicCodeFormatter.cs" />
+    <Compile Include="Code\BasicCodeFormatter.cs" />
     <Compile Include="ICodeFormatter.cs" />
     <Compile Include="Line.cs" />
-    <Compile Include="RunTime\BuiltInFunctions.cs" />
-    <Compile Include="Compiling\BasicCodeGenerator.cs" />
-    <Compile Include="Compiling\CompilerException.cs" />
+    <Compile Include="Code\BuiltInFunctions.cs" />
+    <Compile Include="Code\BasicCodeGenerator.cs" />
+    <Compile Include="Code\CodeException.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="ConsoleInputOutput.cs" />
     <Compile Include="ICodeGenerator.cs" />

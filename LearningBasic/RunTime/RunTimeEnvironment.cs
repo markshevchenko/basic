@@ -11,6 +11,8 @@
 
         public IDictionary<string, dynamic> Variables { get; private set; }
 
+        public SortedList<int, Statement> Statements { get; private set; }
+
         public RunTimeEnvironment(IInputOutput inputOutput)
         {
             if (inputOutput == null)
@@ -21,8 +23,6 @@
             Variables = new Dictionary<string, dynamic>();
             Statements = new SortedList<int, Statement>();
         }
-
-        public SortedList<int, Statement> Statements { get; private set; }
 
         public void Close()
         {
