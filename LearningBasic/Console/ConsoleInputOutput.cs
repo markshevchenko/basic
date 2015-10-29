@@ -1,4 +1,4 @@
-﻿namespace LearningBasic
+﻿namespace LearningBasic.Console
 {
     using System;
 
@@ -14,14 +14,24 @@
             Console.Write(s);
         }
 
-        public void WriteLine()
+        public void Write(string format, params object[] args)
         {
-            Console.WriteLine();
+            Console.Write(format, args);
         }
 
         public void WriteLine(string s)
         {
             Console.WriteLine(s);
+        }
+
+        public void WriteLine(string format, params object[] args)
+        {
+            Console.WriteLine(format, args);
+        }
+
+        public void WriteLine()
+        {
+            Console.WriteLine();
         }
     }
 }

@@ -1,24 +1,26 @@
-﻿namespace LearningBasic.CodeGenerating
+﻿namespace LearningBasic.Compiling
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq.Expressions;
     using System.Reflection;
+    using LearningBasic.RunTime;
     using Microsoft.CSharp.RuntimeBinder;
+
     using CSharpBinder = Microsoft.CSharp.RuntimeBinder.Binder;
 
     /// <summary>
     /// Implements the <see cref="Command">command</see> builder (code generator).
     /// </summary>
-    public class BasicCommandBuilder : ICommandBuilder<Tag>
+    public class BasicStatementCompiler : IStatementCompiler<Tag>
     {
-        public Command Build(AstNode<Tag> statement)
+        public Action<IRunTimeEnvironment> Compile(AstNode<Tag> statement)
         {
             switch (statement.Tag)
             {
                 case Tag.Quit:
-                    return (rte) => rte.Terminate();
+                    return (rte) => rte.Close();
 
                 case Tag.Let:
                     return BuildLet(statement);
@@ -33,11 +35,11 @@
                     return BuildInput(statement);
 
                 default:
-                    throw new Exception();
+                    throw new CompilerException(string.Format(ErrorMessages.UnrecognizedStatement, statement.Tag));
             }
         }
 
-        private static Command BuildPrint(AstNode<Tag> statement)
+        private static Action<IRunTimeEnvironment> BuildPrint(AstNode<Tag> statement)
         {
             return (rte) =>
             {
@@ -56,7 +58,7 @@
             };
         }
 
-        private static Command BuildPrintLine(AstNode<Tag> statement)
+        private static Action<IRunTimeEnvironment> BuildPrintLine(AstNode<Tag> statement)
         {
             var printCommand = BuildPrint(statement);
 
@@ -67,7 +69,7 @@
             };
         }
 
-        private static Command BuildInput(AstNode<Tag> statement)
+        private static Action<IRunTimeEnvironment> BuildInput(AstNode<Tag> statement)
         {
             return (rte) =>
             {
@@ -101,7 +103,7 @@
         private delegate Expression CommandExpression(IRunTimeEnvironment runtimeSystem);
         private static readonly PropertyInfo dictionaryItemPropertyInfo = typeof(IDictionary<string, dynamic>).GetProperty("Item");
 
-        public static Command BuildLet(AstNode<Tag> statement)
+        public static Action<IRunTimeEnvironment> BuildLet(AstNode<Tag> statement)
         {
             var leftNode = statement.Children[0];
             var rightNode = statement.Children[1];
@@ -198,7 +200,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand"),
                 };
 
-                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCommandBuilder), operandInfos);
+                var binder = CSharpBinder.UnaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicStatementCompiler), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), operand);
             };
         }
@@ -217,7 +219,7 @@
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "operand2"),
                 };
 
-                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicCommandBuilder), operandInfos);
+                var binder = CSharpBinder.BinaryOperation(CSharpBinderFlags.None, operationType, typeof(BasicStatementCompiler), operandInfos);
                 return Expression.Dynamic(binder, typeof(object), leftOperand, rightOperand);
             };
         }

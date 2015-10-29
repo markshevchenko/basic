@@ -61,7 +61,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must specify at least one variable in the INPUT statement.
+        ///   Looks up a localized string similar to You must specify at least one variable in the INPUT statement..
         /// </summary>
         internal static string EmptyVariableListInInput {
             get {
@@ -70,7 +70,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t specify a semicolon in the PRINT statement without parameters.
+        ///   Looks up a localized string similar to You can&apos;t specify a semicolon in the PRINT statement without parameters..
         /// </summary>
         internal static string InvalidSemicolonInPrint {
             get {
@@ -79,7 +79,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid list of variables in the INPUT statement.
+        ///   Looks up a localized string similar to Invalid list of variables in the INPUT statement..
         /// </summary>
         internal static string InvalidVariableListInInput {
             get {
@@ -88,7 +88,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The line number must belong to the range of 1 to 99999.
+        ///   Looks up a localized string similar to The line number must belong to the range of 1 to 99999..
         /// </summary>
         internal static string LineNumberOutOfRange {
             get {
@@ -97,7 +97,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing array&apos;s dimensions and bounds.
+        ///   Looks up a localized string similar to Missing array&apos;s dimensions and bounds..
         /// </summary>
         internal static string MissingArray {
             get {
@@ -106,7 +106,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing assignment.
+        ///   Looks up a localized string similar to Missing assignment..
         /// </summary>
         internal static string MissingAssignment {
             get {
@@ -115,7 +115,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing condition.
+        ///   Looks up a localized string similar to Missing condition..
         /// </summary>
         internal static string MissingCondition {
             get {
@@ -124,7 +124,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing expression.
+        ///   Looks up a localized string similar to Missing expression..
         /// </summary>
         internal static string MissingExpression {
             get {
@@ -133,7 +133,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing variable or reference to an array element.
+        ///   Looks up a localized string similar to Missing variable or reference to an array element..
         /// </summary>
         internal static string MissingLValue {
             get {
@@ -142,7 +142,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=.
+        ///   Looks up a localized string similar to Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=..
         /// </summary>
         internal static string MissingRelationOperator {
             get {
@@ -151,7 +151,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing statement.
+        ///   Looks up a localized string similar to Missing statement..
         /// </summary>
         internal static string MissingStatement {
             get {
@@ -160,7 +160,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected character &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Unexpected character &apos;{0}&apos;..
         /// </summary>
         internal static string UnexpectedCharacter {
             get {
@@ -169,7 +169,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected end of file.
+        ///   Looks up a localized string similar to Unexpected end of file..
         /// </summary>
         internal static string UnexpectedEndOfFile {
             get {
@@ -178,11 +178,20 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token &apos;{0}&apos; is expected, token &apos;{1}&apos; is read actually.
+        ///   Looks up a localized string similar to Token &apos;{0}&apos; is expected, token &apos;{1}&apos; is read actually..
         /// </summary>
         internal static string UnexpectedToken {
             get {
                 return ResourceManager.GetString("UnexpectedToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized statement to compilation: &apos;{0}&apos;..
+        /// </summary>
+        internal static string UnrecognizedStatement {
+            get {
+                return ResourceManager.GetString("UnrecognizedStatement", resourceCulture);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace LearningBasic
+﻿namespace LearningBasic.RunTime
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     {
         public IInputOutput InputOutput { get; private set; }
 
-        public bool IsTerminated { get; private set; }
+        public bool IsClosed { get; private set; }
 
         public IDictionary<string, dynamic> Variables { get; private set; }
 
@@ -17,18 +17,16 @@
                 throw new ArgumentNullException("inputOutput");
 
             InputOutput = inputOutput;
-            IsTerminated = false;
+            IsClosed = false;
             Variables = new Dictionary<string, dynamic>();
+            Statements = new SortedList<int, Statement>();
         }
 
-        public void AddCommand(int lineNumber, Command command)
-        {
+        public SortedList<int, Statement> Statements { get; private set; }
 
-        }
-
-        public void Terminate()
+        public void Close()
         {
-            IsTerminated = true;
+            IsClosed = true;
         }
     }
 }

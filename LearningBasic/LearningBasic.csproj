@@ -56,11 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AstNode.cs" />
-    <Compile Include="BuiltInFunctions.cs" />
-    <Compile Include="CodeGenerating\BasicCommandBuilder.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="ConsoleInputOutput.cs" />
-    <Compile Include="ICommandBuilder.cs" />
+    <Compile Include="RunTime\BuiltInFunctions.cs" />
+    <Compile Include="Compiling\BasicStatementCompiler.cs" />
+    <Compile Include="Compiling\CompilerException.cs" />
+    <Compile Include="Statement.cs" />
+    <Compile Include="Console\ConsoleInputOutput.cs" />
+    <Compile Include="IStatementCompiler.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,8 +78,8 @@
     <Compile Include="Parsing\ParserException.cs" />
     <Compile Include="Parsing\ScannerExtensions.cs" />
     <Compile Include="Parsing\UnexpectedTokenException.cs" />
-    <Compile Include="Repl.cs" />
-    <Compile Include="RunTimeEnvironment.cs" />
+    <Compile Include="Console\ReadEvaluatePrintLoop.cs" />
+    <Compile Include="RunTime\RunTimeEnvironment.cs" />
     <Compile Include="Parsing\BasicScannerFactory.cs" />
     <Compile Include="Parsing\BasicScanner.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensions.cs" />

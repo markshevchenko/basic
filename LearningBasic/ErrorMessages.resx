@@ -118,45 +118,48 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EmptyVariableListInInput" xml:space="preserve">
-    <value>You must specify at least one variable in the INPUT statement</value>
+    <value>You must specify at least one variable in the INPUT statement.</value>
   </data>
   <data name="InvalidSemicolonInPrint" xml:space="preserve">
-    <value>You can't specify a semicolon in the PRINT statement without parameters</value>
+    <value>You can't specify a semicolon in the PRINT statement without parameters.</value>
   </data>
   <data name="InvalidVariableListInInput" xml:space="preserve">
-    <value>Invalid list of variables in the INPUT statement</value>
+    <value>Invalid list of variables in the INPUT statement.</value>
   </data>
   <data name="LineNumberOutOfRange" xml:space="preserve">
-    <value>The line number must belong to the range of 1 to 99999</value>
+    <value>The line number must belong to the range of 1 to 99999.</value>
   </data>
   <data name="MissingArray" xml:space="preserve">
-    <value>Missing array's dimensions and bounds</value>
+    <value>Missing array's dimensions and bounds.</value>
   </data>
   <data name="MissingAssignment" xml:space="preserve">
-    <value>Missing assignment</value>
+    <value>Missing assignment.</value>
   </data>
   <data name="MissingCondition" xml:space="preserve">
-    <value>Missing condition</value>
+    <value>Missing condition.</value>
   </data>
   <data name="MissingExpression" xml:space="preserve">
-    <value>Missing expression</value>
+    <value>Missing expression.</value>
   </data>
   <data name="MissingLValue" xml:space="preserve">
-    <value>Missing variable or reference to an array element</value>
+    <value>Missing variable or reference to an array element.</value>
   </data>
   <data name="MissingRelationOperator" xml:space="preserve">
-    <value>Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=</value>
+    <value>Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=.</value>
   </data>
   <data name="MissingStatement" xml:space="preserve">
-    <value>Missing statement</value>
+    <value>Missing statement.</value>
   </data>
   <data name="UnexpectedCharacter" xml:space="preserve">
-    <value>Unexpected character '{0}'</value>
+    <value>Unexpected character '{0}'.</value>
   </data>
   <data name="UnexpectedEndOfFile" xml:space="preserve">
-    <value>Unexpected end of file</value>
+    <value>Unexpected end of file.</value>
   </data>
   <data name="UnexpectedToken" xml:space="preserve">
-    <value>Token '{0}' is expected, token '{1}' is read actually</value>
+    <value>Token '{0}' is expected, token '{1}' is read actually.</value>
+  </data>
+  <data name="UnrecognizedStatement" xml:space="preserve">
+    <value>Unrecognized statement to compilation: '{0}'.</value>
   </data>
 </root>

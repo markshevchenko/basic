@@ -1,4 +1,4 @@
-﻿namespace LearningBasic
+﻿namespace LearningBasic.RunTime
 {
     using System;
 
@@ -12,6 +12,11 @@
             throw new ArithmeticException(exceptionMessage);
         }
 
+        public static object Execute<T1, T2>(object operand1, object operand2, Func<T1, T2, object> operation)
+        {
+            return operation((T1)operand1, (T2)operand2);
+        }
+
         public static bool TryExecute<T1, T2>(object operand1, object operand2, Func<T1, T2, object> operation, out object result)
         {
             if (operand1 is T1 && operand2 is T2)
@@ -22,11 +27,6 @@
 
             result = null;
             return false;
-        }
-
-        public static object Execute<T1, T2>(object operand1, object operand2, Func<T1, T2, object> operation)
-        {
-            return operation((T1)operand1, (T2)operand2);
         }
 
         public static object Power(int @base, int exponent)

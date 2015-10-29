@@ -1,7 +1,6 @@
 ﻿namespace LearningBasic
 {
     using System.Collections.Generic;
-    using System.Linq.Expressions;
 
     /// <summary>
     /// Declares the interface of the run-time environment.
@@ -14,9 +13,9 @@
         IInputOutput InputOutput { get; }
 
         /// <summary>
-        /// Retrieves a Boolean value that indicates whether the specified environment instance has been terminated.
+        /// Retrieves a <c>Boolean</c> value that indicates whether the specified environment instance has been closed.
         /// </summary>
-        bool IsTerminated { get; }
+        bool IsClosed { get; }
 
         /// <summary>
         /// Gets the variables dictionary.
@@ -24,15 +23,13 @@
         IDictionary<string, dynamic> Variables { get; }
 
         /// <summary>
-        /// Adds the command with specified line number.
+        /// Gets the sorted statements' list.
         /// </summary>
-        /// <param name="lineNumber">The line number.</param>
-        /// <param name="command">The command.</param>
-        void AddCommand(int lineNumber, Command command);
+        SortedList<int, Statement> Statements { get; }
 
         /// <summary>
-        /// Terminates the work session of the run-time environment.
+        /// Closes the run-time environment.
         /// </summary>
-        void Terminate();
+        void Close();
     }
 }

@@ -1,8 +1,10 @@
 ﻿namespace LearningBasic
 {
     using System.Reflection;
-    using LearningBasic.CodeGenerating;
+    using LearningBasic.Compiling;
     using LearningBasic.Parsing;
+    using LearningBasic.RunTime;
+    using LearningBasic.Console;
 
     class Program
     {
@@ -12,20 +14,33 @@
             var runtimeSystem = new RunTimeEnvironment(inputOutput);
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
-            var commandBuilder = new BasicCommandBuilder();
-            var repl = new Repl<Tag>(runtimeSystem, parser, commandBuilder);
+            var commandBuilder = new BasicStatementCompiler();
+            var repl = new ReadEvaluatePrintLoop(runtimeSystem, parser, commandBuilder);
 
-            Salute(inputOutput);
+            PrintSalute(inputOutput);
             repl.Run();
         }
 
-        private static void Salute(IInputOutput inputOutput)
+        private static void PrintSalute(IInputOutput inputOutput)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var title = assembly.GetName().Name;
-            var version = assembly.GetName().Version;
-            var message = string.Format("{0} {1}", title, version);
-            inputOutput.WriteLine(message);
+            PrintTitleAndVersion(inputOutput, assembly);
+            PrintCopyright(inputOutput, assembly);
+        }
+
+        private static void PrintTitleAndVersion(IInputOutput inputOutput, Assembly assembly)
+        {
+            var assemblyName = assembly.GetName();
+            inputOutput.WriteLine("{0} {1}", assemblyName.Name, assemblyName.Version);
+        }
+
+        private static void PrintCopyright(IInputOutput inputOutput, Assembly assembly)
+        {
+            var attribute = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
+            if (attribute == null)
+                return;
+
+            inputOutput.WriteLine(attribute.Copyright);
         }
     }
 }
