@@ -1,7 +1,6 @@
 ﻿namespace LearningBasic
 {
     using System.Reflection;
-    using LearningBasic.Code;
     using LearningBasic.Parsing;
     using LearningBasic.RunTime;
 
@@ -13,9 +12,7 @@
             var rte = new RunTimeEnvironment(inputOutput);
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
-            var codeGenerator = new BasicCodeGenerator();
-            var codeFormatter = new BasicCodeFormatter();
-            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop<Tag>(rte, parser, codeGenerator, codeFormatter);
+            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop(rte, parser);
 
             PrintSalute(inputOutput);
             Run(readEvaluatePrintLoop);
@@ -41,7 +38,7 @@
                 inputOutput.WriteLine(attribute.Copyright);
         }
 
-        private static void Run(ReadEvaluatePrintLoop<Tag> readEvaluatePrintLoop)
+        private static void Run(ReadEvaluatePrintLoop readEvaluatePrintLoop)
         {
             do
             {

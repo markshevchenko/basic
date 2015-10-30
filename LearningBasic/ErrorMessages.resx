@@ -145,13 +145,16 @@
     <value>Missing expression.</value>
   </data>
   <data name="MissingLValue" xml:space="preserve">
-    <value>Missing variable or reference to an array element.</value>
+    <value>Missing variable or array.</value>
   </data>
   <data name="MissingRelationOperator" xml:space="preserve">
     <value>Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=.</value>
   </data>
   <data name="MissingStatement" xml:space="preserve">
     <value>Missing statement.</value>
+  </data>
+  <data name="MissingTerminal" xml:space="preserve">
+    <value>Missing constant, variable, array, parenthesis, or function call.</value>
   </data>
   <data name="UnexpectedCharacter" xml:space="preserve">
     <value>Unexpected character '{0}'.</value>

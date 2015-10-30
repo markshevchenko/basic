@@ -142,7 +142,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing variable or reference to an array element..
+        ///   Looks up a localized string similar to Missing variable or array..
         /// </summary>
         internal static string MissingLValue {
             get {
@@ -165,6 +165,15 @@ namespace LearningBasic {
         internal static string MissingStatement {
             get {
                 return ResourceManager.GetString("MissingStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing constant, variable, array, parenthesis, or function call..
+        /// </summary>
+        internal static string MissingTerminal {
+            get {
+                return ResourceManager.GetString("MissingTerminal", resourceCulture);
             }
         }
         

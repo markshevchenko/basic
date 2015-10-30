@@ -1,4 +1,4 @@
-﻿namespace LearningBasic
+﻿namespace LearningBasic.Parsing.Ast
 {
     using System;
     using System.Globalization;
@@ -6,36 +6,39 @@
     /// <summary>
     /// Represents a program line that is a statement with a possible line number.
     /// </summary>
-    /// <typeparam name="TTag">The type of a tag of an Abstract Syntax Tree.</typeparam>
-    public class Line<TTag>
-        where TTag : struct
+    public class Line : ILine
     {
-        private const int StatementIndex = 0;
         public const int MinNumber = 1;
         public const int MaxNumber = 99999;
 
-        /// <summary>
-        /// The line number.
-        /// </summary>
-        /// <remarks><c>null</c> value means a line without a number.</remarks>
         public int? Number { get; private set; }
 
-        /// <summary>
-        /// The statement.
-        /// </summary>
-        public AstNode<TTag> Statement { get; private set; }
+        public IStatement Statement { get; private set; }
 
-        /// <summary>
-        /// Creates an instance of <see cref="Line"/>.
-        /// </summary>
-        /// <param name="line">The root node of a line's Abstract Syntax Tree.</param>
-        public Line(AstNode<TTag> line)
+        public Line(IStatement statement)
         {
-            if (line == null)
-                throw new ArgumentNullException("line");
+            if (statement == null)
+                throw new ArgumentNullException("statement");
 
-            Number = ParseNumber(line.Text);
-            Statement = line.Children[StatementIndex];
+            Number = null;
+            Statement = statement;
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="Line"/> with line number.
+        /// </summary>
+        /// <param name="number">The string representation of line number.</param>
+        /// <param name="statement">The statement.</param>
+        public Line(string number, IStatement statement)
+        {
+            if (number == null)
+                throw new ArgumentNullException("number");
+
+            if (statement == null)
+                throw new ArgumentNullException("statement");
+
+            Number = ParseNumber(number);
+            Statement = statement;
         }
 
         /// <summary>
@@ -48,14 +51,11 @@
         /// </exception>
         public static int? ParseNumber(string numberAsString)
         {
-            if (string.IsNullOrEmpty(numberAsString))
-                return null;
-
             var number = ParseInt32AndWrapException(numberAsString);
             if (number < MinNumber || number > MaxNumber)
             {
                 var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
-                throw new BasicException(message);
+                throw new ParserException(message);
             }
 
             return number;
@@ -76,7 +76,7 @@
             catch (Exception exception)
             {
                 var message = string.Format(ErrorMessages.CantParseLineNumber, s);
-                throw new BasicException(message, exception);
+                throw new ParserException(message, exception);
             }
         }
     }

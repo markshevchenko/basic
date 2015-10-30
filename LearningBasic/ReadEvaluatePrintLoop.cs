@@ -5,14 +5,10 @@
     /// <summary>
     /// Implements the Read-Eval-Print step-by-step loop.
     /// </summary>
-    /// <typeparam name="TTag">The type of a tag of an Abstract Syntax Tree.</typeparam>
-    public class ReadEvaluatePrintLoop<TTag>
-        where TTag : struct
+    public class ReadEvaluatePrintLoop
     {
         private readonly IRunTimeEnvironment rte;
-        private readonly IParser<TTag> parser;
-        private readonly ICodeGenerator<TTag> codeGenerator;
-        private readonly ICodeFormatter<TTag> codeFormatter;
+        private readonly ILineParser parser;
 
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified loop has been terminated.
@@ -24,13 +20,7 @@
         /// </summary>
         /// <param name="rte"></param>
         /// <param name="parser"></param>
-        /// <param name="codeGenerator"></param>
-        /// <param name="codeFormatter"></param>
-        public ReadEvaluatePrintLoop(
-            IRunTimeEnvironment rte,
-            IParser<TTag> parser,
-            ICodeGenerator<TTag> codeGenerator,
-            ICodeFormatter<TTag> codeFormatter)
+        public ReadEvaluatePrintLoop(IRunTimeEnvironment rte, ILineParser parser)
         {
             if (rte == null)
                 throw new ArgumentNullException("rte");
@@ -38,16 +28,8 @@
             if (parser == null)
                 throw new ArgumentNullException("parser");
 
-            if (codeGenerator == null)
-                throw new ArgumentNullException("codeGenerator");
-
-            if (codeFormatter == null)
-                throw new ArgumentNullException("codeFormatter");
-
             this.rte = rte;
             this.parser = parser;
-            this.codeGenerator = codeGenerator;
-            this.codeFormatter = codeFormatter;
         }
 
         public void TakeStep()
@@ -68,31 +50,27 @@
             }
         }
 
-        public Line<TTag> Read()
+        public ILine Read()
         {
-            var inputLine = rte.InputOutput.ReadLine();
-            var parsedLine = parser.Parse(inputLine);
-            return new Line<TTag>(parsedLine);
+            var line = rte.InputOutput.ReadLine();
+            return parser.Parse(line);
         }
 
-        public string Evaluate(Line<TTag> line)
+        public Result Evaluate(ILine line)
         {
-            var compiledStatement = codeGenerator.Generate(line.Statement);
-
             if (line.Number.HasValue)
             {
-                var sourceCode = codeFormatter.Format(line.Statement);
-                rte.Statements[line.Number.Value] = new Statement(sourceCode, compiledStatement);
-                return compiledStatement.ToString();
+                rte.Statements[line.Number.Value] = line.Statement;
+                return new Result(line.Statement);
             }
             else
-                return compiledStatement(rte);
+                return line.Statement.Run(rte);
         }
 
-        public void Print(string result)
+        public void Print(Result result)
         {
-            if (!string.IsNullOrEmpty(result))
-                rte.InputOutput.WriteLine(result);
+            if (result.HasValue)
+                rte.InputOutput.WriteLine(result.Value);
         }
     }
 }
