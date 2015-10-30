@@ -105,7 +105,7 @@
     <Compile Include="Parsing\UnexpectedTokenException.cs" />
     <Compile Include="ReadEvaluatePrintLoop.cs" />
     <Compile Include="StatementResult.cs" />
-    <Compile Include="RunTime\RunTimeEnvironment.cs" />
+    <Compile Include="RunTimeEnvironment.cs" />
     <Compile Include="Parsing\BasicScannerFactory.cs" />
     <Compile Include="Parsing\BasicScanner.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensions.cs" />

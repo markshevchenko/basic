@@ -46,9 +46,10 @@
 
         public override string ToString()
         {
-            return "INPUT "
-                 + (Prompt == null ? "" : Prompt.ToListingValue() + ", ")
-                 + LValue.ToString();
+            if (Prompt == null)
+                return "INPUT " + LValue.ToString();
+            else
+                return "INPUT " + Prompt.ToListingValue() + ", " + LValue.ToString();
         }
 
         public static Expression ParseToObjectExpression(string s)
