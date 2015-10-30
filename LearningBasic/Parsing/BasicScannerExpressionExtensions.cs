@@ -1,10 +1,9 @@
 ﻿namespace LearningBasic.Parsing
 {
+    using System;
     using System.Collections.Generic;
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Expressions;
-    using System.Globalization;
-    using System;
 
     public static class BasicScannerExpressionExtensions
     {

@@ -53,24 +53,41 @@
             }
         }
 
+        /// <summary>
+        /// Reads and parses the single BASIC line.
+        /// </summary>
+        /// <returns>The parsed line.</returns>
         public ILine Read()
         {
             var line = rte.InputOutput.ReadLine();
             return parser.Parse(line);
         }
 
-        public StatementResult Evaluate(ILine line)
+        /// <summary>
+        /// Evaluates the parsed line.
+        /// </summary>
+        /// <remarks>
+        /// If the line has a line number, then evaluator stores the statement into
+        /// run-time environment; otherwise it runs the statement.</remarks>
+        /// <param name="line">The parsed line.</param>
+        /// <returns>The <see cref="EvaluateResult">result of evaluate stage</see>.</returns>
+        public EvaluateResult Evaluate(ILine line)
         {
             if (line.Number.HasValue)
             {
                 rte.Lines[line.Number.Value] = line.Statement;
-                return StatementResult.Empty;
+                return EvaluateResult.Empty;
             }
             else
                 return line.Statement.Run(rte);
         }
 
-        public void Print(StatementResult result)
+        /// <summary>
+        /// Prints the result of evaluate stage.
+        /// </summary>
+        /// <remarks>If the result hasn't a message then prints nothing.</remarks>
+        /// <param name="result">The result of evaluate stage.</param>
+        public void Print(EvaluateResult result)
         {
             if (result.HasMessage)
                 rte.InputOutput.WriteLine(result.Message);

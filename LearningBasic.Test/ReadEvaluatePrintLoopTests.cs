@@ -54,7 +54,7 @@
             var inputOutput = MakeInputOutput();
             var rte = MakeRunTimeEnvironment(inputOutput);
             var repl = new ReadEvaluatePrintLoop(rte, parser);
-            var result = new StatementResult("message");
+            var result = new EvaluateResult("message");
 
             repl.Print(result);
 
@@ -70,7 +70,7 @@
             var repl = new ReadEvaluatePrintLoop(rte, parser);
 
             inputOutput.Write("still message");
-            repl.Print(StatementResult.Empty);
+            repl.Print(EvaluateResult.Empty);
 
             Assert.AreEqual("still message", inputOutput.LastWritten);
 

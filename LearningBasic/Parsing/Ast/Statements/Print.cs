@@ -16,7 +16,7 @@
             Expressions = new List<IExpression>(expressions);
         }
 
-        public virtual StatementResult Run(IRunTimeEnvironment rte)
+        public virtual EvaluateResult Run(IRunTimeEnvironment rte)
         {
             foreach (var expression in Expressions)
             {
@@ -24,7 +24,7 @@
                 rte.InputOutput.Write(e.ToString(CultureInfo.InvariantCulture));
             }
 
-            return StatementResult.Empty;
+            return EvaluateResult.Empty;
         }
 
         public override string ToString()

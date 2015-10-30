@@ -31,7 +31,7 @@
             }
         }
 
-        public static Line ReadStatementWithLineNumber(IScanner<Token> scanner, string lineNumber)
+        private static Line ReadStatementWithLineNumber(IScanner<Token> scanner, string lineNumber)
         {
             if (scanner.TryReadToken(Token.Next))
                 return new Line(lineNumber, new Next());
@@ -40,7 +40,7 @@
             return new Line(lineNumber, statement);
         }
 
-        public static Line ReadStatemement(IScanner<Token> scanner)
+        private static Line ReadStatemement(IScanner<Token> scanner)
         {
             var statement = scanner.ReadStatementExcludingNext();
             return new Line(statement);
