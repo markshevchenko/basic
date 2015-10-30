@@ -1,8 +1,8 @@
-﻿namespace LearningBasic.Parsing
+﻿namespace LearningBasic
 {
     using System;
 
-    public class ParserException : BasicException
+    public class ParserException : Exception
     {
         public ParserException()
             : base()

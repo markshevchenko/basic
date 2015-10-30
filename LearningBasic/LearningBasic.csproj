@@ -55,34 +55,56 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AstNode.cs" />
-    <Compile Include="BasicException.cs" />
-    <Compile Include="Code\BasicCodeFormatter.cs" />
-    <Compile Include="ICodeFormatter.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="Code\BuiltInFunctions.cs" />
-    <Compile Include="Code\BasicCodeGenerator.cs" />
-    <Compile Include="Code\CodeException.cs" />
-    <Compile Include="Statement.cs" />
+    <Compile Include="Parsing\Ast\Associativity.cs" />
+    <Compile Include="Parsing\Ast\ExpressionExtensions.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Add.cs" />
+    <Compile Include="Parsing\Ast\Expressions\ArrayVariable.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Positive.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Negative.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Power.cs" />
+    <Compile Include="Parsing\Ast\Expressions\UnaryOperator.cs" />
+    <Compile Include="Parsing\Ast\Expressions\BinaryOperator.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Constant.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Modulo.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Divide.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Multiply.cs" />
+    <Compile Include="Parsing\Ast\Expressions\ScalarVariable.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Subtract.cs" />
+    <Compile Include="Parsing\Ast\IExpression.cs" />
+    <Compile Include="Parsing\Ast\ILValue.cs" />
+    <Compile Include="Parsing\Ast\ObjectExtensions.cs" />
+    <Compile Include="Parsing\Ast\Priority.cs" />
+    <Compile Include="Parsing\Ast\Statements\Input.cs" />
+    <Compile Include="Parsing\Ast\Statements\Let.cs" />
+    <Compile Include="Parsing\Ast\Statements\List.cs" />
+    <Compile Include="Parsing\Ast\Statements\Next.cs" />
+    <Compile Include="Parsing\Ast\Statements\Print.cs" />
+    <Compile Include="Parsing\Ast\Statements\PrintLine.cs" />
+    <Compile Include="Parsing\Ast\Statements\Quit.cs" />
+    <Compile Include="IAstNode.cs" />
+    <Compile Include="ILine.cs" />
+    <Compile Include="IStatement.cs" />
+    <Compile Include="Parsing\Ast\Line.cs" />
+    <Compile Include="Parsing\Ast\BuiltInFunctions.cs" />
     <Compile Include="ConsoleInputOutput.cs" />
-    <Compile Include="ICodeGenerator.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="IInputOutput.cs" />
-    <Compile Include="IParser.cs" />
+    <Compile Include="ILineParser.cs" />
     <Compile Include="IRunTimeEnvironment.cs" />
     <Compile Include="IScanner.cs" />
     <Compile Include="IScannerFactory.cs" />
-    <Compile Include="Parsing\SyntaxRule.cs" />
+    <Compile Include="Parsing\BasicScannerExpressionExtensions.cs" />
     <Compile Include="Parsing\BasicParser.cs" />
-    <Compile Include="Parsing\BasicScannerExtensions.cs" />
-    <Compile Include="Parsing\ParserException.cs" />
+    <Compile Include="Parsing\BasicScannerStatementExtensions.cs" />
+    <Compile Include="ParserException.cs" />
     <Compile Include="Parsing\ScannerExtensions.cs" />
     <Compile Include="Parsing\UnexpectedTokenException.cs" />
     <Compile Include="ReadEvaluatePrintLoop.cs" />
+    <Compile Include="StatementResult.cs" />
     <Compile Include="RunTime\RunTimeEnvironment.cs" />
     <Compile Include="Parsing\BasicScannerFactory.cs" />
     <Compile Include="Parsing\BasicScanner.cs" />
@@ -120,6 +142,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,7 @@
 
         public IDictionary<string, dynamic> Variables { get; private set; }
 
-        public SortedList<int, Statement> Statements { get; private set; }
+        public SortedList<int, IStatement> Lines { get; private set; }
 
         public RunTimeEnvironment(IInputOutput inputOutput)
         {
@@ -21,7 +21,7 @@
             InputOutput = inputOutput;
             IsClosed = false;
             Variables = new Dictionary<string, dynamic>();
-            Statements = new SortedList<int, Statement>();
+            Lines = new SortedList<int, IStatement>();
         }
 
         public void Close()

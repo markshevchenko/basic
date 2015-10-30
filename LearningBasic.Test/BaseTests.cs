@@ -18,7 +18,7 @@
             return new BasicScanner(reader);
         }
 
-        protected static IParser<Tag> MakeParser()
+        protected static ILineParser MakeParser()
         {
             return new BasicParser(new BasicScannerFactory());
         }

@@ -2,8 +2,10 @@
 {
     using System;
     using System.IO;
+    using LearningBasic.Parsing.Ast;
+    using LearningBasic.Parsing.Ast.Statements;
 
-    public class BasicParser : IParser<Tag>
+    public class BasicParser : ILineParser
     {
         private readonly IScannerFactory<Token> scannerFactory;
 
@@ -15,27 +17,33 @@
             this.scannerFactory = scannerFactory;
         }
 
-        public virtual AstNode<Tag> Parse(string line)
+        public ILine Parse(string line)
         {
             var inputStream = new StringReader(line);
             using (var scanner = this.scannerFactory.Create(inputStream))
             {
                 string lineNumber;
-                AstNode<Tag> statement;
 
                 if (scanner.TryReadToken(Token.Integer, out lineNumber))
-                {
-                    if (scanner.TryParseNextStatement(out statement))
-                        return new AstNode<Tag>(Tag.Line, lineNumber, statement);
-                    
-                    statement = scanner.ParseStatement();
-                    return new AstNode<Tag>(Tag.Line, lineNumber, statement);
-                }
+                    return ReadStatementWithLineNumber(scanner, lineNumber);
 
-                statement = scanner.ParseStatement();
-                return new AstNode<Tag>(Tag.Line, statement);
+                return ReadStatemement(scanner);
             }
         }
 
+        public static Line ReadStatementWithLineNumber(IScanner<Token> scanner, string lineNumber)
+        {
+            if (scanner.TryReadToken(Token.Next))
+                return new Line(lineNumber, new Next());
+
+            var statement = scanner.ReadStatementExcludingNext();
+            return new Line(lineNumber, statement);
+        }
+
+        public static Line ReadStatemement(IScanner<Token> scanner)
+        {
+            var statement = scanner.ReadStatementExcludingNext();
+            return new Line(statement);
+        }
     }
 }

@@ -3,16 +3,12 @@
     using System;
 
     /// <summary>
-    /// Implements the Read-Eval-Print step-by-step loop.
+    /// Implements the Read-Evaluate-Print step-by-step loop.
     /// </summary>
-    /// <typeparam name="TTag">The type of a tag of an Abstract Syntax Tree.</typeparam>
-    public class ReadEvaluatePrintLoop<TTag>
-        where TTag : struct
+    public class ReadEvaluatePrintLoop
     {
         private readonly IRunTimeEnvironment rte;
-        private readonly IParser<TTag> parser;
-        private readonly ICodeGenerator<TTag> codeGenerator;
-        private readonly ICodeFormatter<TTag> codeFormatter;
+        private readonly ILineParser parser;
 
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified loop has been terminated.
@@ -20,17 +16,11 @@
         public bool IsTerminated { get { return rte.IsClosed; } }
 
         /// <summary>
-        /// 
+        /// Creates an instance of Read-Evaluate-Print loop object.
         /// </summary>
         /// <param name="rte"></param>
         /// <param name="parser"></param>
-        /// <param name="codeGenerator"></param>
-        /// <param name="codeFormatter"></param>
-        public ReadEvaluatePrintLoop(
-            IRunTimeEnvironment rte,
-            IParser<TTag> parser,
-            ICodeGenerator<TTag> codeGenerator,
-            ICodeFormatter<TTag> codeFormatter)
+        public ReadEvaluatePrintLoop(IRunTimeEnvironment rte, ILineParser parser)
         {
             if (rte == null)
                 throw new ArgumentNullException("rte");
@@ -38,18 +28,13 @@
             if (parser == null)
                 throw new ArgumentNullException("parser");
 
-            if (codeGenerator == null)
-                throw new ArgumentNullException("codeGenerator");
-
-            if (codeFormatter == null)
-                throw new ArgumentNullException("codeFormatter");
-
             this.rte = rte;
             this.parser = parser;
-            this.codeGenerator = codeGenerator;
-            this.codeFormatter = codeFormatter;
         }
 
+        /// <summary>
+        /// Takes next step of the Read-Evaluate-Print loop.
+        /// </summary>
         public void TakeStep()
         {
             try
@@ -58,9 +43,9 @@
                 var result = Evaluate(line);
                 Print(result);
             }
-            catch (BasicException exception)
+            catch (ParserException exception)
             {
-                rte.InputOutput.WriteLine(exception.Message);
+                rte.InputOutput.WriteLine("Parser error: {0}", exception.Message);
             }
             catch (Exception)
             {
@@ -68,31 +53,27 @@
             }
         }
 
-        public Line<TTag> Read()
+        public ILine Read()
         {
-            var inputLine = rte.InputOutput.ReadLine();
-            var parsedLine = parser.Parse(inputLine);
-            return new Line<TTag>(parsedLine);
+            var line = rte.InputOutput.ReadLine();
+            return parser.Parse(line);
         }
 
-        public string Evaluate(Line<TTag> line)
+        public StatementResult Evaluate(ILine line)
         {
-            var compiledStatement = codeGenerator.Generate(line.Statement);
-
             if (line.Number.HasValue)
             {
-                var sourceCode = codeFormatter.Format(line.Statement);
-                rte.Statements[line.Number.Value] = new Statement(sourceCode, compiledStatement);
-                return compiledStatement.ToString();
+                rte.Lines[line.Number.Value] = line.Statement;
+                return StatementResult.Empty;
             }
             else
-                return compiledStatement(rte);
+                return line.Statement.Run(rte);
         }
 
-        public void Print(string result)
+        public void Print(StatementResult result)
         {
-            if (!string.IsNullOrEmpty(result))
-                rte.InputOutput.WriteLine(result);
+            if (result.HasMessage)
+                rte.InputOutput.WriteLine(result.Message);
         }
     }
 }

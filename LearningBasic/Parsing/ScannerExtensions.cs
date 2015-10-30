@@ -65,26 +65,5 @@
             text = string.Empty;
             return false;
         }
-
-        public static AstNode<TTag> ReadNode<TToken, TTag>(this IScanner<TToken> scanner, Func<IScanner<TToken>, AstNode<TTag>> parser, string errorFormat, params object[] errorArgs)
-            where TToken : struct
-            where TTag : struct
-        {
-            var result = parser(scanner);
-
-            if (result == null)
-                throw new ParserException(string.Format(errorFormat, errorArgs));
-
-            return result;
-        }
-
-        public static bool TryReadNode<TToken, TTag>(this IScanner<TToken> scanner, Func<IScanner<TToken>, AstNode<TTag>> parser, out AstNode<TTag> node)
-            where TToken : struct
-            where TTag : struct
-        {
-            node = parser(scanner);
-
-            return node != null;
-        }
     }
 }

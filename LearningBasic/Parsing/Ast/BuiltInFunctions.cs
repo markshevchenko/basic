@@ -1,4 +1,4 @@
-﻿namespace LearningBasic.Code
+﻿namespace LearningBasic.Parsing.Ast
 {
     using System;
 

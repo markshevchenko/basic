@@ -40,7 +40,7 @@
             {
                 ThrowIfDisposed();
 
-                return this.currentToken;
+                return currentToken;
             }
         }
 
@@ -51,7 +51,7 @@
             {
                 ThrowIfDisposed();
 
-                return this.currentText;
+                return currentText;
             }
         }
 
@@ -66,10 +66,16 @@
                 throw new ArgumentNullException("inputStream");
 
             this.inputStream = inputStream;
-            this.IsDisposed = false;
-            this.State = ScannerState.Token;
 
-            this.MoveNext();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            IsDisposed = false;
+            State = ScannerState.Token;
+
+            MoveNext();
         }
 
         /// <inheritdoc />
@@ -79,16 +85,16 @@
 
             var text = new StringBuilder();
 
-            if (this.State == ScannerState.Token)
+            if (State == ScannerState.Token)
             {
-                this.currentToken = this.ReadToken(text);
-                if (this.currentToken == Token.Rem)
-                    this.State = ScannerState.Comment;
+                currentToken = ReadToken(text);
+                if (currentToken == Token.Rem)
+                    State = ScannerState.Comment;
             }
-            else if (this.State == ScannerState.Comment)
+            else if (State == ScannerState.Comment)
             {
-                this.currentToken = this.ReadComment(text);
-                this.State = ScannerState.Token;
+                currentToken = ReadComment(text);
+                State = ScannerState.Token;
             }
             
             this.currentText = text.ToString();
@@ -98,32 +104,32 @@
         {
             this.inputStream.SkipWhile(char.IsWhiteSpace);
 
-            if (this.inputStream.IsEof())
+            if (inputStream.IsEof())
                 return Token.Eof;
 
             Token token;
-            if (this.TryReadBasicToken(target, out token))
+            if (TryReadBasicToken(target, out token))
                 return token;
 
-            var nextCharacterOfInputStream = (char)this.inputStream.Peek();
+            var nextCharacterOfInputStream = (char)inputStream.Peek();
             throw new UnexpectedCharacterException(nextCharacterOfInputStream);
         }
 
         private bool TryReadBasicToken(StringBuilder target, out Token token)
         {
-            if (this.inputStream.TryReadPunctuationMark(target, out token))
+            if (inputStream.TryReadPunctuationMark(target, out token))
                 return true;
 
-            if (this.inputStream.TryReadOperator(target, out token))
+            if (inputStream.TryReadOperator(target, out token))
                 return true;
 
-            if (this.inputStream.TryReadString(target, out token))
+            if (inputStream.TryReadString(target, out token))
                 return true;
 
-            if (this.inputStream.TryReadIntegerOrFloatNumber(target, out token))
+            if (inputStream.TryReadIntegerOrFloatNumber(target, out token))
                 return true;
 
-            if (this.inputStream.TryReadIdentifierOrKeyword(target, out token))
+            if (inputStream.TryReadIdentifierOrKeyword(target, out token))
                 return true;
 
             return false;
@@ -131,8 +137,8 @@
 
         private Token ReadComment(StringBuilder target)
         {
-            this.inputStream.SkipWhile(char.IsWhiteSpace);
-            this.inputStream.TakeWhile(c => true, target);
+            inputStream.SkipWhile(char.IsWhiteSpace);
+            inputStream.TakeWhile(c => true, target);
 
             return Token.Comment;
         }
@@ -140,23 +146,23 @@
         /// <inheritdoc />
         public void Dispose()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         /// <summary>
         /// Disposes managed and unmanaged resources of the object.
         /// </summary>
-        /// <param name="isDisposing"><c>true</c>, if called from <see cref="Dispose"/> method;
-        /// <c>false</c>, if called from finalizator.</param>
+        /// <param name="isDisposing"><c>true</c> when the method has been called by user's code;
+        /// <c>false</c> when the method has been called by the runtime from inside the finalizer.</param>
         protected virtual void Dispose(bool isDisposing)
         {
-            if (this.IsDisposed)
+            if (IsDisposed)
                 return;
 
             if (isDisposing)
-                this.inputStream.Dispose();
+                inputStream.Dispose();
 
-            this.IsDisposed = true;
+            IsDisposed = true;
         }
 
         /// <summary>
@@ -164,9 +170,9 @@
         /// </summary>
         protected virtual void ThrowIfDisposed()
         {
-            if (this.IsDisposed)
+            if (IsDisposed)
             {
-                var objectName = this.GetType().FullName;
+                var objectName = GetType().FullName;
                 throw new ObjectDisposedException(objectName);
             }
         }
