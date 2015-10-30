@@ -5,7 +5,7 @@
     public class Subtract : BinaryOperator
     {
         public Subtract(IExpression left, IExpression right)
-            : base("-", left, right)
+            : base(Associativity.Left, Priority.ArithmeticAddition, "-", left, right)
         { }
 
         protected override Expression Calculate(Expression left, Expression right)

@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
+    using System;
     using System.Globalization;
     using System.Linq.Expressions;
 
@@ -8,6 +9,10 @@
         private readonly Expression compiledValue;
 
         public object Value { get; }
+
+        public Associativity Associativity { get { return Associativity.Left; } }
+
+        public Priority Priority { get { return Priority.Terminal; } }
 
         public Constant(string value)
         {
@@ -18,6 +23,20 @@
         public Expression Compile(IRunTimeEnvironment rte)
         {
             return compiledValue;
+        }
+
+        public override string ToString()
+        {
+            if (Value == null)
+                return string.Empty;
+
+            if (Value is string)
+                return '"' + (string)Value + '"';
+
+            if (Value is IConvertible)
+                return (Value as IConvertible).ToString(CultureInfo.InvariantCulture);
+
+            return Value.ToString();
         }
 
         public static object Parse(string s)

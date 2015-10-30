@@ -6,12 +6,18 @@
 
     public abstract class UnaryOperator : IExpression
     {
-        public string Operator { get; set; }
+        public Associativity Associativity { get; private set; }
 
-        public IExpression Operand { get; set; }
+        public Priority Priority { get; private set; }
 
-        protected UnaryOperator(string @operator, IExpression operand)
+        public string Operator { get; private set; }
+
+        public IExpression Operand { get; private set; }
+
+        protected UnaryOperator(Associativity associativity, Priority priority, string @operator, IExpression operand)
         {
+            Associativity = associativity;
+            Priority = priority;
             Operator = @operator;
             Operand = operand;
         }

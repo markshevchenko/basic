@@ -10,8 +10,20 @@
 
         public ILValue LValue { get; }
 
+        public Input(ILValue lValue)
+        {
+            if (lValue == null)
+                throw new ArgumentNullException("lValue");
+
+            Prompt = null;
+            LValue = lValue;
+        }
+
         public Input(string prompt, ILValue lValue)
         {
+            if (prompt == null)
+                throw new ArgumentNullException("prompt");
+
             if (lValue == null)
                 throw new ArgumentNullException("lValue");
 
@@ -19,7 +31,7 @@
             LValue = lValue;
         }
 
-        public Result Run(IRunTimeEnvironment rte)
+        public StatementResult Run(IRunTimeEnvironment rte)
         {
             rte.InputOutput.Write(Prompt);
             var line = rte.InputOutput.ReadLine();
@@ -29,7 +41,14 @@
             var assignment = Expression.Assign(lValue, rValue);
 
             var value = assignment.CalculateValue();
-            return new Result(value);
+            return new StatementResult(value);
+        }
+
+        public override string ToString()
+        {
+            return "INPUT "
+                 + (Prompt == null ? "" : Prompt.ToListingValue() + ", ")
+                 + LValue.ToString();
         }
 
         public static Expression ParseToObjectExpression(string s)

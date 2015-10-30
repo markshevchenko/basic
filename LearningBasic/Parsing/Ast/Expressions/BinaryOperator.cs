@@ -6,14 +6,20 @@
 
     public abstract class BinaryOperator : IExpression
     {
-        public string Operator { get; set; }
+        public Associativity Associativity { get; private set; }
 
-        public IExpression Left { get; set; }
+        public Priority Priority { get; private set; }
 
-        public IExpression Right { get; set; }
+        public string Operator { get; private set; }
 
-        protected BinaryOperator(string @operator, IExpression left, IExpression right)
+        public IExpression Left { get; private set; }
+
+        public IExpression Right { get; private set; }
+
+        protected BinaryOperator(Associativity associativity, Priority priority, string @operator, IExpression left, IExpression right)
         {
+            Associativity = associativity;
+            Priority = priority;
             Operator = @operator;
             Left = left;
             Right = right;

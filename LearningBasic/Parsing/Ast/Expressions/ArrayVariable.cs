@@ -8,6 +8,10 @@
     {
         public IReadOnlyList<IExpression> Indexes { get; private set; }
 
+        public override Associativity Associativity { get { return Associativity.Right; } }
+
+        public override Priority Priority { get { return Priority.LowerIndex; } }
+
         public ArrayVariable(string name, IReadOnlyList<IExpression> indexes)
             : base(name)
         {

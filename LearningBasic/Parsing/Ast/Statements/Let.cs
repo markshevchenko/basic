@@ -21,13 +21,13 @@
             Right = right;
         }
 
-        public Result Run(IRunTimeEnvironment rte)
+        public StatementResult Run(IRunTimeEnvironment rte)
         {
             var left = Left.Compile(rte);
             var right = Right.Compile(rte);
             var assignment = Expression.Assign(left, right);
             var value = assignment.CalculateValue();
-            return new Result(value);
+            return new StatementResult(value);
         }
 
         public override string ToString()

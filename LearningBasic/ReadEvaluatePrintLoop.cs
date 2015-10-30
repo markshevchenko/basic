@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Implements the Read-Eval-Print step-by-step loop.
+    /// Implements the Read-Evaluate-Print step-by-step loop.
     /// </summary>
     public class ReadEvaluatePrintLoop
     {
@@ -16,7 +16,7 @@
         public bool IsTerminated { get { return rte.IsClosed; } }
 
         /// <summary>
-        /// 
+        /// Creates an instance of Read-Evaluate-Print loop object.
         /// </summary>
         /// <param name="rte"></param>
         /// <param name="parser"></param>
@@ -32,6 +32,9 @@
             this.parser = parser;
         }
 
+        /// <summary>
+        /// Takes next step of the Read-Evaluate-Print loop.
+        /// </summary>
         public void TakeStep()
         {
             try
@@ -40,9 +43,9 @@
                 var result = Evaluate(line);
                 Print(result);
             }
-            catch (BasicException exception)
+            catch (ParserException exception)
             {
-                rte.InputOutput.WriteLine(exception.Message);
+                rte.InputOutput.WriteLine("Parser error: {0}", exception.Message);
             }
             catch (Exception)
             {
@@ -56,21 +59,21 @@
             return parser.Parse(line);
         }
 
-        public Result Evaluate(ILine line)
+        public StatementResult Evaluate(ILine line)
         {
             if (line.Number.HasValue)
             {
-                rte.Statements[line.Number.Value] = line.Statement;
-                return new Result(line.Statement);
+                rte.Lines[line.Number.Value] = line.Statement;
+                return StatementResult.Empty;
             }
             else
                 return line.Statement.Run(rte);
         }
 
-        public void Print(Result result)
+        public void Print(StatementResult result)
         {
-            if (result.HasValue)
-                rte.InputOutput.WriteLine(result.Value);
+            if (result.HasMessage)
+                rte.InputOutput.WriteLine(result.Message);
         }
     }
 }

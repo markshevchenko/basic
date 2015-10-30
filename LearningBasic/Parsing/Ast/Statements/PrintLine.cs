@@ -8,7 +8,7 @@
             : base(expressions)
         { }
 
-        public override Result Run(IRunTimeEnvironment rte)
+        public override StatementResult Run(IRunTimeEnvironment rte)
         {
             var result = base.Run(rte);
             rte.InputOutput.WriteLine();
@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return base.ToString() + ";";
+            return "PRINT " + string.Join(", ", Expressions);
         }
     }
 }

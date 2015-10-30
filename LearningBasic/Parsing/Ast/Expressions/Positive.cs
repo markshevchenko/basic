@@ -6,7 +6,7 @@
     public class Positive : UnaryOperator
     {
         public Positive(IExpression operand)
-            : base("+", operand)
+            : base(Associativity.Right, Priority.ArithmeticNegation, "+", operand)
         { }
 
         protected override Expression Calculate(Expression operand)

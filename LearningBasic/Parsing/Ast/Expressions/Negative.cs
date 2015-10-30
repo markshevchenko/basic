@@ -6,7 +6,7 @@
     public class Negative : UnaryOperator
     {
         public Negative(IExpression operand)
-            : base("-", operand)
+            : base(Associativity.Right, Priority.ArithmeticNegation, "-", operand)
         { }
 
         protected override Expression Calculate(Expression operand)

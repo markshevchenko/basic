@@ -2,10 +2,10 @@
 {
     public class Quit : IStatement
     {
-        public Result Run(IRunTimeEnvironment rte)
+        public StatementResult Run(IRunTimeEnvironment rte)
         {
             rte.Close();
-            return Result.Nothing;
+            return StatementResult.Empty;
         }
 
         public override string ToString()

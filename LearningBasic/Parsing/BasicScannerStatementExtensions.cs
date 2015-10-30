@@ -1,6 +1,5 @@
 ﻿namespace LearningBasic.Parsing
 {
-    using System.Collections.Generic;
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Statements;
 
@@ -9,8 +8,6 @@
     /// </summary>
     public static class BasicScannerStatementExtensions
     {
-        #region Parse methods
-
         public static IStatement ReadStatementExcludingNext(this IScanner<Token> scanner)
         {
             IStatement result;
@@ -24,15 +21,14 @@
             if (scanner.TryReadInput(out result))
                 return result;
 
+            if (scanner.TryReadList(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Quit))
                 return new Quit();
 
             throw new ParserException(ErrorMessages.MissingStatement);
         }
-
-        #endregion
-
-        #region TryParse methods
 
         public static bool TryReadLet(this IScanner<Token> scanner, out IStatement result)
         {
@@ -79,11 +75,13 @@
             {
                 string prompt;
                 if (scanner.TryReadToken(Token.String, out prompt))
+                {
                     scanner.ReadToken(Token.Comma);
+                    result = new Input(prompt, scanner.ReadLValue());
+                    return true;
+                }
 
-                var lValue = scanner.ReadLValue();
-
-                result = new Input(prompt, lValue);
+                result = new Input(scanner.ReadLValue());
                 return true;
             }
 
@@ -91,6 +89,16 @@
             return false;
         }
 
-        #endregion
+        public static bool TryReadList(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.List))
+            {
+                result = new List();
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
     }
 }

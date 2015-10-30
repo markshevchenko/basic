@@ -10,6 +10,10 @@
 
         public string Name { get; private set; }
 
+        public virtual Associativity Associativity { get { return Associativity.Left; } }
+
+        public virtual Priority Priority { get { return Priority.Terminal; } }
+
         public ScalarVariable(string name)
         {
             Name = name;

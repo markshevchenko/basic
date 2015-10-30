@@ -5,7 +5,7 @@
     public class Modulo : BinaryOperator
     {
         public Modulo(IExpression left, IExpression right)
-            : base("%", left, right)
+            : base(Associativity.Left, Priority.ArithmeticMultiplication, "%", left, right)
         { }
 
         protected override Expression Calculate(Expression left, Expression right)

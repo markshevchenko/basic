@@ -8,7 +8,7 @@
         private static readonly MethodInfo PowerMethodInfo = typeof(BuiltInFunctions).GetMethod("Power", new[] { typeof(object), typeof(object) });
 
         public Power(IExpression left, IExpression right)
-            : base("^", left, right)
+            : base(Associativity.Right, Priority.UpperIndex, "^", left, right)
         { }
 
         protected override Expression Calculate(Expression left, Expression right)

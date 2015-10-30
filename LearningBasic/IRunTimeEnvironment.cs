@@ -23,9 +23,9 @@
         IDictionary<string, dynamic> Variables { get; }
 
         /// <summary>
-        /// Gets the sorted statements' list.
+        /// Gets the sorted lines' list.
         /// </summary>
-        SortedList<int, IStatement> Statements { get; }
+        SortedList<int, IStatement> Lines { get; }
 
         /// <summary>
         /// Closes the run-time environment.
