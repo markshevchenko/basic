@@ -4,7 +4,12 @@
     {
         private readonly string inputString;
 
-        public string OutputString { get; private set; }
+        public string LastWritten { get; private set; }
+
+        public MockInputOutput()
+        {
+            inputString = null;
+        }
 
         public MockInputOutput(string inputString)
         {
@@ -18,27 +23,27 @@
 
         public void Write(string s)
         {
-            OutputString = s;
+            LastWritten = s;
         }
 
         public void Write(string format, params object[] args)
         {
-            OutputString = string.Format(format, args);
+            LastWritten = string.Format(format, args);
         }
 
         public void WriteLine()
         {
-            OutputString = "\n";
+            LastWritten = "\n";
         }
 
         public void WriteLine(string s)
         {
-            OutputString = s + "\n";
+            LastWritten = s + "\n";
         }
 
         public void WriteLine(string format, params object[] args)
         {
-            OutputString = string.Format(format, args) + "\n";
+            LastWritten = string.Format(format, args) + "\n";
         }
     }
 }

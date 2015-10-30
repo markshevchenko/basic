@@ -1,8 +1,7 @@
-﻿namespace LearningBasic.Test.RunTime
+﻿namespace LearningBasic.Test
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using LearningBasic.RunTime;
 
     [TestClass]
     public class RunTimeEnvironmentTests : BaseTests

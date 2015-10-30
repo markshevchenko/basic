@@ -63,7 +63,8 @@
     <Compile Include="Parsing\BasicScannerTests.cs" />
     <Compile Include="Parsing\TextReaderExtensionsTests.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensionsTests.cs" />
-    <Compile Include="RunTime\RunTimeEnvironmentTests.cs" />
+    <Compile Include="RunTimeEnvironmentTests.cs" />
+    <Compile Include="ReadEvaluatePrintLoopTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningBasic\LearningBasic.csproj">

@@ -1,4 +1,4 @@
-﻿namespace LearningBasic.RunTime
+﻿namespace LearningBasic
 {
     using System;
     using System.Collections.Generic;
