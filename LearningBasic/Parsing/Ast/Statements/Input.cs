@@ -31,7 +31,7 @@
             LValue = lValue;
         }
 
-        public StatementResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Run(IRunTimeEnvironment rte)
         {
             rte.InputOutput.Write(Prompt);
             var line = rte.InputOutput.ReadLine();
@@ -41,7 +41,7 @@
             var assignment = Expression.Assign(lValue, rValue);
 
             var value = assignment.CalculateValue();
-            return new StatementResult(value);
+            return new EvaluateResult(value);
         }
 
         public override string ToString()

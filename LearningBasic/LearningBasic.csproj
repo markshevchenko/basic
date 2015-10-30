@@ -104,13 +104,12 @@
     <Compile Include="Parsing\ScannerExtensions.cs" />
     <Compile Include="Parsing\UnexpectedTokenException.cs" />
     <Compile Include="ReadEvaluatePrintLoop.cs" />
-    <Compile Include="StatementResult.cs" />
+    <Compile Include="EvaluateResult.cs" />
     <Compile Include="RunTimeEnvironment.cs" />
     <Compile Include="Parsing\BasicScannerFactory.cs" />
     <Compile Include="Parsing\BasicScanner.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensions.cs" />
     <Compile Include="Parsing\TextReaderExtensions.cs" />
-    <Compile Include="Tag.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

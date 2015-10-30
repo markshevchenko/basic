@@ -5,16 +5,16 @@
 
     public class List : IStatement
     {
-        public StatementResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Run(IRunTimeEnvironment rte)
         {
             if (rte.Lines.Count == 0)
-                return StatementResult.Empty;
+                return EvaluateResult.Empty;
 
             var format = GetLineFormat(rte.Lines.Keys);
             PrintLines(rte.InputOutput, format, rte.Lines);
 
 
-            return StatementResult.Empty;
+            return EvaluateResult.Empty;
         }
 
         public override string ToString()
