@@ -1,7 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
     using System.Linq.Expressions;
-    using System.Reflection;
 
     public class Power : BinaryOperator
     {

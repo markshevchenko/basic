@@ -43,5 +43,28 @@
         {
             return Math.Pow(@base, exponent);
         }
+
+        public static dynamic Divide(int numerator, int denominator)
+        {
+            if (numerator % denominator == 0)
+                return numerator / denominator;
+
+            return (double)numerator / denominator;
+        }
+
+        public static dynamic Divide(int numerator, double denominator)
+        {
+            return numerator / denominator;
+        }
+
+        public static dynamic Divide(double numerator, int denominator)
+        {
+            return numerator / denominator;
+        }
+
+        public static dynamic Divide(double numerator, double denominator)
+        {
+            return numerator / denominator;
+        }
     }
 }

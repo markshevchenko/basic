@@ -10,7 +10,7 @@
 
         protected override Expression Calculate(Expression left, Expression right)
         {
-            return PerformBuiltInOperator(ExpressionType.Divide, left, right);
+            return CallStaticMethod(typeof(BuiltInFunctions), "Divide", left, right);
         }
     }
 }
