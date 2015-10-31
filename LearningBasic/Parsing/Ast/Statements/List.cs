@@ -5,24 +5,39 @@
 
     public class List : IStatement
     {
+        public Range Range { get; private set; }
+
+        public List()
+        {
+            Range = Range.Undefined;
+        }
+
+        public List(Range range)
+        {
+            Range = range;
+        }
+
         public EvaluateResult Run(IRunTimeEnvironment rte)
         {
             if (rte.Lines.Count == 0)
                 return EvaluateResult.Empty;
 
             var format = GetLineFormat(rte.Lines.Keys);
-            PrintLines(rte.InputOutput, format, rte.Lines);
-
+            var filterdLines = rte.Lines.Where(line => Range.Contains(line.Key));
+            PrintLines(rte.InputOutput, format, filterdLines);
 
             return EvaluateResult.Empty;
         }
 
         public override string ToString()
         {
-            return "LIST";
+            if (Range.IsDefined)
+                return "LIST";
+
+            return "LIST " + Range;
         }
 
-        public static void PrintLines(IInputOutput inputOutput, string format, IDictionary<int, IStatement> lines)
+        public static void PrintLines(IInputOutput inputOutput, string format, IEnumerable<KeyValuePair<int, IStatement>> lines)
         {
             foreach (var line in lines)
             {
