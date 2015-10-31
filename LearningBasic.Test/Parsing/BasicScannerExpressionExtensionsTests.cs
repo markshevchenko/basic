@@ -49,5 +49,33 @@
 
             Assert.IsFalse(condition);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void ReadExpressions_WithEmptyString_ThrowsParserException()
+        {
+            var scanner = MakeScanner("");
+
+            var actual = scanner.ReadExpressions();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void ReadExpressions_WithoutComma_ThrowsParserException()
+        {
+            var scanner = MakeScanner("1 2");
+
+            var actual = scanner.ReadExpressions();
+        }
+
+        [TestMethod]
+        public void ReadExpressions_WithTwoExpressions_ReturnsListWithTwoElements()
+        {
+            var scanner = MakeScanner("1, 2");
+
+            var actual = scanner.ReadExpressions();
+
+            Assert.AreEqual(2, actual.Count);
+        }
     }
 }
