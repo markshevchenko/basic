@@ -61,11 +61,11 @@
         public static ConstantExpression ParseToConstantExpression(string s)
         {
             int i;
-            if (int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out i))
+            if (int.TryParse(s, NumberStyles.None, CultureInfo.InvariantCulture, out i))
                 return Expression.Constant(i);
 
             double d;
-            if (double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d))
+            if (double.TryParse(s, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out d))
                 return Expression.Constant(d);
 
             return Expression.Constant(s);
