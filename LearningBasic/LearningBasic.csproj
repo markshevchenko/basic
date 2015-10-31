@@ -86,7 +86,7 @@
     <Compile Include="ILine.cs" />
     <Compile Include="IStatement.cs" />
     <Compile Include="Parsing\Ast\Line.cs" />
-    <Compile Include="Parsing\Ast\BuiltInFunctions.cs" />
+    <Compile Include="Parsing\Ast\BuiltInOperators.cs" />
     <Compile Include="ConsoleInputOutput.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>

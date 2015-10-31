@@ -125,21 +125,9 @@
         }
 
         [TestMethod]
-        public void TryReadList_WithRange_StoresNonEmptyRange()
+        public void TryReadList_WithRange_StoresDefinedRange()
         {
             var scanner = MakeScanner("LIST 30-60");
-            IStatement result;
-
-            var condition = scanner.TryReadList(out result);
-            var range = (result as List).Range;
-
-            Assert.IsFalse(range.IsDefined);
-        }
-
-        [TestMethod]
-        public void TryReadList_WithoutRange_StoresEmptyRange()
-        {
-            var scanner = MakeScanner("LIST");
             IStatement result;
 
             var condition = scanner.TryReadList(out result);
@@ -149,14 +137,26 @@
         }
 
         [TestMethod]
-        public void TryReadRange_WithEmptyString_SetsEmptyResult()
+        public void TryReadList_WithoutRange_StoresUndefinedRange()
+        {
+            var scanner = MakeScanner("LIST");
+            IStatement result;
+
+            var condition = scanner.TryReadList(out result);
+            var range = (result as List).Range;
+
+            Assert.IsFalse(range.IsDefined);
+        }
+
+        [TestMethod]
+        public void TryReadRange_WithEmptyString_SetsUndefinedResult()
         {
             var scanner = MakeScanner("");
             Range result;
 
             var condition = scanner.TryReadRange(out result);
 
-            Assert.IsTrue(result.IsDefined);
+            Assert.IsFalse(result.IsDefined);
         }
 
         [TestMethod]
