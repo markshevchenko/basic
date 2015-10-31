@@ -10,7 +10,7 @@
 
         protected override Expression Calculate(Expression left, Expression right)
         {
-            return CallStaticMethod(typeof(BuiltInFunctions), "Power", left, right);
+            return CallStaticMethod(typeof(BuiltInOperators), "Power", left, right);
         }
     }
 }
