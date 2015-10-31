@@ -6,11 +6,6 @@
     public enum Priority
     {
         /// <summary>
-        /// Single constants and identifiers.
-        /// </summary>
-        Terminal,
-
-        /// <summary>
         /// Logical OR binary operator.
         /// </summary>
         LogicalAddition,
@@ -49,5 +44,10 @@
         /// Array-index and fucntion call operators.
         /// </summary>
         LowerIndex,
+
+        /// <summary>
+        /// Single constants and identifiers.
+        /// </summary>
+        Terminal,
     }
 }

@@ -32,7 +32,12 @@
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", Operator, Operand);
+            var operand = Operand.ToString();
+
+            if (Priority > Operand.Priority)
+                operand = '(' + operand + ')';
+
+            return string.Format("{0}{1}", Operator, operand);
         }
 
         public static Expression Calculate(ExpressionType expressionType, Expression operand)
