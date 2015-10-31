@@ -93,11 +93,39 @@
         {
             if (scanner.TryReadToken(Token.List))
             {
-                result = new List();
+                Range range;
+                if (scanner.TryReadRange(out range))
+                    result = new List(range);
+                else
+                    result = new List();
+
                 return true;
             }
 
             result = null;
+            return false;
+        }
+
+        public static bool TryReadRange(this IScanner<Token> scanner, out Range result)
+        {
+            string text;
+            if (scanner.TryReadToken(Token.Integer, out text))
+            {
+                int min = Line.Parse(text);
+
+                if (scanner.TryReadToken(Token.Minus))
+                {
+                    scanner.ReadToken(Token.Integer, out text);
+                    int max = Line.Parse(text);
+                    result = new Range(min, max);
+                }
+                else
+                    result = new Range(min);
+
+                return true;
+            }
+
+            result = Range.Undefined;
             return false;
         }
     }

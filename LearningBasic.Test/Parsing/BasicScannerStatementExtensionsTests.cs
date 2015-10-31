@@ -2,6 +2,7 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using LearningBasic.Parsing;
+    using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Statements;
 
     [TestClass]
@@ -121,6 +122,73 @@
             var condition = scanner.TryReadInput(out result);
 
             Assert.AreEqual("prompt", (result as Input).Prompt);
+        }
+
+        [TestMethod]
+        public void TryReadList_WithRange_StoresNonEmptyRange()
+        {
+            var scanner = MakeScanner("LIST 30-60");
+            IStatement result;
+
+            var condition = scanner.TryReadList(out result);
+            var range = (result as List).Range;
+
+            Assert.IsFalse(range.IsDefined);
+        }
+
+        [TestMethod]
+        public void TryReadList_WithoutRange_StoresEmptyRange()
+        {
+            var scanner = MakeScanner("LIST");
+            IStatement result;
+
+            var condition = scanner.TryReadList(out result);
+            var range = (result as List).Range;
+
+            Assert.IsTrue(range.IsDefined);
+        }
+
+        [TestMethod]
+        public void TryReadRange_WithEmptyString_SetsEmptyResult()
+        {
+            var scanner = MakeScanner("");
+            Range result;
+
+            var condition = scanner.TryReadRange(out result);
+
+            Assert.IsTrue(result.IsDefined);
+        }
+
+        [TestMethod]
+        public void TryReadRange_WithEmptyString_ReturnsFalse()
+        {
+            var scanner = MakeScanner("");
+            Range result;
+
+            var condition = scanner.TryReadRange(out result);
+
+            Assert.IsFalse(condition);
+        }
+
+        [TestMethod]
+        public void TryReadRange_WithRange_ReturnsTrue()
+        {
+            var scanner = MakeScanner("20-30");
+            Range result;
+
+            var condition = scanner.TryReadRange(out result);
+
+            Assert.IsTrue(condition);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadRange_WithIncompleteRange_ThrowsParserException()
+        {
+            var scanner = MakeScanner("20-");
+            Range result;
+
+            var condition = scanner.TryReadRange(out result);
         }
     }
 }
