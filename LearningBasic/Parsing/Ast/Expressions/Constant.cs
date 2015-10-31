@@ -17,7 +17,7 @@
         public Constant(string value)
         {
             Value = Parse(value);
-            compiledValue = Expression.Convert(Expression.Constant(value), typeof(object));
+            compiledValue = Expression.Constant(Value);
         }
 
         public Expression Compile(IRunTimeEnvironment rte)
@@ -46,7 +46,7 @@
                 return i;
 
             double d;
-            if (double.TryParse(s, NumberStyles.None, CultureInfo.InvariantCulture, out d))
+            if (double.TryParse(s, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out d))
                 return d;
 
             return s;

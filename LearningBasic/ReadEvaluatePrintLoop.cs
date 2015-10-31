@@ -47,10 +47,6 @@
             {
                 rte.InputOutput.WriteLine("Parser error: {0}", exception.Message);
             }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         /// <summary>
