@@ -3,6 +3,7 @@
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using Microsoft.CSharp.RuntimeBinder;
+    using System;
 
     public abstract class BinaryOperator : IExpression
     {
@@ -39,21 +40,33 @@
             return string.Format("{0} {1} {2}", Left, Operator, Right);
         }
 
-        public static Expression Calculate(ExpressionType expressionType, Expression left, Expression right)
+        public static Expression CallStaticMethod(Type methodClass, string methodName, Expression left, Expression right)
         {
-            var binder = CreateBinder(expressionType);
-            return Expression.Dynamic(binder, typeof(object), left, right);
-        }
-
-        public static CallSiteBinder CreateBinder(ExpressionType expressionType)
-        {
-            var operands = new[]
+            var argumentInfo = new[]
             {
-                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "left"),
-                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "right"),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.IsStaticType, null),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            return Binder.BinaryOperation(CSharpBinderFlags.None, expressionType, typeof(UnaryOperator), operands);
+            var binder = Binder.InvokeMember(CSharpBinderFlags.None, methodName, null, typeof(BinaryOperator), argumentInfo);
+
+            var classExpression = Expression.Constant(methodClass);
+
+            return Expression.Dynamic(binder, typeof(object), classExpression, left, right);
+        }
+
+        public static Expression PerformBuiltInOperator(ExpressionType @operator, Expression left, Expression right)
+        {
+            var argumentInfo = new[]
+            {
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+            };
+
+            var binder = Binder.BinaryOperation(CSharpBinderFlags.None, @operator, typeof(BinaryOperator), argumentInfo);
+
+            return Expression.Dynamic(binder, typeof(object), left, right);
         }
     }
 }

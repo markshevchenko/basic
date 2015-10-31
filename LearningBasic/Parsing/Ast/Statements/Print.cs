@@ -20,8 +20,9 @@
         {
             foreach (var expression in Expressions)
             {
-                var e = expression.Compile(rte);
-                rte.InputOutput.Write(e.ToString(CultureInfo.InvariantCulture));
+                var compiled = expression.Compile(rte);
+                var value = compiled.CalculateValue();
+                rte.InputOutput.Write(value.ToString());
             }
 
             return EvaluateResult.Empty;
