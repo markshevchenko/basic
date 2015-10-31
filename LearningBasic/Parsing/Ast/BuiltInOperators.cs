@@ -2,7 +2,10 @@
 {
     using System;
 
-    public static class BuiltInFunctions
+    /// <summary>
+    /// Implements specific BASIC operators those actions differs from C#.
+    /// </summary>
+    public static class BuiltInOperators
     {
         public static dynamic Power(int @base, int exponent)
         {
