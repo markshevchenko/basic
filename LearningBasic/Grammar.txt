@@ -4,8 +4,8 @@
 
 statement		: 'DIM' IDENTIFIER array
 				| 'RANDOMIZE' expression?
-				| 'PRINT' (expressions ';'?)?
-				| 'INPUT' (STRING ',')? l-values
+				| 'PRINT' expressions ';'?
+				| 'INPUT' (STRING ',')? l-value
 				| 'IF' condition 'THEN' statement ('ELSE' statement)?
 				| 'FOR' l-value '=' expression 'TO' expression ('STEP' expression)? (statement 'NEXT')?
 				| 'GOTO' expression
@@ -17,11 +17,7 @@ statement		: 'DIM' IDENTIFIER array
 				| 'RUN'
 				| 'END'
 				| 'QUIT'
-				| let
-				;
-
-let             : 'LET' assignment
-				| assignment
+				| 'LET'? assignment
 				;
 
 assignment		: l-value '=' expression
@@ -82,22 +78,16 @@ un-operand		: '-' un-operand
 pow-operands	: pow-operand ('^' pow-operands)?
 				;
 
-pow-operand		: terminal
-				;
-				
-terminal		: constant
+pow-operand		: constant
 				| '(' expression ')'
 				| l-value
 				| function '(' expressions? ')'
 				;
 
-l-values		: l-value (',' l-values)?
+l-value			: IDENTIFIER array-suffix?
 				;
 
-l-value			: IDENTIFIER array?
-				;
-
-array			: '[' expressions ']'
+array-suffix	: '[' expressions ']'
 				;
 
 constant		: INTEGER
@@ -135,7 +125,6 @@ function		: 'RND'
 				| 'ACOS'
 				| 'ATAN'
 				| 'ATAN2'
-				| 'MOD'
 				| 'CEIL'
 				| 'FLOOR'
 				;

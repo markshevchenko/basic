@@ -37,7 +37,7 @@
             if (statement == null)
                 throw new ArgumentNullException("statement");
 
-            Number = ParseNumber(number);
+            Number = Parse(number);
             Statement = statement;
         }
 
@@ -46,37 +46,25 @@
         /// </summary>
         /// <param name="numberAsString">The line number as a <see cref="String">string</see>.</param>
         /// <returns>The line number, or <c>null</c> if <paramref name="numberAsString"/> is null or empty.</returns>
-        /// <exception cref="EvaluatorException">
+        /// <exception cref="ParserException">
         /// The number can't be parsed, or is out of range of <see cref="MinNumber"/> to <see cref="MaxNumber"/>.
         /// </exception>
-        public static int? ParseNumber(string numberAsString)
-        {
-            var number = ParseInt32AndWrapException(numberAsString);
-            if (number < MinNumber || number > MaxNumber)
-            {
-                var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
-                throw new ParserException(message);
-            }
-
-            return number;
-        }
-
-        /// <summary>
-        /// Converts the string representation of a number to its 32-bit signed integer equivalent
-        /// </summary>
-        /// <param name="s">A string containing a number to convert.</param>
-        /// <returns>A 32-bit signed integer equivalent to the number contained in <paramref name="s"/>.</returns>
-        /// <exception cref="EvaluatorException">Any exception occured while converting <paramref name="s"/>.</exception>
-        public static int ParseInt32AndWrapException(string s)
+        public static int Parse(string numberAsString)
         {
             try
             {
-                return int.Parse(s, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                var number = int.Parse(numberAsString, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                if (number < MinNumber || number > MaxNumber)
+                {
+                    var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
+                    throw new ParserException(message);
+                }
+
+                return number;
             }
-            catch (Exception exception)
+            catch (OverflowException exception)
             {
-                var message = string.Format(ErrorMessages.CantParseLineNumber, s);
-                throw new ParserException(message, exception);
+                throw new ParserException(ErrorMessages.CantParseLineNumber, exception);
             }
         }
     }
