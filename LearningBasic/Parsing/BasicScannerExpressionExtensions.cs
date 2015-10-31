@@ -21,6 +21,9 @@
             string identifier;
             if (scanner.TryReadToken(Token.Identifier, out identifier))
             {
+                if (scanner.CurrentToken == Token.LParen)
+                    throw new ParserException(ErrorMessages.MissingLValue);
+
                 if (scanner.TryReadToken(Token.LBracket))
                 {
                     var parameters = scanner.ReadExpressions();
