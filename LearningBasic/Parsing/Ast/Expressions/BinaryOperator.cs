@@ -37,7 +37,16 @@
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", Left, Operator, Right);
+            var left = Left.ToString();
+            var right = Right.ToString();
+
+            if (Left.Priority < Priority || (Left.Priority == Priority && Associativity == Associativity.Right))
+                left = '(' + left + ')';
+
+            if (Right.Priority < Priority || (Right.Priority == Priority && Associativity == Associativity.Left))
+                right = '(' + right + ')';
+
+            return string.Format("{0} {1} {2}", left, Operator, right);
         }
 
         public static Expression CallStaticMethod(Type methodClass, string methodName, Expression left, Expression right)
