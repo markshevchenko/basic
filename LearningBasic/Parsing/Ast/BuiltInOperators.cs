@@ -9,6 +9,9 @@
     {
         public static dynamic Power(int @base, int exponent)
         {
+            if (@base == 0 && exponent <= 0)
+                throw new DivideByZeroException();
+
             var sign = Math.Sign(exponent);
             exponent = Math.Abs(exponent);
             var result = 1;
@@ -24,6 +27,9 @@
 
         public static dynamic Power(double @base, int exponent)
         {
+            if (@base == 0.0 && exponent <= 0)
+                throw new DivideByZeroException();
+
             var sign = Math.Sign(exponent);
             exponent = Math.Abs(exponent);
             var result = 1.0;
