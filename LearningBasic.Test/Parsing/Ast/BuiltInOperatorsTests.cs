@@ -77,5 +77,21 @@
 
             Assert.AreEqual(9.0, expected);
         }
+
+        [TestMethod]
+        public void Divide_WithIntegerParametersWithoutRemainder_ReturnsInteger()
+        {
+            var value = BuiltInOperators.Divide(4, 2);
+
+            Assert.IsInstanceOfType(value, typeof(int));
+        }
+
+        [TestMethod]
+        public void Divide_WithIntegerParametersWithRemainder_ReturnsDouble()
+        {
+            var value = BuiltInOperators.Divide(4, 3);
+
+            Assert.IsInstanceOfType(value, typeof(double));
+        }
     }
 }
