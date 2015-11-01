@@ -62,6 +62,7 @@
     <Compile Include="Parsing\Ast\BuiltInOperatorsTests.cs" />
     <Compile Include="Parsing\Ast\ExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\Ast\LineTests.cs" />
+    <Compile Include="Parsing\Ast\ObjectExtensionsTests.cs" />
     <Compile Include="Parsing\BasicScannerExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\ScannerExtensionsTests.cs" />
     <Compile Include="Parsing\BasicParserTests.cs" />
