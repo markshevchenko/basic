@@ -19,7 +19,7 @@
             Name = name.ToUpper();
         }
 
-        public virtual Expression Compile(IRunTimeEnvironment rte)
+        public virtual Expression GetExpression(IRunTimeEnvironment rte)
         {
             var variables = Expression.Constant(rte.Variables);
             var name = Expression.Constant(Name);

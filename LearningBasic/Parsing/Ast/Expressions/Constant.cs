@@ -20,7 +20,7 @@
             compiledValue = Expression.Constant(Value);
         }
 
-        public Expression Compile(IRunTimeEnvironment rte)
+        public Expression GetExpression(IRunTimeEnvironment rte)
         {
             return compiledValue;
         }

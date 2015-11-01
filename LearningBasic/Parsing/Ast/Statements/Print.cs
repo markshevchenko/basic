@@ -20,7 +20,7 @@
         {
             foreach (var expression in Expressions)
             {
-                var compiled = expression.Compile(rte);
+                var compiled = expression.GetExpression(rte);
                 var value = compiled.CalculateValue();
                 rte.InputOutput.Write(value.ToString());
             }

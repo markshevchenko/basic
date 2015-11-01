@@ -24,9 +24,9 @@
 
         protected abstract Expression Calculate(Expression operand);
 
-        public Expression Compile(IRunTimeEnvironment rte)
+        public Expression GetExpression(IRunTimeEnvironment rte)
         {
-            var operand = Operand.Compile(rte);
+            var operand = Operand.GetExpression(rte);
             return Calculate(operand);
         }
 

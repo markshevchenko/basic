@@ -37,7 +37,7 @@
             var line = rte.InputOutput.ReadLine();
 
             var rValue = ParseToObjectExpression(line);
-            var lValue = LValue.Compile(rte);
+            var lValue = LValue.GetExpression(rte);
             var assignment = Expression.Assign(lValue, rValue);
 
             var value = assignment.CalculateValue();
