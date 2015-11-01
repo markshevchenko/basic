@@ -13,6 +13,9 @@
             if (expression == null)
                 throw new ArgumentNullException("expression");
 
+            if (expression.Type != typeof(object))
+                expression = Expression.Convert(expression, typeof(object));
+
             var compiledExpression = Expression.Lambda<Func<object>>(expression)
                                                .Compile();
             return compiledExpression();

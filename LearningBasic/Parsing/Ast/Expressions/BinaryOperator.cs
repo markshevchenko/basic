@@ -28,10 +28,10 @@
 
         protected abstract Expression Calculate(Expression left, Expression right);
 
-        public Expression Compile(IRunTimeEnvironment rte)
+        public Expression GetExpression(IRunTimeEnvironment rte)
         {
-            var left = Left.Compile(rte);
-            var right = Right.Compile(rte);
+            var left = Left.GetExpression(rte);
+            var right = Right.GetExpression(rte);
             return Calculate(left, right);
         }
 

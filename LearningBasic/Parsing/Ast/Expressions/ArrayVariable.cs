@@ -18,10 +18,10 @@
             Indexes = indexes;
         }
 
-        public override Expression Compile(IRunTimeEnvironment rte)
+        public override Expression GetExpression(IRunTimeEnvironment rte)
         {
-            var array = base.Compile(rte);
-            var indexes = Indexes.Select(i => i.Compile(rte))
+            var array = base.GetExpression(rte);
+            var indexes = Indexes.Select(i => i.GetExpression(rte))
                                  .ToArray();
             return Expression.ArrayAccess(array, indexes);
         }

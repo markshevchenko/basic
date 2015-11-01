@@ -24,6 +24,6 @@
         /// </summary>
         /// <param name="rte">The run-time environment to get varaibles' values.</param>
         /// <returns>.NET expression object.</returns>
-        Expression Compile(IRunTimeEnvironment rte);
+        Expression GetExpression(IRunTimeEnvironment rte);
     }
 }

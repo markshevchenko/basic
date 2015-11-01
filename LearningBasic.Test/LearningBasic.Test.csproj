@@ -60,6 +60,7 @@
     <Compile Include="EvaluateResultTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />
     <Compile Include="Parsing\Ast\BuiltInOperatorsTests.cs" />
+    <Compile Include="Parsing\Ast\ExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\BasicScannerExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\ScannerExtensionsTests.cs" />
     <Compile Include="Parsing\BasicParserTests.cs" />

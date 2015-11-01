@@ -5,7 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class BuiltInOperatorsTests
+    public class BuiltInOperatorsTests : BaseTests
     {
         [TestMethod]
         public void Power_WithIntegerPositiveBaseAndExponent_ReturnsInteger()
