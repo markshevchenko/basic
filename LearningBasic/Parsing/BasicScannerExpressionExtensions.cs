@@ -56,95 +56,79 @@
 
         public static IExpression ReadExpression(this IScanner<Token> scanner)
         {
-            var left = scanner.ReadAddOperand();
+            var result = scanner.ReadAddOperand();
 
             while (true)
             {
+                IExpression tail;
                 if (scanner.TryReadToken(Token.Plus))
                 {
-                    var right = scanner.ReadAddOperand();
-                    left = new Add(left, right);
+                    tail = scanner.ReadAddOperand();
+                    result = new Add(result, tail);
                 }
                 else if (scanner.TryReadToken(Token.Minus))
                 {
-                    var right = scanner.ReadAddOperand();
-                    left = new Subtract(left, right);
+                    tail = scanner.ReadAddOperand();
+                    result = new Subtract(result, tail);
                 }
                 else
-                    return left;
+                    return result;
             }
         }
 
         public static IExpression ReadAddOperand(this IScanner<Token> scanner)
         {
-            var left = scanner.ReadMulOperand();
+            var result = scanner.ReadMulOperand();
 
             while (true)
             {
+                IExpression tail;
                 if (scanner.TryReadToken(Token.Asterisk))
                 {
-                    var right = scanner.ReadMulOperand();
-                    left = new Multiply(left, right);
+                    tail = scanner.ReadMulOperand();
+                    result = new Multiply(result, tail);
                 }
                 else if (scanner.TryReadToken(Token.Slash))
                 {
-                    var right = scanner.ReadMulOperand();
-                    left = new Divide(left, right);
+                    tail = scanner.ReadMulOperand();
+                    result = new Divide(result, tail);
                 }
                 else if (scanner.TryReadToken(Token.Percent))
                 {
-                    var right = scanner.ReadMulOperand();
-                    left = new Modulo(left, right);
+                    tail = scanner.ReadMulOperand();
+                    result = new Modulo(result, tail);
                 }
                 else
-                    return left;
+                    return result;
             }
         }
 
         public static IExpression ReadMulOperand(this IScanner<Token> scanner)
         {
-            var signStack = new Stack<Token>();
+            if (scanner.TryReadToken(Token.Plus))
+                return new Positive(scanner.ReadMulOperand());
+            else if (scanner.TryReadToken(Token.Minus))
+                return new Negative(scanner.ReadMulOperand());
+            else return scanner.ReadUnaryOperand();
 
-            while (scanner.CurrentToken == Token.Plus || scanner.CurrentToken == Token.Minus)
-            {
-                signStack.Push(scanner.CurrentToken);
-                scanner.MoveNext();
-            }
-
-            var operand = scanner.ReadPowOperand();
-
-            while (signStack.Count > 0)
-            {
-                if (signStack.Pop() == Token.Plus)
-                    operand = new Positive(operand);
-                else
-                    operand = new Negative(operand);
-            }
-
-            return operand;
         }
 
-        public static IExpression ReadPowOperand(this IScanner<Token> scanner)
+        public static IExpression ReadUnaryOperand(this IScanner<Token> scanner)
         {
-            var operandStack = new Stack<IExpression>();
+            var result = scanner.ReadTerminal();
 
-            while (true)
+            if (scanner.TryReadToken(Token.Caret))
             {
-                operandStack.Push(scanner.ReadTerminal());
+                IExpression tail;
+                if (scanner.CurrentToken == Token.Plus || scanner.CurrentToken == Token.Minus)
+                    tail = scanner.ReadMulOperand();
+                else
+                    tail = scanner.ReadUnaryOperand();
 
-                if (!scanner.TryReadToken(Token.Caret))
-                    break;
+                result = new Power(result, tail);
             }
 
-            var right = operandStack.Pop();
-
-            while (operandStack.Count > 0)
-            {
-                var left = operandStack.Pop();
-                right = new Power(left, right);
-            }
-
-            return right;
+            return result;
         }
 
         public static IExpression ReadTerminal(this IScanner<Token> scanner)

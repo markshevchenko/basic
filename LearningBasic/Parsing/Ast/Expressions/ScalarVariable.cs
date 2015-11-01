@@ -16,7 +16,7 @@
 
         public ScalarVariable(string name)
         {
-            Name = name;
+            Name = name.ToUpper();
         }
 
         public virtual Expression Compile(IRunTimeEnvironment rte)
