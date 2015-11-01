@@ -1,5 +1,8 @@
 ﻿namespace LearningBasic.Parsing
 {
+    using System;
+
+    [Serializable]
     public sealed class UnexpectedTokenException : ParserException
     {
         public UnexpectedTokenException(object expectedToken, object actualToken)
