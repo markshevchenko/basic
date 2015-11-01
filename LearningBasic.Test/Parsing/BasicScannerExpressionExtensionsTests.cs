@@ -90,5 +90,69 @@
 
             Assert.IsInstanceOfType(value, typeof(Add));
         }
+
+        [TestMethod]
+        public void ReadAddOperand_WithMultiplyDivide_PlacesDivideToRoot()
+        {
+            var scanner = MakeScanner("a * b / c");
+
+            var value = scanner.ReadAddOperand();
+
+            Assert.IsInstanceOfType(value, typeof(Divide));
+        }
+
+        [TestMethod]
+        public void ReadAddOperand_WithMultiplyDivide_PlacesMultiplyToLeftChild()
+        {
+            var scanner = MakeScanner("a * b / c");
+
+            var value = scanner.ReadAddOperand();
+            value = (value as Divide).Left;
+
+            Assert.IsInstanceOfType(value, typeof(Multiply));
+        }
+
+        [TestMethod]
+        public void ReadMulOperand_WithUnaryPlusMinus_PlacesPlusToRoot()
+        {
+            var scanner = MakeScanner("+-a");
+
+            var value = scanner.ReadMulOperand();
+
+            Assert.IsInstanceOfType(value, typeof(Positive));
+        }
+
+        [TestMethod]
+        public void ReadMulOperand_WithUnaryPlusMinus_PlacesMinusToChild()
+        {
+            var scanner = MakeScanner("+-a");
+
+            var value = scanner.ReadMulOperand();
+            value = (value as Positive).Operand;
+
+            Assert.IsInstanceOfType(value, typeof(Negative));
+        }
+
+        [TestMethod]
+        public void ReadUnaryOperand_WithCaretCaret_PlacesFirstCaretToRoot()
+        {
+            var scanner = MakeScanner("a^b^c");
+
+            var value = scanner.ReadUnaryOperand();
+            var left = (value as Power).Left;
+
+            Assert.AreEqual("A", (left as ScalarVariable).Name);
+        }
+
+        [TestMethod]
+        public void ReadUnaryOperand_WithCaretMinus_PlacesMinusToRight()
+        {
+            var scanner = MakeScanner("a^-b");
+
+            var value = scanner.ReadUnaryOperand();
+            value = (value as Power).Right;
+
+            Assert.IsInstanceOfType(value, typeof(Negative));
+        }
     }
 }
