@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Test.Parsing
 {
+    using System;
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Expressions;
@@ -153,6 +154,84 @@
             value = (value as Power).Right;
 
             Assert.IsInstanceOfType(value, typeof(Negative));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithInteger_ReturnsConstant()
+        {
+            var scanner = MakeScanner("123");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Constant));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithReal_ReturnsConstant()
+        {
+            var scanner = MakeScanner("123.456");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Constant));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithString_ReturnsConstant()
+        {
+            var scanner = MakeScanner("\"123\"");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Constant));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithSumInParenthesis_ReturnsAdd()
+        {
+            var scanner = MakeScanner("(a + 2)");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Add));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithIdentifier_ReturnsScalarVariable()
+        {
+            var scanner = MakeScanner("foo123");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(ScalarVariable));
+        }
+
+        [TestMethod]
+        public void ReadValue_WithArray_ReturnsArrayVariable()
+        {
+            var scanner = MakeScanner("foo123[x]");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(ArrayVariable));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void ReadValue_WithFunction_ThrowsNotImplementedException()
+        {
+            var scanner = MakeScanner("foo123(x)");
+
+            var value = scanner.ReadValue();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void ReadValue_WithMinus_ThrowsParserException()
+        {
+            var scanner = MakeScanner("-a");
+
+            var value = scanner.ReadValue();
         }
     }
 }

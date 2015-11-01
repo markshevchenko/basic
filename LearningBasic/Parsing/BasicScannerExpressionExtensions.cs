@@ -115,7 +115,7 @@
 
         public static IExpression ReadUnaryOperand(this IScanner<Token> scanner)
         {
-            var result = scanner.ReadTerminal();
+            var result = scanner.ReadValue();
 
             if (scanner.TryReadToken(Token.Caret))
             {
@@ -131,7 +131,7 @@
             return result;
         }
 
-        public static IExpression ReadTerminal(this IScanner<Token> scanner)
+        public static IExpression ReadValue(this IScanner<Token> scanner)
         {
             string text;
             if (scanner.TryReadToken(Token.Integer, out text))
