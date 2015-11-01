@@ -2,6 +2,7 @@
 {
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Ast;
+    using LearningBasic.Parsing.Ast.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -60,15 +61,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParserException))]
-        public void ReadExpressions_WithoutComma_ThrowsParserException()
-        {
-            var scanner = MakeScanner("1 2");
-
-            var actual = scanner.ReadExpressions();
-        }
-
-        [TestMethod]
         public void ReadExpressions_WithTwoExpressions_ReturnsListWithTwoElements()
         {
             var scanner = MakeScanner("1, 2");
@@ -76,6 +68,27 @@
             var actual = scanner.ReadExpressions();
 
             Assert.AreEqual(2, actual.Count);
+        }
+
+        [TestMethod]
+        public void ReadExpression_WithPlusMinues_PlacesMinusToRoot()
+        {
+            var scanner = MakeScanner("a + b - c");
+
+            var value = scanner.ReadExpression();
+
+            Assert.IsInstanceOfType(value, typeof(Subtract));
+        }
+
+        [TestMethod]
+        public void ReadExpression_WithPlusMinus_PlacesPlusToLeftChild()
+        {
+            var scanner = MakeScanner("a + b - c");
+
+            var value = scanner.ReadExpression();
+            value = (value as Subtract).Left;
+
+            Assert.IsInstanceOfType(value, typeof(Add));
         }
     }
 }
