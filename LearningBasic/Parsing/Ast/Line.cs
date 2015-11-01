@@ -15,6 +15,13 @@
 
         public IStatement Statement { get; private set; }
 
+        /// <summary>
+        /// Creates an instance of <see cref="Line"/> without line number.
+        /// </summary>
+        /// <param name="statement">The statement.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="statement"/> is <c>null</c>.
+        /// </exception>
         public Line(IStatement statement)
         {
             if (statement == null)
@@ -29,6 +36,10 @@
         /// </summary>
         /// <param name="number">The string representation of line number.</param>
         /// <param name="statement">The statement.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="number"/> or
+        /// <paramref name="statement"/> are <c>null</c>.
+        /// </exception>
         public Line(string number, IStatement statement)
         {
             if (number == null)
@@ -54,6 +65,7 @@
             try
             {
                 var number = int.Parse(numberAsString, NumberStyles.Integer, CultureInfo.InvariantCulture);
+
                 if (number < MinNumber || number > MaxNumber)
                 {
                     var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
@@ -61,6 +73,10 @@
                 }
 
                 return number;
+            }
+            catch (FormatException exception)
+            {
+                throw new ParserException(ErrorMessages.CantParseLineNumber, exception);
             }
             catch (OverflowException exception)
             {
