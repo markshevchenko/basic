@@ -79,7 +79,7 @@
         }
 
         /// <inheritdoc />
-        public virtual void MoveNext()
+        public void MoveNext()
         {
             ThrowIfDisposed();
 
@@ -168,7 +168,7 @@
         /// <summary>
         /// Throws <see cref="ObjectDisposedException"/>, if the object is disposed.
         /// </summary>
-        protected virtual void ThrowIfDisposed()
+        protected void ThrowIfDisposed()
         {
             if (IsDisposed)
             {
