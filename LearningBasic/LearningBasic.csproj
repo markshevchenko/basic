@@ -55,6 +55,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\FileProgramRepository.cs" />
+    <Compile Include="IO\IOException.cs" />
+    <Compile Include="IProgramRepository.cs" />
+    <Compile Include="LinesExtensions.cs" />
     <Compile Include="Parsing\Ast\Associativity.cs" />
     <Compile Include="Parsing\Ast\ExpressionExtensions.cs" />
     <Compile Include="Parsing\Ast\Expressions\Add.cs" />
@@ -87,7 +91,7 @@
     <Compile Include="IStatement.cs" />
     <Compile Include="Parsing\Ast\Line.cs" />
     <Compile Include="Parsing\Ast\BuiltInOperators.cs" />
-    <Compile Include="ConsoleInputOutput.cs" />
+    <Compile Include="IO\ConsoleInputOutput.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

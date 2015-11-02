@@ -2,15 +2,17 @@
 {
     using System.Reflection;
     using LearningBasic.Parsing;
+    using IO;
 
     class Program
     {
         private static void Main(string[] args)
         {
             var inputOutput = new ConsoleInputOutput();
-            var rte = new RunTimeEnvironment(inputOutput);
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
+            var programRepository = new FileProgramRepository(parser);
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
             var readEvaluatePrintLoop = new ReadEvaluatePrintLoop(rte, parser);
 
             PrintSalute(inputOutput);

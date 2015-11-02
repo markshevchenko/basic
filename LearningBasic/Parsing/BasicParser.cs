@@ -5,10 +5,17 @@
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Statements;
 
+    /// <summary>
+    /// Implements BASIC per-line parser.
+    /// </summary>
     public class BasicParser : ILineParser
     {
         private readonly IScannerFactory<Token> scannerFactory;
 
+        /// <summary>
+        /// Creates an instance of the <see cref="BasicParser"/>.
+        /// </summary>
+        /// <param name="scannerFactory">The factory of BASIC scanners.</param>
         public BasicParser(IScannerFactory<Token> scannerFactory)
         {
             if (scannerFactory == null)
@@ -17,6 +24,11 @@
             this.scannerFactory = scannerFactory;
         }
 
+        /// <summary>
+        /// Parses BASIC source line and builds parsed <see cref="ILine">line</see>.
+        /// </summary>
+        /// <param name="line">The BASIC source line.</param>
+        /// <returns>The parsed line.</returns>
         public ILine Parse(string line)
         {
             var inputStream = new StringReader(line);

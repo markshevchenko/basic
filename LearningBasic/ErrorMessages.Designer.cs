@@ -61,11 +61,29 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t load file &apos;{0}&apos;..
+        /// </summary>
+        internal static string CantLoadFile {
+            get {
+                return ResourceManager.GetString("CantLoadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t parse line number &apos;{0}&apos;..
         /// </summary>
         internal static string CantParseLineNumber {
             get {
                 return ResourceManager.GetString("CantParseLineNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t save file &apos;{0}&apos;..
+        /// </summary>
+        internal static string CantSaveFile {
+            get {
+                return ResourceManager.GetString("CantSaveFile", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace LearningBasic {
         internal static string MissingExpression {
             get {
                 return ResourceManager.GetString("MissingExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing file name..
+        /// </summary>
+        internal static string MissingFileName {
+            get {
+                return ResourceManager.GetString("MissingFileName", resourceCulture);
             }
         }
         

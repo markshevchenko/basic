@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CantLoadFile" xml:space="preserve">
+    <value>Can't load file '{0}'.</value>
+  </data>
   <data name="CantParseLineNumber" xml:space="preserve">
     <value>Can't parse line number '{0}'.</value>
+  </data>
+  <data name="CantSaveFile" xml:space="preserve">
+    <value>Can't save file '{0}'.</value>
   </data>
   <data name="EmptyVariableListInInput" xml:space="preserve">
     <value>You must specify at least one variable in the INPUT statement.</value>
@@ -143,6 +149,9 @@
   </data>
   <data name="MissingExpression" xml:space="preserve">
     <value>Missing expression.</value>
+  </data>
+  <data name="MissingFileName" xml:space="preserve">
+    <value>Missing file name.</value>
   </data>
   <data name="MissingLValue" xml:space="preserve">
     <value>Missing variable or array.</value>

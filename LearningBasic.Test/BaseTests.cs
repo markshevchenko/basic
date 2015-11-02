@@ -5,6 +5,8 @@
     using LearningBasic.Parsing.Ast.Expressions;
     using LearningBasic.Parsing.Ast.Statements;
     using LearningBasic.Test.Mocks;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public abstract class BaseTests
     {
@@ -35,21 +37,36 @@
             return new MockInputOutput(inputString);
         }
 
+        private static IDictionary<int, IStatement> lines = new Dictionary<int, IStatement>
+        {
+            { 10, new Input(new ScalarVariable("A")) },
+            { 20, new Let(new ScalarVariable("B"), new ScalarVariable("A")) },
+            { 30, new Print(new[] { new ScalarVariable("B") }) },
+        };
+
+        protected static MockProgramRepository MakeProgramRepository()
+        {
+            return new MockProgramRepository(lines);
+        }
+
         protected static IRunTimeEnvironment MakeRunTimeEnvironment()
         {
             var inputOutput = MakeInputOutput();
-            return new RunTimeEnvironment(inputOutput);
+            var programRepository = MakeProgramRepository();
+            return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
         protected static IRunTimeEnvironment MakeRunTimeEnvironment(string inputString)
         {
             var inputOutput = MakeInputOutput(inputString);
-            return new RunTimeEnvironment(inputOutput);
+            var programRepository = MakeProgramRepository();
+            return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
         protected static IRunTimeEnvironment MakeRunTimeEnvironment(IInputOutput inputOutput)
         {
-            return new RunTimeEnvironment(inputOutput);
+            var programRepository = MakeProgramRepository();
+            return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
         protected static IStatement MakePrintStatement(string argument)

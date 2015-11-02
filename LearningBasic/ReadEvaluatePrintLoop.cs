@@ -1,6 +1,7 @@
 ﻿namespace LearningBasic
 {
     using System;
+    using LearningBasic.IO;
 
     /// <summary>
     /// Implements the Read-Evaluate-Print step-by-step loop.
@@ -42,6 +43,10 @@
                 var line = Read();
                 var result = Evaluate(line);
                 Print(result);
+            }
+            catch (IOException exception)
+            {
+                rte.InputOutput.WriteLine("I/O error: {0}", exception.Message);
             }
             catch (ParserException exception)
             {

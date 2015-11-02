@@ -13,7 +13,7 @@
         /// </summary>
         /// <param name="o">The dynamic object.</param>
         /// <returns>The string representation of the <paramref name="o">object</paramref>.</returns>
-        public static string ToListing(this object o)
+        public static string ToPrintable(this object o)
         {
             if (o == null)
                 return string.Empty;

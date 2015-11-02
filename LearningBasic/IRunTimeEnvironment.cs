@@ -10,7 +10,14 @@
         /// <summary>
         /// Gets the <see cref="IInputOutput"/> object.
         /// </summary>
+        /// <remarks>This object incapsulates all input-output operations.</remarks>
         IInputOutput InputOutput { get; }
+
+        /// <summary>
+        /// Get the <see cref="IProgramRepository"/>.
+        /// </summary>
+        /// <remarks>This repository incapsulates save and load operations.</remarks>
+        IProgramRepository ProgramRepository { get; }
 
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified environment instance has been closed.

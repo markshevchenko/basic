@@ -49,7 +49,7 @@
             if (Prompt == null)
                 return "INPUT " + LValue.ToString();
             else
-                return "INPUT " + Prompt.ToListing() + ", " + LValue.ToString();
+                return "INPUT " + Prompt.ToPrintable() + ", " + LValue.ToString();
         }
 
         public static Expression ParseToObjectExpression(string s)

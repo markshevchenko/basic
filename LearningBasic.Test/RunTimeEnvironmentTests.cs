@@ -10,14 +10,26 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void RunTimeEnvironment_WithNullInputOutput_ThrowsArgumentNullException()
         {
-            var rte = new RunTimeEnvironment(null);
+            IInputOutput inputOutput = null;
+            IProgramRepository programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RunTimeEnvironment_WithNullProgramRepository_ThrowsArgumentNullException()
+        {
+            IInputOutput inputOutput = MakeInputOutput();
+            IProgramRepository programRepository = null;
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
         }
 
         [TestMethod]
         public void RunTimeEnvironment_AfterConstructing_IsNotClosed()
         {
-            var inputOuput = MakeInputOutput("any string");
-            var rte = new RunTimeEnvironment(inputOuput);
+            IInputOutput inputOutput = MakeInputOutput("any string");
+            IProgramRepository programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
 
             Assert.IsFalse(rte.IsClosed);
         }
@@ -25,8 +37,9 @@
         [TestMethod]
         public void Close_WhenCalled_SetsIsClosedProperty()
         {
-            var inputOuput = MakeInputOutput("any string");
-            var rte = new RunTimeEnvironment(inputOuput);
+            IInputOutput inputOutput = MakeInputOutput("any string");
+            IProgramRepository programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
 
             rte.Close();
 

@@ -58,7 +58,9 @@
       <Link>Properties\Version.cs</Link>
     </Compile>
     <Compile Include="EvaluateResultTests.cs" />
+    <Compile Include="LinesExtensionsTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />
+    <Compile Include="Mocks\MockProgramRepository.cs" />
     <Compile Include="Parsing\Ast\BuiltInOperatorsTests.cs" />
     <Compile Include="Parsing\Ast\ExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\Ast\LineTests.cs" />
