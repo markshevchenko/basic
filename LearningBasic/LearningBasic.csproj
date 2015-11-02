@@ -102,6 +102,7 @@
     <Compile Include="IRunTimeEnvironment.cs" />
     <Compile Include="IScanner.cs" />
     <Compile Include="IScannerFactory.cs" />
+    <Compile Include="Parsing\Ast\Statements\Remove.cs" />
     <Compile Include="Parsing\BasicScannerExpressionExtensions.cs" />
     <Compile Include="Parsing\BasicParser.cs" />
     <Compile Include="Parsing\BasicScannerStatementExtensions.cs" />

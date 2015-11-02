@@ -190,5 +190,37 @@
 
             var condition = scanner.TryReadRange(out result);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void ReadRange_WithNoRange_ThrowsParserException()
+        {
+            var scanner = MakeScanner("no range");
+
+            var actual = scanner.ReadRange();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadRemove_WithoutRange_ThrowsParserException()
+        {
+            var scanner = MakeScanner("REMOVE");
+            IStatement result;
+
+            var condition = scanner.TryReadRemove(out result);
+        }
+
+        [TestMethod]
+        public void TryReadRemove_WithRange_SetsRange()
+        {
+            var scanner = MakeScanner("REMOVE 100-200");
+            IStatement result;
+
+            var condition = scanner.TryReadRemove(out result);
+            var remove = result as Remove;
+
+            var expected = new Range(100, 200);
+            Assert.AreEqual(expected, remove.Range);
+        }
     }
 }

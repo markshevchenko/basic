@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents integer range with minimal and maximal values.
     /// </summary>
-    public struct Range
+    public struct Range : IEquatable<Range>
     {
         private readonly bool isDefined;
         private readonly int min;
@@ -95,6 +95,7 @@
             return !IsDefined || (value >= Min && value <= Max);
         }
 
+        /// <inheritdoc />
         public override string ToString()
         {
             if (!IsDefined)
@@ -104,6 +105,56 @@
                 return Min.ToString(CultureInfo.InvariantCulture);
 
             return string.Format(CultureInfo.InvariantCulture, "{0}-{1}", Min, Max);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            if (obj is Range)
+                return Equals((Range)obj);
+
+            return false;
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return min.GetHashCode() ^ max.GetHashCode();
+        }
+
+        /// <inheritdoc />
+        public bool Equals(Range other)
+        {
+            return (!isDefined && !other.isDefined)
+                || (isDefined == other.isDefined && min == other.min && max == other.max);
+        }
+
+        /// <summary>
+        /// Determines whether two specified instances of <see cref="Range"/> are equal.
+        /// </summary>
+        /// <param name="a">The first object to compare.</param>
+        /// <param name="b">The second object to compare.</param>
+        /// <returns>
+        /// <c>true</c>, if <paramref name="a"/> and <paramref name="b"/>
+        /// represents the same range; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool operator ==(Range a, Range b)
+        {
+            return a.Equals(b);
+        }
+
+        /// <summary>
+        /// Determines whether two specified instances of <see cref="Range"/> are not equal.
+        /// </summary>
+        /// <param name="a">The first object to compare.</param>
+        /// <param name="b">The second object to compare.</param>
+        /// <returns>
+        /// <c>true</c>, if <paramref name="a"/> and <paramref name="b"/>
+        /// do not represents the same range; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool operator !=(Range a, Range b)
+        {
+            return !a.Equals(b);
         }
     }
 }

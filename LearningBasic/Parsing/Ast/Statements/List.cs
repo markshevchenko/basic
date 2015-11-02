@@ -24,6 +24,7 @@
 
             var filterdLines = rte.Lines.Where(line => Range.Contains(line.Key));
             var printableLines = LinesExtensions.ToPrintable(filterdLines);
+            PrintLines(rte.InputOutput, printableLines);
 
             return EvaluateResult.Empty;
         }

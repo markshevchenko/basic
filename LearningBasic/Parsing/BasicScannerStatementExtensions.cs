@@ -24,6 +24,9 @@
             if (scanner.TryReadList(out result))
                 return result;
 
+            if (scanner.TryReadRemove(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Quit))
                 return new Quit();
 
@@ -126,6 +129,28 @@
             }
 
             result = Range.Undefined;
+            return false;
+        }
+
+        public static Range ReadRange(this IScanner<Token> scanner)
+        {
+            Range result;
+            if (scanner.TryReadRange(out result))
+                return result;
+
+            throw new ParserException(ErrorMessages.RemoveMissingRange);
+        }
+
+        public static bool TryReadRemove(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Remove))
+            {
+                var range = scanner.ReadRange();
+                result = new Remove(range);
+                return true;
+            }
+
+            result = null;
             return false;
         }
     }

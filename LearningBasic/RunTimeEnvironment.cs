@@ -8,6 +8,8 @@
     /// </summary>
     public class RunTimeEnvironment : IRunTimeEnvironment
     {
+        public string ProgramName { get; set; }
+
         /// <inheritdoc />
         public IInputOutput InputOutput { get; private set; }
 
@@ -36,6 +38,7 @@
             if (programRepository == null)
                 throw new ArgumentNullException("programRepository");
 
+            ProgramName = null;
             InputOutput = inputOutput;
             ProgramRepository = programRepository;
             IsClosed = false;

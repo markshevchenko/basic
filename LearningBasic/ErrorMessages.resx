@@ -126,13 +126,10 @@
   <data name="CantSaveFile" xml:space="preserve">
     <value>Can't save file '{0}'.</value>
   </data>
-  <data name="EmptyVariableListInInput" xml:space="preserve">
+  <data name="InputEmptyVariableList" xml:space="preserve">
     <value>You must specify at least one variable in the INPUT statement.</value>
   </data>
-  <data name="InvalidSemicolonInPrint" xml:space="preserve">
-    <value>You can't specify a semicolon in the PRINT statement without parameters.</value>
-  </data>
-  <data name="InvalidVariableListInInput" xml:space="preserve">
+  <data name="InputInvalidVariableList" xml:space="preserve">
     <value>Invalid list of variables in the INPUT statement.</value>
   </data>
   <data name="LineNumberOutOfRange" xml:space="preserve">
@@ -164,6 +161,12 @@
   </data>
   <data name="MissingTerminal" xml:space="preserve">
     <value>Missing constant, variable, array, parenthesis, or function call.</value>
+  </data>
+  <data name="PrintInvalidSemicolon" xml:space="preserve">
+    <value>You can't specify a semicolon in the PRINT statement without parameters.</value>
+  </data>
+  <data name="RemoveMissingRange" xml:space="preserve">
+    <value>Missing range in REMOVE statement.</value>
   </data>
   <data name="UnexpectedCharacter" xml:space="preserve">
     <value>Unexpected character '{0}'.</value>

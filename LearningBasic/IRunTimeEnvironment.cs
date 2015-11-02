@@ -8,6 +8,12 @@
     public interface IRunTimeEnvironment
     {
         /// <summary>
+        /// Gets or sets the name of the program (last used name).
+        /// </summary>
+        /// <remarks><c>null</c> name means that there was no LOAD or SAVE operations.</remarks>
+        string ProgramName { get; set; }
+
+        /// <summary>
         /// Gets the <see cref="IInputOutput"/> object.
         /// </summary>
         /// <remarks>This object incapsulates all input-output operations.</remarks>

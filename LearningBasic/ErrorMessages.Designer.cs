@@ -90,27 +90,18 @@ namespace LearningBasic {
         /// <summary>
         ///   Looks up a localized string similar to You must specify at least one variable in the INPUT statement..
         /// </summary>
-        internal static string EmptyVariableListInInput {
+        internal static string InputEmptyVariableList {
             get {
-                return ResourceManager.GetString("EmptyVariableListInInput", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t specify a semicolon in the PRINT statement without parameters..
-        /// </summary>
-        internal static string InvalidSemicolonInPrint {
-            get {
-                return ResourceManager.GetString("InvalidSemicolonInPrint", resourceCulture);
+                return ResourceManager.GetString("InputEmptyVariableList", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid list of variables in the INPUT statement..
         /// </summary>
-        internal static string InvalidVariableListInInput {
+        internal static string InputInvalidVariableList {
             get {
-                return ResourceManager.GetString("InvalidVariableListInInput", resourceCulture);
+                return ResourceManager.GetString("InputInvalidVariableList", resourceCulture);
             }
         }
         
@@ -201,6 +192,24 @@ namespace LearningBasic {
         internal static string MissingTerminal {
             get {
                 return ResourceManager.GetString("MissingTerminal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t specify a semicolon in the PRINT statement without parameters..
+        /// </summary>
+        internal static string PrintInvalidSemicolon {
+            get {
+                return ResourceManager.GetString("PrintInvalidSemicolon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing range in REMOVE statement..
+        /// </summary>
+        internal static string RemoveMissingRange {
+            get {
+                return ResourceManager.GetString("RemoveMissingRange", resourceCulture);
             }
         }
         
