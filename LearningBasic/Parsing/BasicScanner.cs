@@ -97,12 +97,12 @@
                 State = ScannerState.Token;
             }
             
-            this.currentText = text.ToString();
+            currentText = text.ToString();
         }
 
         private Token ReadToken(StringBuilder target)
         {
-            this.inputStream.SkipWhile(char.IsWhiteSpace);
+            inputStream.SkipWhile(char.IsWhiteSpace);
 
             if (inputStream.IsEof())
                 return Token.Eof;

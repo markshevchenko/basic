@@ -93,7 +93,7 @@
                     tail = scanner.ReadMulOperand();
                     result = new Divide(result, tail);
                 }
-                else if (scanner.TryReadToken(Token.Percent))
+                else if (scanner.TryReadToken(Token.Mod))
                 {
                     tail = scanner.ReadMulOperand();
                     result = new Modulo(result, tail);
