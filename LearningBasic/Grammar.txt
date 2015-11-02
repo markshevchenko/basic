@@ -9,7 +9,7 @@ statement		: 'DIM' IDENTIFIER array
 				| 'IF' condition 'THEN' statement ('ELSE' statement)?
 				| 'FOR' l-value '=' expression 'TO' expression ('STEP' expression)? (statement 'NEXT')?
 				| 'GOTO' expression
-				| 'REMOVE' range?
+				| 'REMOVE' range
 				| 'LIST' range?
 				| 'SAVE' STRING?
 				| 'LOAD' STRING
