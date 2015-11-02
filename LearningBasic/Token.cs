@@ -20,14 +20,11 @@
 
         #endregion
 
-        #region Operators
+        #region Conditions
 
-        Plus,               // +
-        Minus,              // -
-        Asterisk,           // *
-        Slash,              // /
-        Percent,            // %
-        Caret,              // ^
+        And,                // AND
+        Not,                // NOT
+        Or,                 // OR
         Eq,                 // =
         Lt,                 // <
         Le,                 // <=
@@ -37,11 +34,22 @@
 
         #endregion
 
+        #region Operators
+
+        Plus,               // +
+        Minus,              // -
+        Asterisk,           // *
+        Slash,              // /
+        Caret,              // ^
+        Mod,                // MOD
+
+        #endregion
+
         #region Terminals
 
         Identifier,         // ([a-zA-Z_][a-zA-Z0-9_]*)
         Integer,            // ([0-9]+)
-        Float,               // ([0-9]+\.[0-9]*)
+        Float,              // ([0-9]+\.[0-9])
         String,             // "([^"]|"")*"
         Comment,            // ([^\n]*)
 
@@ -49,7 +57,6 @@
 
         #region Keywords
 
-        And,
         Dim,
         Else,
         End,
@@ -61,8 +68,6 @@
         List,
         Load,
         Next,
-        Not,
-        Or,
         Print,
         Quit,
         Randomize,
