@@ -70,7 +70,6 @@
             { '-', Token.Minus },
             { '*', Token.Asterisk },
             { '/', Token.Slash },
-            { '%', Token.Percent },
             { '^', Token.Caret },
             { '=', Token.Eq },
         };
@@ -149,6 +148,7 @@
             { "let", Token.Let },
             { "list", Token.List },
             { "load", Token.Load },
+            { "mod", Token.Mod },
             { "next", Token.Next },
             { "not", Token.Not },
             { "or", Token.Or },

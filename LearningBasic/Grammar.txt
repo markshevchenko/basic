@@ -65,23 +65,26 @@ add-operands	: add-operand ('+' | '-' add-operands)?
 add-operand		: mul-operands
 				;
 
-mul-operands	: mul-operand ('*' | '/' | '%' mul-operands)?
+mul-operands	: mul-operand ('*' | '/' | 'MOD' mul-operands)?
 				;
 
 mul-operand		: un-operand
 				;
 
-un-operand		: '-' un-operand
-				| '+' un-operand
-				| pow-operands
+un-operand		: value ('^' pow-operands)?
 
 pow-operands	: pow-operand ('^' pow-operands)?
 				;
 
-pow-operand		: constant
-				| '(' expression ')'
+
+pow-operand		: '-' mul-operand
+				| '+' mul-operand
+				| value
+
+value			: constant
 				| l-value
 				| function '(' expressions? ')'
+				| '(' expression ')'
 				;
 
 l-value			: IDENTIFIER array-suffix?
