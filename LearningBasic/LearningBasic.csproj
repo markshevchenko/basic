@@ -88,6 +88,7 @@
     <Compile Include="Parsing\Ast\Statements\Input.cs" />
     <Compile Include="Parsing\Ast\Statements\Let.cs" />
     <Compile Include="Parsing\Ast\Statements\List.cs" />
+    <Compile Include="Parsing\Ast\Statements\Load.cs" />
     <Compile Include="Parsing\Ast\Statements\Next.cs" />
     <Compile Include="Parsing\Ast\Statements\Print.cs" />
     <Compile Include="Parsing\Ast\Statements\PrintLine.cs" />

@@ -217,10 +217,44 @@
             IStatement result;
 
             var condition = scanner.TryReadRemove(out result);
-            var remove = result as Remove;
+            var statement = result as Remove;
 
             var expected = new Range(100, 200);
-            Assert.AreEqual(expected, remove.Range);
+            Assert.AreEqual(expected, statement.Range);
+        }
+
+        [TestMethod]
+        public void TryReadSave_WithFileName_SetsName()
+        {
+            var scanner = MakeScanner("SAVE \"very special program\"");
+            IStatement result;
+
+            var condition = scanner.TryReadSave(out result);
+            var statement = result as Save;
+
+            Assert.AreEqual("very special program", statement.Name);
+        }
+
+        [TestMethod]
+        public void TryReadSave_WithoutFileName_SetsNullName()
+        {
+            var scanner = MakeScanner("SAVE");
+            IStatement result;
+
+            var condition = scanner.TryReadSave(out result);
+            var statement = result as Save;
+
+            Assert.IsNull(statement.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadLoad_WithoutFileName_ThrowsParserException()
+        {
+            var scanner = MakeScanner("LOAD");
+            IStatement result;
+
+            var condition = scanner.TryReadLoad(out result);
         }
     }
 }

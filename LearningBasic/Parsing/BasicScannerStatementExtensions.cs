@@ -179,6 +179,14 @@
 
         public static bool TryReadLoad(this IScanner<Token> scanner, out IStatement result)
         {
+            if (scanner.TryReadToken(Token.Load))
+            {
+                string fileName;
+                scanner.ReadToken(Token.String, out fileName);
+                result = new Load(fileName);
+                return true;
+            }
+
             result = null;
             return false;
         }

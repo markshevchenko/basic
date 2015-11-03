@@ -11,12 +11,12 @@
             Name = null;
         }
 
-        public Save(string programName)
+        public Save(string name)
         {
-            if (programName == null)
-                throw new ArgumentNullException("programName");
+            if (name == null)
+                throw new ArgumentNullException("name");
 
-            Name = programName;
+            Name = name;
         }
 
         public EvaluateResult Run(IRunTimeEnvironment rte)
