@@ -1,8 +1,12 @@
 ﻿namespace LearningBasic.Test.Mocks
 {
+    using System;
+
     public class MockInputOutput : IInputOutput
     {
         private readonly string inputString;
+
+        public event EventHandler OnBreak;
 
         public string LastWritten { get; private set; }
 

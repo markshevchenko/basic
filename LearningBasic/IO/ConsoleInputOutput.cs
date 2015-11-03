@@ -8,6 +8,25 @@
     public class ConsoleInputOutput : IInputOutput
     {
         /// <inheritdoc />
+        public event EventHandler OnBreak;
+
+        /// <summary>
+        /// Initializes a new instance of the class <see cref="ConsoleInputOutput"/>.
+        /// </summary>
+        public ConsoleInputOutput()
+        {
+            Console.CancelKeyPress += (object sender, ConsoleCancelEventArgs e) =>
+            {
+                var onBreak = OnBreak;
+                if (onBreak != null)
+                    onBreak(this, EventArgs.Empty);
+
+                // Surpise, this means DO NOT CANCEL:
+                e.Cancel = true;
+            };
+        }
+
+        /// <inheritdoc />
         public virtual string ReadLine()
         {
             return Console.ReadLine();
