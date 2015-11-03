@@ -27,6 +27,12 @@
             if (scanner.TryReadRemove(out result))
                 return result;
 
+            if (scanner.TryReadSave(out result))
+                return result;
+
+            if (scanner.TryReadLoad(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Quit))
                 return new Quit();
 
@@ -150,6 +156,29 @@
                 return true;
             }
 
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadSave(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Save))
+            {
+                string fileName;
+                if (scanner.TryReadToken(Token.String, out fileName))
+                    result = new Save(fileName);
+                else
+                    result = new Save();
+
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadLoad(this IScanner<Token> scanner, out IStatement result)
+        {
             result = null;
             return false;
         }

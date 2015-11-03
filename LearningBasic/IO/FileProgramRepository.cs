@@ -65,7 +65,7 @@
             catch (Exception exception)
             {
                 var message = string.Format(ErrorMessages.CantLoadFile, fileName);
-                throw new IOException(message, exception);
+                throw new IOException(Operation.Load, fileName, message, exception);
             }
         }
 
@@ -85,7 +85,7 @@
             catch (Exception exception)
             {
                 var message = string.Format(ErrorMessages.CantSaveFile, fileName);
-                throw new IOException(message, exception);
+                throw new IOException(Operation.Save, fileName, message, exception);
             }
         }
     }
