@@ -25,7 +25,8 @@
             foreach (var numberToRemove in numbersToRemove)
                 rte.Lines.Remove(numberToRemove);
 
-            return new EvaluateResult(numbersToRemove.Length);
+            var message = string.Format(Messages.RemoveResult, numbersToRemove.Length);
+            return new EvaluateResult(message);
         }
 
         public override string ToString()

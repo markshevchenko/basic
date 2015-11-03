@@ -8,13 +8,13 @@
     /// </summary>
     public class RunTimeEnvironment : IRunTimeEnvironment
     {
-        public string ProgramName { get; set; }
+        private readonly IProgramRepository programRepository;
+
+        /// <inheritdoc />
+        public string LastUsedName { get; private set; }
 
         /// <inheritdoc />
         public IInputOutput InputOutput { get; private set; }
-
-        /// <inheritdoc />
-        public IProgramRepository ProgramRepository { get; private set; }
 
         /// <inheritdoc />
         public bool IsClosed { get; private set; }
@@ -38,9 +38,10 @@
             if (programRepository == null)
                 throw new ArgumentNullException("programRepository");
 
-            ProgramName = null;
+            this.programRepository = programRepository;
+
             InputOutput = inputOutput;
-            ProgramRepository = programRepository;
+            LastUsedName = null;
             IsClosed = false;
             Variables = new Dictionary<string, dynamic>();
             Lines = new SortedList<int, IStatement>();
@@ -50,6 +51,40 @@
         public void Close()
         {
             IsClosed = true;
+        }
+
+        /// <inheritdoc />
+        public void Save()
+        {
+            if (LastUsedName == null)
+            {
+                var name = AskUserForName();
+                programRepository.Save(name, Lines);
+                LastUsedName = name;
+            }
+            else
+                programRepository.Save(LastUsedName, Lines);
+        }
+
+        private string AskUserForName()
+        {
+            InputOutput.Write(Messages.InputProgramName);
+            return InputOutput.ReadLine();
+        }
+
+        /// <inheritdoc />
+        public void Save(string name)
+        {
+            programRepository.Save(name, Lines);
+            LastUsedName = name;
+        }
+
+        /// <inheritdoc />
+        public void Load(string name)
+        {
+            var lines = programRepository.Load(name);
+            Lines = new SortedList<int, IStatement>(lines);
+            LastUsedName = name;
         }
     }
 }

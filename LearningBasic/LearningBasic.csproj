@@ -57,8 +57,14 @@
   <ItemGroup>
     <Compile Include="IO\FileProgramRepository.cs" />
     <Compile Include="IO\IOException.cs" />
+    <Compile Include="IO\Operation.cs" />
     <Compile Include="IProgramRepository.cs" />
     <Compile Include="LinesExtensions.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Parsing\Ast\Associativity.cs" />
     <Compile Include="Parsing\Ast\ExpressionExtensions.cs" />
     <Compile Include="Parsing\Ast\Expressions\Add.cs" />
@@ -103,6 +109,7 @@
     <Compile Include="IScanner.cs" />
     <Compile Include="IScannerFactory.cs" />
     <Compile Include="Parsing\Ast\Statements\Remove.cs" />
+    <Compile Include="Parsing\Ast\Statements\Save.cs" />
     <Compile Include="Parsing\BasicScannerExpressionExtensions.cs" />
     <Compile Include="Parsing\BasicParser.cs" />
     <Compile Include="Parsing\BasicScannerStatementExtensions.cs" />
@@ -130,6 +137,10 @@
     <EmbeddedResource Include="ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

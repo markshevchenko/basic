@@ -5,7 +5,8 @@
         public EvaluateResult Run(IRunTimeEnvironment rte)
         {
             rte.Close();
-            return EvaluateResult.Empty;
+
+            return new EvaluateResult(Messages.BasicInterpreterTerminated);
         }
 
         public override string ToString()

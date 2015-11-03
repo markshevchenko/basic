@@ -8,22 +8,19 @@
     public interface IRunTimeEnvironment
     {
         /// <summary>
-        /// Gets or sets the name of the program (last used name).
+        /// Gets the last used program name.
         /// </summary>
-        /// <remarks><c>null</c> name means that there was no LOAD or SAVE operations.</remarks>
-        string ProgramName { get; set; }
+        /// <remarks>
+        /// The <see cref="Load(string)"/> and <see cref="Save(string)"/> methods
+        /// sets <see cref="LastUsedName"/>.
+        /// </remarks>
+        string LastUsedName { get; }
 
         /// <summary>
         /// Gets the <see cref="IInputOutput"/> object.
         /// </summary>
         /// <remarks>This object incapsulates all input-output operations.</remarks>
         IInputOutput InputOutput { get; }
-
-        /// <summary>
-        /// Get the <see cref="IProgramRepository"/>.
-        /// </summary>
-        /// <remarks>This repository incapsulates save and load operations.</remarks>
-        IProgramRepository ProgramRepository { get; }
 
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified environment instance has been closed.
@@ -44,5 +41,22 @@
         /// Closes the run-time environment.
         /// </summary>
         void Close();
+
+        /// <summary>
+        /// Saves the current program with last used name.
+        /// </summary>
+        void Save();
+
+        /// <summary>
+        /// Saves the current program with specified name.
+        /// </summary>
+        /// <param name="name">The name to save.</param>
+        void Save(string name);
+
+        /// <summary>
+        /// Loads the program with specified name.
+        /// </summary>
+        /// <param name="name">The name to load.</param>
+        void Load(string name);
     }
 }
