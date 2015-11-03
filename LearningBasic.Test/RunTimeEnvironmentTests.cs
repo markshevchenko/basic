@@ -1,6 +1,7 @@
 ﻿namespace LearningBasic.Test
 {
     using System;
+    using LearningBasic.Evaluating;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

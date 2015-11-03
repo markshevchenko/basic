@@ -1,8 +1,9 @@
 ﻿namespace LearningBasic
 {
     using System.Reflection;
+    using LearningBasic.Evaluating;
+    using LearningBasic.IO;
     using LearningBasic.Parsing;
-    using IO;
 
     class Program
     {

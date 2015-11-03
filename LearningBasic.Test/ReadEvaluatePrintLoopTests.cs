@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Test
 {
+    using LearningBasic.Evaluating;
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
