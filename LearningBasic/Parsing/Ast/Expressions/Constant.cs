@@ -1,6 +1,7 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq.Expressions;
 
@@ -20,7 +21,7 @@
             compiledValue = Expression.Constant(Value);
         }
 
-        public Expression GetExpression(IRunTimeEnvironment rte)
+        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
         {
             return compiledValue;
         }

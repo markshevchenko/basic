@@ -19,11 +19,11 @@
             Name = name.ToUpper();
         }
 
-        public virtual Expression GetExpression(IRunTimeEnvironment rte)
+        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
         {
-            var variables = Expression.Constant(rte.Variables);
+            var dictionary = Expression.Constant(variables);
             var name = Expression.Constant(Name);
-            return Expression.MakeIndex(variables, DictionaryItemPropertyInfo, new[] { name });
+            return Expression.MakeIndex(dictionary, DictionaryItemPropertyInfo, new[] { name });
         }
 
         public override string ToString()

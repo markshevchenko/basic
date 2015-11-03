@@ -18,10 +18,11 @@
             Indexes = indexes;
         }
 
-        public override Expression GetExpression(IRunTimeEnvironment rte)
+        public override Expression GetExpression(IDictionary<string, dynamic> variables)
         {
-            var array = base.GetExpression(rte);
-            var indexes = Indexes.Select(i => i.GetExpression(rte))
+            var array = base.GetExpression(variables);
+            var indexes = Indexes.Select(i => i.GetExpression(variables))
+                                 .Select(e => Expression.Add(e, Expression.Constant(1)))
                                  .ToArray();
             return Expression.ArrayAccess(array, indexes);
         }

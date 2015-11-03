@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast
 {
+    using System.Collections.Generic;
     using System.Linq.Expressions;
 
     /// <summary>
@@ -22,8 +23,8 @@
         /// <summary>
         /// Compiles abstract syntax expression to <see cref="Expression">.NET expression object</see>.
         /// </summary>
-        /// <param name="rte">The run-time environment to get varaibles' values.</param>
+        /// <param name="variables">The variables dictionary to get and set variables' values.</param>
         /// <returns>.NET expression object.</returns>
-        Expression GetExpression(IRunTimeEnvironment rte);
+        Expression GetExpression(IDictionary<string, dynamic> variables);
     }
 }

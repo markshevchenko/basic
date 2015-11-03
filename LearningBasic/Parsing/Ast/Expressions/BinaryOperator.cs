@@ -1,9 +1,9 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
-    using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
-    using Microsoft.CSharp.RuntimeBinder;
     using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using Microsoft.CSharp.RuntimeBinder;
 
     public abstract class BinaryOperator : IExpression
     {
@@ -28,10 +28,10 @@
 
         protected abstract Expression Calculate(Expression left, Expression right);
 
-        public Expression GetExpression(IRunTimeEnvironment rte)
+        public Expression GetExpression(IDictionary<string, dynamic> variables)
         {
-            var left = Left.GetExpression(rte);
-            var right = Right.GetExpression(rte);
+            var left = Left.GetExpression(variables);
+            var right = Right.GetExpression(variables);
             return Calculate(left, right);
         }
 

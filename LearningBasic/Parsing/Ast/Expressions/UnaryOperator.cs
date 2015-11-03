@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
+    using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using Microsoft.CSharp.RuntimeBinder;
@@ -24,9 +25,9 @@
 
         protected abstract Expression Calculate(Expression operand);
 
-        public Expression GetExpression(IRunTimeEnvironment rte)
+        public Expression GetExpression(IDictionary<string, dynamic> variables)
         {
-            var operand = Operand.GetExpression(rte);
+            var operand = Operand.GetExpression(variables);
             return Calculate(operand);
         }
 

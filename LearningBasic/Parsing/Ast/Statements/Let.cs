@@ -23,8 +23,8 @@
 
         public EvaluateResult Run(IRunTimeEnvironment rte)
         {
-            var left = Left.GetExpression(rte);
-            var right = Right.GetExpression(rte);
+            var left = Left.GetExpression(rte.Variables);
+            var right = Right.GetExpression(rte.Variables);
             var assignment = Expression.Assign(left, right);
             var value = assignment.CalculateValue();
             return new EvaluateResult(value);
