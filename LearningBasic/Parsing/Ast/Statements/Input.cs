@@ -31,7 +31,7 @@
             LValue = lValue;
         }
 
-        public EvaluateResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
             rte.InputOutput.Write(Prompt);
             var line = rte.InputOutput.ReadLine();

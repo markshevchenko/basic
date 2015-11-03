@@ -110,6 +110,7 @@
     <Compile Include="IScanner.cs" />
     <Compile Include="IScannerFactory.cs" />
     <Compile Include="Parsing\Ast\Statements\Remove.cs" />
+    <Compile Include="Parsing\Ast\Statements\Run.cs" />
     <Compile Include="Parsing\Ast\Statements\Save.cs" />
     <Compile Include="Parsing\BasicScannerExpressionExtensions.cs" />
     <Compile Include="Parsing\BasicParser.cs" />

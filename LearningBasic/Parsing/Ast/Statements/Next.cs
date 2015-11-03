@@ -4,7 +4,7 @@
 
     public class Next : IStatement
     {
-        public EvaluateResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
             throw new NotImplementedException();
         }

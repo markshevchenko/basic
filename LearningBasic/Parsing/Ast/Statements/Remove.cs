@@ -15,7 +15,7 @@
             Range = range;
         }
 
-        public EvaluateResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
             var numbersToRemove = rte.Lines
                                      .Select(line => line.Key)

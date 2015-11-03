@@ -19,7 +19,7 @@
             Name = name;
         }
 
-        public EvaluateResult Run(IRunTimeEnvironment rte)
+        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
             if (Name == null)
                 rte.Save();

@@ -16,7 +16,7 @@
             Expressions = new List<IExpression>(expressions);
         }
 
-        public virtual EvaluateResult Run(IRunTimeEnvironment rte)
+        public virtual EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
             foreach (var expression in Expressions)
             {
