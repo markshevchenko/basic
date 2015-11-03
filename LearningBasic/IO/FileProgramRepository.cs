@@ -41,6 +41,12 @@
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException(ErrorMessages.MissingFileName, name);
 
+            if (lines == null)
+                throw new ArgumentNullException("lines");
+
+            if (lines.Count == 0)
+                throw new IOException(Operation.Save, name, ErrorMessages.CantSaveEmptyProgram);
+
             var nameWithExtention = AddExtensionIfNeeded(name);
             var printableLines = lines.ToPrintable();
             Save(nameWithExtention, printableLines);

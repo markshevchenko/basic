@@ -123,6 +123,9 @@
   <data name="CantParseLineNumber" xml:space="preserve">
     <value>Can't parse line number '{0}'.</value>
   </data>
+  <data name="CantSaveEmptyProgram" xml:space="preserve">
+    <value>Can't save empty program.</value>
+  </data>
   <data name="CantSaveFile" xml:space="preserve">
     <value>Can't save file '{0}'.</value>
   </data>

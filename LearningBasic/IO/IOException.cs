@@ -50,6 +50,20 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IOException"/> class with an operation
+        /// that leads to error, a file name, and an error message.
+        /// </summary>
+        /// <param name="operation">The IO operation that leads to error.</param>
+        /// <param name="fileName">The file name.</param>
+        /// <param name="message">The error message.</param>
+        public IOException(Operation operation, string fileName, string message)
+            : base(message)
+        {
+            Operation = operation;
+            FileName = fileName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IOException"/> class with an operation
         /// that leads to error, a file name, an error message, and a reference to the inner
         /// exception that is the cause of this exception.
         /// </summary>

@@ -79,6 +79,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t save empty program..
+        /// </summary>
+        internal static string CantSaveEmptyProgram {
+            get {
+                return ResourceManager.GetString("CantSaveEmptyProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t save file &apos;{0}&apos;..
         /// </summary>
         internal static string CantSaveFile {
