@@ -81,7 +81,7 @@
                 return EvaluateResult.Empty;
             }
             else
-                return line.Statement.Evaluate(rte);
+                return line.Statement.Execute(rte);
         }
 
         /// <summary>

@@ -9,6 +9,16 @@
     public interface IRunTimeEnvironment
     {
         /// <summary>
+        /// Gets a value indicating whether the current run-time environment has been closed.
+        /// </summary>
+        bool IsClosed { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the current environment runs the program <see cref="Lines"/>.
+        /// </summary>
+        bool IsRunning { get; }
+
+        /// <summary>
         /// Gets the last used program name.
         /// </summary>
         /// <remarks>
@@ -22,16 +32,6 @@
         /// </summary>
         /// <remarks>This object incapsulates all input-output operations.</remarks>
         IInputOutput InputOutput { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the current run-time environment has been closed.
-        /// </summary>
-        bool IsClosed { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the current environment runs the program <see cref="Lines"/>.
-        /// </summary>
-        bool IsRunning { get; }
 
         /// <summary>
         /// Gets the variables dictionary.
@@ -49,11 +49,6 @@
         void Close();
 
         /// <summary>
-        /// Saves the current program with last used name.
-        /// </summary>
-        void Save();
-
-        /// <summary>
         /// Saves the current program with specified name.
         /// </summary>
         /// <param name="name">The name to save.</param>
@@ -66,14 +61,14 @@
         void Load(string name);
 
         /// <summary>
-        /// Runs the program stored in <see cref="Lines">.
+        /// Executes <see cref="Lines">lines</see> till the end, or infinitly.
         /// </summary>
-        /// <returns>The result of running.</returns>
-        EvaluateResult Run();
+        /// <returns>The result of program runned.</returns>
+        ProgramResult Run();
 
 
         /// <summary>
-        /// Ends the running program.
+        /// Terminates the running program.
         /// </summary>
         void End();
 

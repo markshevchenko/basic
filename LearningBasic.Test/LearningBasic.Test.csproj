@@ -62,6 +62,7 @@
     <Compile Include="LinesExtensionsTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />
     <Compile Include="Mocks\MockProgramRepository.cs" />
+    <Compile Include="Mocks\MockStatement.cs" />
     <Compile Include="Parsing\Ast\BuiltInOperatorsTests.cs" />
     <Compile Include="Parsing\Ast\ExpressionExtensionsTests.cs" />
     <Compile Include="Parsing\Ast\LineTests.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Parsing\ScannerExtensionsTests.cs" />
     <Compile Include="Parsing\BasicParserTests.cs" />
     <Compile Include="Parsing\BasicScannerStatementExtensionsTests.cs" />
+    <Compile Include="ProgramResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTests.cs" />
     <Compile Include="Parsing\BasicScannerTests.cs" />

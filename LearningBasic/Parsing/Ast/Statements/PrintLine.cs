@@ -8,9 +8,9 @@
             : base(expressions)
         { }
 
-        public override EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public override EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            var result = base.Evaluate(rte);
+            var result = base.Execute(rte);
             rte.InputOutput.WriteLine();
             return result;
         }

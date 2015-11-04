@@ -1,7 +1,8 @@
 ﻿namespace LearningBasic.Test
 {
-    using System.IO;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using LearningBasic.Evaluating;
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Ast.Expressions;
@@ -49,30 +50,34 @@
             return new MockProgramRepository(lines);
         }
 
-        protected static IRunTimeEnvironment MakeRunTimeEnvironment()
+        protected static RunTimeEnvironment MakeRunTimeEnvironment()
         {
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
             return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
-        protected static IRunTimeEnvironment MakeRunTimeEnvironment(string inputString)
+        protected static RunTimeEnvironment MakeRunTimeEnvironment(string inputString)
         {
             var inputOutput = MakeInputOutput(inputString);
             var programRepository = MakeProgramRepository();
             return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
-        protected static IRunTimeEnvironment MakeRunTimeEnvironment(IInputOutput inputOutput)
+        protected static RunTimeEnvironment MakeRunTimeEnvironment(IInputOutput inputOutput)
         {
             var programRepository = MakeProgramRepository();
             return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
-        protected static IStatement MakePrintStatement(string argument)
+        protected static MockStatement MakeStatement()
         {
-            var expression = new Constant(argument);
-            return new Print(new[] { expression });
+            return new MockStatement();
+        }
+
+        protected static MockStatement MakeStatement(Action action)
+        {
+            return new MockStatement(action);
         }
     }
 }

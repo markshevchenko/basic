@@ -9,6 +9,8 @@
 
         public IDictionary<int, IStatement> Lines { get; private set; }
 
+        public string LastFileName { get; private set; }
+
         public MockProgramRepository(IDictionary<int, IStatement> lines)
         {
             Lines = lines;
@@ -16,18 +18,14 @@
 
         public IDictionary<int, IStatement> Load(string name)
         {
-            if (name == ValidFileName)
-                return Lines;
-
-            throw new IOException();
+            LastFileName = name;
+            return Lines;
         }
 
         public void Save(string name, IDictionary<int, IStatement> lines)
         {
-            if (name == ValidFileName)
-                Lines = lines;
-
-            throw new IOException();
+            Lines = lines;
+            LastFileName = name;
         }
     }
 }

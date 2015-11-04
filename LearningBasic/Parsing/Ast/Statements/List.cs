@@ -17,7 +17,7 @@
             Range = range;
         }
 
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             if (rte.Lines.Count == 0)
                 return EvaluateResult.Empty;

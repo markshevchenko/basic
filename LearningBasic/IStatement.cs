@@ -6,10 +6,10 @@
     public interface IStatement : IAstNode
     {
         /// <summary>
-        /// Evaluates the statement inside the specified <see cref="IRunTimeEnvironment"/>.
+        /// Executes the statement in the context of the specified <see cref="IRunTimeEnvironment"/>.
         /// </summary>
         /// <param name="rte">The run-time environment.</param>
-        /// <returns>The result of a statement (a message or a <see cref="EvaluateResult.Empty">nothing</see>).</returns>
-        EvaluateResult Evaluate(IRunTimeEnvironment rte);
+        /// <returns>The result of execution (a message or <see cref="EvaluateResult.Empty">nothing</see>).</returns>
+        EvaluateResult Execute(IRunTimeEnvironment rte);
     }
 }

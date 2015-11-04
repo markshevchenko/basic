@@ -9,7 +9,7 @@
             Number = number;
         }
 
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var numberExpression = Number.GetExpression(rte.Variables);
             var number = numberExpression.CalculateValue();

@@ -21,7 +21,7 @@
             Right = right;
         }
 
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var left = Left.GetExpression(rte.Variables);
             var right = Right.GetExpression(rte.Variables);

@@ -19,15 +19,29 @@
             Name = name;
         }
 
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            if (Name == null)
-                rte.Save();
-            else
-                rte.Save(Name);
+            string name = GetFileName(rte);
+            rte.Save(name);
 
             var message = string.Format(Messages.ProgramSaved, rte.LastUsedName);
             return new EvaluateResult(message);
+        }
+
+        private string GetFileName(IRunTimeEnvironment rte)
+        {
+            if (Name == null)
+            {
+                if (rte.LastUsedName == null)
+                {
+                    rte.InputOutput.Write(Messages.InputProgramName);
+                    return rte.InputOutput.ReadLine();
+                }
+                else
+                    return rte.LastUsedName;
+            }
+            else
+                return Name;
         }
 
         public override string ToString()

@@ -2,7 +2,7 @@
 {
     public class End : IStatement
     {
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             rte.End();
 

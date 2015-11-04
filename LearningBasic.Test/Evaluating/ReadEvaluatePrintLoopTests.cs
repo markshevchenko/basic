@@ -22,13 +22,13 @@
         }
 
         [TestMethod]
-        public void Evaluate_WithPrintStatement_PrintsArgument()
+        public void Evaluate_WhenLineWithoutNumber_RunsStatementImmediately()
         {
             var parser = MakeParser();
             var inputOutput = MakeInputOutput();
             var rte = MakeRunTimeEnvironment(inputOutput);
             var repl = new ReadEvaluatePrintLoop(rte, parser);
-            var line = new Line(MakePrintStatement("Windows"));
+            var line = new Line(MakeStatement(() => inputOutput.Write("Windows")));
 
             var result = repl.Evaluate(line);
 
@@ -36,12 +36,12 @@
         }
 
         [TestMethod]
-        public void Evalate_WithNumberedPrintStatement_StoresStatement()
+        public void Evalate_WhenLineWithNumbered_AddsItToLines()
         {
             var parser = MakeParser();
             var rte = MakeRunTimeEnvironment();
             var repl = new ReadEvaluatePrintLoop(rte, parser);
-            var line = new Line("10", MakePrintStatement("Windows"));
+            var line = new Line("10", MakeStatement());
 
             var result = repl.Evaluate(line);
 

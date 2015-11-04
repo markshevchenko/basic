@@ -33,6 +33,9 @@
             if (scanner.TryReadLoad(out result))
                 return result;
 
+            if (scanner.TryReadGoto(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
@@ -199,7 +202,7 @@
 
         public static bool TryReadGoto(this IScanner<Token> scanner, out IStatement result)
         {
-            if (scanner.TryReadToken(Token.Load))
+            if (scanner.TryReadToken(Token.Goto))
             {
                 IExpression number = scanner.ReadExpression();
                 result = new Goto(number);

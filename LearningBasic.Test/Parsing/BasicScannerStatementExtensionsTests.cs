@@ -18,6 +18,26 @@
         }
 
         [TestMethod]
+        public void ReadStatementExcludingNext_WithRun_ReturnsRun()
+        {
+            var scanner = MakeScanner("RUN");
+
+            var value = scanner.ReadStatementExcludingNext();
+
+            Assert.IsInstanceOfType(value, typeof(Run));
+        }
+
+        [TestMethod]
+        public void ReadStatementExcludingNext_WithEnd_ReturnsEnd()
+        {
+            var scanner = MakeScanner("END");
+
+            var value = scanner.ReadStatementExcludingNext();
+
+            Assert.IsInstanceOfType(value, typeof(End));
+        }
+
+        [TestMethod]
         public void ReadStatementExcludingNext_WithQuit_ReturnsQuit()
         {
             var scanner = MakeScanner("QUIT");
@@ -255,6 +275,16 @@
             IStatement result;
 
             var condition = scanner.TryReadLoad(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadGoto_WithoutNumber_ThrowsParserException()
+        {
+            var scanner = MakeScanner("GOTO");
+            IStatement result;
+
+            var condition = scanner.TryReadGoto(out result);
         }
     }
 }

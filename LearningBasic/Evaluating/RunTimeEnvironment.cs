@@ -9,30 +9,32 @@
     public class RunTimeEnvironment : IRunTimeEnvironment, IDisposable
     {
         private readonly IProgramRepository programRepository;
-        private ProgramRunner programRunner;
 
         /// <inheritdoc />
-        public string LastUsedName { get; private set; }
+        public virtual bool IsClosed { get; private set; }
 
         /// <inheritdoc />
-        public IInputOutput InputOutput { get; private set; }
+        public virtual bool IsRunning { get { return Runner != null; } }
 
         /// <inheritdoc />
-        public bool IsClosed { get; private set; }
+        public virtual string LastUsedName { get; private set; }
 
-        /// <summary>
-        /// Gets a value indicating whether the current environment has been disposed of.
-        /// </summary>
+        /// <inheritdoc />
+        public virtual IInputOutput InputOutput { get; private set; }
+
+        /// <inheritdoc />
+        public virtual IDictionary<string, dynamic> Variables { get; private set; }
+
+        /// <inheritdoc />
+        public virtual SortedList<int, IStatement> Lines { get; private set; }
+
+        /// <inheritdoc />
         public bool IsDisposed { get; private set; }
 
-        /// <inheritdoc />
-        public IDictionary<string, dynamic> Variables { get; private set; }
-
-        /// <inheritdoc />
-        public SortedList<int, IStatement> Lines { get; private set; }
-
-        /// <inheritdoc />
-        public bool IsRunning { get { return programRunner != null; } }
+        /// <summary>
+        /// The runner of program.
+        /// </summary>
+        public ProgramRunner Runner { get; private set; }
 
         /// <summary>
         /// Creates an instance of <see cref="RunTimeEnvironment"/>.
@@ -59,89 +61,87 @@
         }
 
         /// <inheritdoc />
-        public void Close()
+        public virtual void Close()
         {
             IsClosed = true;
         }
 
         /// <inheritdoc />
-        public void Save()
+        public virtual void Save(string name)
         {
-            if (LastUsedName == null)
-            {
-                var name = AskUserForName();
-                programRepository.Save(name, Lines);
-                LastUsedName = name;
-            }
-            else
-                programRepository.Save(LastUsedName, Lines);
-        }
+            if (name == null)
+                throw new ArgumentNullException("name");
 
-        private string AskUserForName()
-        {
-            InputOutput.Write(Messages.InputProgramName);
-            return InputOutput.ReadLine();
-        }
-
-        /// <inheritdoc />
-        public void Save(string name)
-        {
             programRepository.Save(name, Lines);
             LastUsedName = name;
         }
 
         /// <inheritdoc />
-        public void Load(string name)
+        public virtual void Load(string name)
         {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
             var lines = programRepository.Load(name);
             Lines = new SortedList<int, IStatement>(lines);
             LastUsedName = name;
         }
 
         /// <inheritdoc />
-        public EvaluateResult Run()
+        public virtual ProgramResult Run()
         {
-            if (programRunner != null)
+            if (Runner != null)
                 throw new RunTimeException(ErrorMessages.ProgramIsRunning);
 
-            programRunner = new ProgramRunner(Lines);
+            Runner = new ProgramRunner(Lines);
             try
             {
-                while (programRunner.MoveNext())
-                    programRunner.CurrentStatement.Evaluate(this);
-
-                if (programRunner.IsBreaked)
-                    return new EvaluateResult(Messages.CtrlCPressed);
-
-                return new EvaluateResult(Messages.ProgramCompleted);
+                return Run(Runner);
             }
             catch (Exception exception)
             {
-                var message = string.Format(ErrorMessages.RunTimeErrorOccured, exception.Message);
-                return new EvaluateResult(message);
+                return ProgramResult.CreateAborted(exception);
             }
             finally
             {
-                programRunner = null;
+                Runner = null;
             }
         }
 
-        /// <inheritdoc />
-        public void End()
+        /// <summary>
+        /// Evaluates statements of a program as long as they still have.
+        /// </summary>
+        /// <param name="programRunner">The program runner.</param>
+        /// <returns>The result if evaluation.</returns>
+        protected virtual ProgramResult Run(ProgramRunner programRunner)
         {
-            if (programRunner == null)
-                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+            while (programRunner.MoveNext())
+            {
+                programRunner.CurrentStatement.Execute(this);
+            }
 
-            programRunner.Complete();
+            if (programRunner.IsBroke)
+                return ProgramResult.CreateBroken();
+
+            return ProgramResult.CreateCompleted();
         }
 
         /// <inheritdoc />
-        public void Goto(int number)
+        public virtual void End()
         {
-            if (programRunner == null)
+            if (Runner == null)
                 throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
 
-            programRunner.Goto(number);
+            Runner.Complete();
+        }
+
+        /// <inheritdoc />
+        public virtual void Goto(int number)
+        {
+            if (Runner == null)
+                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+
+            Runner.Goto(number);
         }
 
         /// <inheritdoc />
@@ -163,10 +163,10 @@
 
         private void InputOutput_OnBreak(object sender, EventArgs e)
         {
-            if (programRunner == null)
+            if (Runner == null)
                 return;
 
-            programRunner.Break();
+            Runner.Break();
         }
     }
 }

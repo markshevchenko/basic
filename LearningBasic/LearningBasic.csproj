@@ -131,6 +131,7 @@
     <Compile Include="Parsing\TextReaderExtensions.cs" />
     <Compile Include="Parsing\Token.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsing\UnexpectedCharacterException.cs" />
     <Compile Include="Parsing\UnexpectedEndOfFileException.cs" />

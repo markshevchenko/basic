@@ -18,17 +18,17 @@
         private const int BeforeFirstLine = -1;
 
         private readonly SortedList<int, IStatement> lines;
-        private volatile bool isBreaked;
+        private volatile bool isBroke;
         private int currentLineIndex;
         private ExecutionOrder executionOrder;
 
         /// <summary>
-        /// Gets a value indicating whether the runner is breaked by <see cref="Break"/> method.
+        /// Gets a value indicating whether the runner is broke by <see cref="Break"/> method.
         /// </summary>
-        public bool IsBreaked
+        public bool IsBroke
         {
-            // Use manual (not automatic) property cause isBreaked is volatile.
-            get { return isBreaked; }
+            // Use manual (not automatic) property cause isBroke is volatile.
+            get { return isBroke; }
         }
 
         /// <summary>
@@ -47,12 +47,12 @@
 
             this.lines = new SortedList<int, IStatement>(lines);
             this.currentLineIndex = BeforeFirstLine;
-            this.isBreaked = false;
+            this.isBroke = false;
             this.executionOrder = ExecutionOrder.LineByLine;
         }
 
         /// <summary>
-        /// The current statement to <see cref="IStatement.Evaluate(IRunTimeEnvironment)">evalutate</see>.
+        /// The current statement to <see cref="IStatement.Execute(IRunTimeEnvironment)">evalutate</see>.
         /// </summary>
         /// <exception cref="IndexOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
         public IStatement CurrentStatement { get { return lines[lines.Keys[currentLineIndex]]; } }
@@ -62,12 +62,12 @@
         /// </summary>
         /// <returns>
         /// <c>true</c> if the runner was successfully advanced on the next line;
-        /// <c>false</c> if the runner has passed the end of the lines, or <see cref="IsBreaked">is breaked</see>.
+        /// <c>false</c> if the runner has passed the end of the lines, or <see cref="IsBroke">is breaked</see>.
         /// </returns>
         /// <exception cref="InvalidOperationException">The method was called after it returns <c>false</c>.</exception>
         public bool MoveNext()
         {
-            if (IsBreaked)
+            if (IsBroke)
                 return false;
 
             if (executionOrder == ExecutionOrder.LineByLine)
@@ -96,7 +96,7 @@
         /// </remarks>
         public void Break()
         {
-            isBreaked = true;
+            isBroke = true;
         }
 
         /// <summary>

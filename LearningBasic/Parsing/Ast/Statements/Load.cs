@@ -18,7 +18,7 @@ namespace LearningBasic.Parsing.Ast.Statements
             Name = name;
         }
 
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             rte.Load(Name);
 

@@ -2,7 +2,7 @@
 {
     public class Quit : IStatement
     {
-        public EvaluateResult Evaluate(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             rte.Close();
 
