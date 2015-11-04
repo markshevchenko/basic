@@ -115,6 +115,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Randomize seed {0} accepted..
+        /// </summary>
+        internal static string RandomizeSeedAccepted {
+            get {
+                return ResourceManager.GetString("RandomizeSeedAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} line(s) removed..
         /// </summary>
         internal static string RemoveResult {

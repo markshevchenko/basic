@@ -4,6 +4,7 @@
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Ast;
     using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Ast.Expressions;
 
     [TestClass]
     public class BasicScannerStatementExtensionsTests : BaseTests
@@ -96,7 +97,7 @@
         }
 
         [TestMethod]
-        public void TryReadPrint_WithPrint_SetsPrintLineAsResult()
+        public void TryReadPrint_WithPrint_StoresPrintLineAsResult()
         {
             var scanner = MakeScanner("PRINT 3.14159265");
             IStatement result;
@@ -106,7 +107,7 @@
         }
 
         [TestMethod]
-        public void TryReadPrint_WithPrintSemicolon_SetsPrintAsResult()
+        public void TryReadPrint_WithPrintSemicolon_StoresPrintAsResult()
         {
             var scanner = MakeScanner("PRINT 3.14159265;");
             IStatement result;
@@ -125,7 +126,7 @@
         }
 
         [TestMethod]
-        public void TryReadInput_WithoutPrompt_SetsNullPrompt()
+        public void TryReadInput_WithoutPrompt_StoresNullPrompt()
         {
             var scanner = MakeScanner("INPUT var");
             IStatement result;
@@ -169,7 +170,7 @@
         }
 
         [TestMethod]
-        public void TryReadRange_WithEmptyString_SetsUndefinedResult()
+        public void TryReadRange_WithEmptyString_StoresUndefinedResult()
         {
             var scanner = MakeScanner("");
             Range result;
@@ -231,7 +232,7 @@
         }
 
         [TestMethod]
-        public void TryReadRemove_WithRange_SetsRange()
+        public void TryReadRemove_WithRange_StoresRange()
         {
             var scanner = MakeScanner("REMOVE 100-200");
             IStatement result;
@@ -244,7 +245,7 @@
         }
 
         [TestMethod]
-        public void TryReadSave_WithFileName_SetsName()
+        public void TryReadSave_WithFileName_StoresIt()
         {
             var scanner = MakeScanner("SAVE \"very special program\"");
             IStatement result;
@@ -256,7 +257,7 @@
         }
 
         [TestMethod]
-        public void TryReadSave_WithoutFileName_SetsNullName()
+        public void TryReadSave_WithoutFileName_StoresNullName()
         {
             var scanner = MakeScanner("SAVE");
             IStatement result;
@@ -278,6 +279,18 @@
         }
 
         [TestMethod]
+        public void TryReadGoto_WithNumber_StoresIt()
+        {
+            var scanner = MakeScanner("GOTO 100");
+            IStatement result;
+
+            var condition = scanner.TryReadGoto(out result);
+            var actual = ((result as Goto).Number as Constant).Value;
+
+            Assert.AreEqual(100, actual);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void TryReadGoto_WithoutNumber_ThrowsParserException()
         {
@@ -285,6 +298,28 @@
             IStatement result;
 
             var condition = scanner.TryReadGoto(out result);
+        }
+
+        [TestMethod]
+        public void TryReadRandomize_WithSeed_StoresIt()
+        {
+            var scanner = MakeScanner("RANDOMIZE 314159265");
+            IStatement result;
+
+            var condition = scanner.TryReadRandomize(out result);
+            var actual = ((result as Randomize).Seed as Constant).Value;
+
+            Assert.AreEqual(314159265, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadRandomize_WithoutSeed_ThrowsParserException()
+        {
+            var scanner = MakeScanner("RANDOMIZE");
+            IStatement result;
+
+            var condition = scanner.TryReadRandomize(out result);
         }
     }
 }

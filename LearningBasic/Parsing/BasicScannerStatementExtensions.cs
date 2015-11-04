@@ -36,6 +36,9 @@
             if (scanner.TryReadGoto(out result))
                 return result;
 
+            if (scanner.TryReadRandomize(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
@@ -206,6 +209,19 @@
             {
                 IExpression number = scanner.ReadExpression();
                 result = new Goto(number);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadRandomize(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Randomize))
+            {
+                IExpression seed = scanner.ReadExpression();
+                result = new Randomize(seed);
                 return true;
             }
 

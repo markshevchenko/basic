@@ -135,6 +135,9 @@
   <data name="ProgramSaved" xml:space="preserve">
     <value>Program with name '{0}' saved.</value>
   </data>
+  <data name="RandomizeSeedAccepted" xml:space="preserve">
+    <value>Randomize seed {0} accepted.</value>
+  </data>
   <data name="RemoveResult" xml:space="preserve">
     <value>{0} line(s) removed.</value>
   </data>

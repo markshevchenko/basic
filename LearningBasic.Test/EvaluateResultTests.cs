@@ -37,6 +37,14 @@
         }
 
         [TestMethod]
+        public void EvaluateResult_WithFormat_StoresFormattedMessage()
+        {
+            var result = new EvaluateResult("{0}", "format");
+
+            Assert.AreEqual("format", result.Message);
+        }
+
+        [TestMethod]
         public void HasMessage_OfEmptyEvaluateResult_IsFalse()
         {
             Assert.IsFalse(EvaluateResult.Empty.HasMessage);

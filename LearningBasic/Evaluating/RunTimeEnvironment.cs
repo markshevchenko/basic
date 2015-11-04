@@ -37,6 +37,11 @@
         public ProgramRunner Runner { get; private set; }
 
         /// <summary>
+        /// The <see cref="Random"/> object.
+        /// </summary>
+        public Random Random { get; private set; }
+
+        /// <summary>
         /// Creates an instance of <see cref="RunTimeEnvironment"/>.
         /// </summary>
         /// <param name="inputOutput">The input/output object.</param>
@@ -58,6 +63,7 @@
             IsDisposed = false;
             Variables = new Dictionary<string, dynamic>();
             Lines = new SortedList<int, IStatement>();
+            Random = new Random();
         }
 
         /// <inheritdoc />
@@ -142,6 +148,12 @@
                 throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
 
             Runner.Goto(number);
+        }
+
+        /// <inheritdoc />
+        public virtual void Randomize(int seed)
+        {
+            Random = new Random(seed);
         }
 
         /// <inheritdoc />

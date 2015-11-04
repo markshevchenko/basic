@@ -3,7 +3,7 @@
 				;
 
 statement		: 'DIM' IDENTIFIER array
-				| 'RANDOMIZE' expression?
+				| 'RANDOMIZE' expression
 				| 'PRINT' expressions ';'?
 				| 'INPUT' (STRING ',')? l-value
 				| 'IF' condition 'THEN' statement ('ELSE' statement)?

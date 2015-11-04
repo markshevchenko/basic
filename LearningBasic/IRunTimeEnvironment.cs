@@ -66,7 +66,6 @@
         /// <returns>The result of program runned.</returns>
         ProgramResult Run();
 
-
         /// <summary>
         /// Terminates the running program.
         /// </summary>
@@ -77,5 +76,11 @@
         /// </summary>
         /// <param name="number">The number of the next executable line.</param>
         void Goto(int number);
+
+        /// <summary>
+        /// Starts new pseudo-random sequence, using specified seed value.
+        /// </summary>
+        /// <param name="seed">A number used to calcuate a starting value for pseudo-random sequence.</param>
+        void Randomize(int seed);
     }
 }
