@@ -259,6 +259,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Too many argument of the &apos;{0}&apos; function: {1}..
+        /// </summary>
+        internal static string TooManyArguments {
+            get {
+                return ResourceManager.GetString("TooManyArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected character &apos;{0}&apos;..
         /// </summary>
         internal static string UnexpectedCharacter {

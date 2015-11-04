@@ -11,7 +11,7 @@
 
         protected override Expression Calculate(Expression operand)
         {
-            return Calculate(ExpressionType.Negate, operand);
+            return PerformBuiltInOperator(ExpressionType.Negate, operand);
         }
     }
 }

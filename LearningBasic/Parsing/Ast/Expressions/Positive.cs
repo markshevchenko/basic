@@ -11,7 +11,7 @@
 
         protected override Expression Calculate(Expression operand)
         {
-            return Calculate(ExpressionType.UnaryPlus, operand);
+            return PerformBuiltInOperator(ExpressionType.UnaryPlus, operand);
         }
     }
 }

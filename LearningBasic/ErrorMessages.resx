@@ -183,6 +183,9 @@
   <data name="RunTimeErrorOccured" xml:space="preserve">
     <value>Run-time error occured: {0}</value>
   </data>
+  <data name="TooManyArguments" xml:space="preserve">
+    <value>Too many argument of the '{0}' function: {1}.</value>
+  </data>
   <data name="UnexpectedCharacter" xml:space="preserve">
     <value>Unexpected character '{0}'.</value>
   </data>

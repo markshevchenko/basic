@@ -72,6 +72,8 @@
     <Compile Include="Parsing\Ast\ExpressionExtensions.cs" />
     <Compile Include="Parsing\Ast\Expressions\Add.cs" />
     <Compile Include="Parsing\Ast\Expressions\ArrayVariable.cs" />
+    <Compile Include="Parsing\Ast\Expressions\Function.cs" />
+    <Compile Include="Parsing\Ast\Expressions\NaryExpression.cs" />
     <Compile Include="Parsing\Ast\Expressions\Positive.cs" />
     <Compile Include="Parsing\Ast\Expressions\Negative.cs" />
     <Compile Include="Parsing\Ast\Expressions\Power.cs" />
