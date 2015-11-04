@@ -321,5 +321,29 @@
 
             var condition = scanner.TryReadRandomize(out result);
         }
+
+        [TestMethod]
+        public void TryReadRem_WithComment_TrimsItLeftAndStoresAsIs()
+        {
+            var scanner = MakeScanner("REM   non-EMPTY Comment");
+            IStatement result;
+
+            var condition = scanner.TryReadRem(out result);
+            var actual = (result as Rem).Comment;
+
+            Assert.AreEqual("non-EMPTY Comment", actual);
+        }
+
+        [TestMethod]
+        public void TryReadRem_WithoutComment_StoresEmptyString()
+        {
+            var scanner = MakeScanner("REM   ");
+            IStatement result;
+
+            var condition = scanner.TryReadRem(out result);
+            var actual = (result as Rem).Comment;
+
+            Assert.AreEqual("", actual);
+        }
     }
 }

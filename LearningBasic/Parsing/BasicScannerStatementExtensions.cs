@@ -39,6 +39,9 @@
             if (scanner.TryReadRandomize(out result))
                 return result;
 
+            if (scanner.TryReadRem(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
@@ -222,6 +225,20 @@
             {
                 IExpression seed = scanner.ReadExpression();
                 result = new Randomize(seed);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadRem(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Rem))
+            {
+                string comment;
+                scanner.ReadToken(Token.Comment, out comment);
+                result = new Rem(comment);
                 return true;
             }
 
