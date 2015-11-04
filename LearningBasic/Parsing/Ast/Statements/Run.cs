@@ -1,16 +1,12 @@
 ﻿namespace LearningBasic.Parsing.Ast.Statements
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using LearningBasic.Evaluating;
 
     public class Run : IStatement
     {
         public EvaluateResult Evaluate(IRunTimeEnvironment rte)
         {
-            return EvaluateResult.Empty;
+            return rte.Run();
         }
 
         public override string ToString()

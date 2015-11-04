@@ -135,6 +135,9 @@
   <data name="InputInvalidVariableList" xml:space="preserve">
     <value>Invalid list of variables in the INPUT statement.</value>
   </data>
+  <data name="LineNumberNotFound" xml:space="preserve">
+    <value>The line number {0} is not found.</value>
+  </data>
   <data name="LineNumberOutOfRange" xml:space="preserve">
     <value>The line number must belong to the range of {0} to {1}.</value>
   </data>
@@ -168,8 +171,17 @@
   <data name="PrintInvalidSemicolon" xml:space="preserve">
     <value>You can't specify a semicolon in the PRINT statement without parameters.</value>
   </data>
+  <data name="ProgramIsNotRunning" xml:space="preserve">
+    <value>The program is not running.</value>
+  </data>
+  <data name="ProgramIsRunning" xml:space="preserve">
+    <value>The program is running already.</value>
+  </data>
   <data name="RemoveMissingRange" xml:space="preserve">
     <value>Missing range in REMOVE statement.</value>
+  </data>
+  <data name="RunTimeErrorOccured" xml:space="preserve">
+    <value>Run-time error occured: {0}</value>
   </data>
   <data name="UnexpectedCharacter" xml:space="preserve">
     <value>Unexpected character '{0}'.</value>

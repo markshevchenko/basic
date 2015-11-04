@@ -24,9 +24,14 @@
         IInputOutput InputOutput { get; }
 
         /// <summary>
-        /// Retrieves a <c>Boolean</c> value that indicates whether the specified environment instance has been closed.
+        /// Gets a value indicating whether the current run-time environment has been closed.
         /// </summary>
         bool IsClosed { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the current environment runs the program <see cref="Lines"/>.
+        /// </summary>
+        bool IsRunning { get; }
 
         /// <summary>
         /// Gets the variables dictionary.
@@ -59,5 +64,17 @@
         /// </summary>
         /// <param name="name">The name to load.</param>
         void Load(string name);
+
+        /// <summary>
+        /// Runs the program stored in <see cref="Lines">.
+        /// </summary>
+        /// <returns>The result of running.</returns>
+        EvaluateResult Run();
+
+        /// <summary>
+        /// Sets the next executable <see cref="ILine">line</see> of the <see cref="Run">running</see> program.
+        /// </summary>
+        /// <param name="number">The number of the next executable line.</param>
+        void Goto(int number);
     }
 }

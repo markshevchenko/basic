@@ -6,9 +6,10 @@
     /// <summary>
     /// Implements the run-time environment.
     /// </summary>
-    public class RunTimeEnvironment : IRunTimeEnvironment
+    public class RunTimeEnvironment : IRunTimeEnvironment, IDisposable
     {
         private readonly IProgramRepository programRepository;
+        private ProgramRunner programRunner;
 
         /// <inheritdoc />
         public string LastUsedName { get; private set; }
@@ -19,11 +20,19 @@
         /// <inheritdoc />
         public bool IsClosed { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether the current environment has been disposed of.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
+
         /// <inheritdoc />
         public IDictionary<string, dynamic> Variables { get; private set; }
 
         /// <inheritdoc />
         public SortedList<int, IStatement> Lines { get; private set; }
+
+        /// <inheritdoc />
+        public bool IsRunning { get { return programRunner != null; } }
 
         /// <summary>
         /// Creates an instance of <see cref="RunTimeEnvironment"/>.
@@ -41,8 +50,10 @@
             this.programRepository = programRepository;
 
             InputOutput = inputOutput;
+            InputOutput.OnBreak += InputOutput_OnBreak;
             LastUsedName = null;
             IsClosed = false;
+            IsDisposed = false;
             Variables = new Dictionary<string, dynamic>();
             Lines = new SortedList<int, IStatement>();
         }
@@ -85,6 +96,65 @@
             var lines = programRepository.Load(name);
             Lines = new SortedList<int, IStatement>(lines);
             LastUsedName = name;
+        }
+
+        public EvaluateResult Run()
+        {
+            if (programRunner != null)
+                throw new RunTimeException(ErrorMessages.ProgramIsRunning);
+
+            programRunner = new ProgramRunner(Lines);
+            try
+            {
+                while (programRunner.MoveNext())
+                    programRunner.CurrentStatement.Evaluate(this);
+
+                if (programRunner.IsBreaked)
+                    return new EvaluateResult(Messages.CtrlCPressed);
+
+                return new EvaluateResult(Messages.ProgramCompleted);
+            }
+            catch (Exception exception)
+            {
+                var message = string.Format(ErrorMessages.RunTimeErrorOccured, exception.Message);
+                return new EvaluateResult(message);
+            }
+            finally
+            {
+                programRunner = null;
+            }
+        }
+
+        public void Goto(int number)
+        {
+            if (programRunner == null)
+                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+
+            programRunner.Goto(number);
+        }
+
+        public void Dispose()
+        {
+            if (IsDisposed)
+                return;
+
+            Dispose(true);
+
+            IsDisposed = true;
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+                InputOutput.OnBreak -= InputOutput_OnBreak;
+        }
+
+        private void InputOutput_OnBreak(object sender, EventArgs e)
+        {
+            if (programRunner == null)
+                return;
+
+            programRunner.Break();
         }
     }
 }

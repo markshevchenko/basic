@@ -120,8 +120,14 @@
   <data name="BasicInterpreterTerminated" xml:space="preserve">
     <value>BASIC interpreter terminated.</value>
   </data>
+  <data name="CtrlCPressed" xml:space="preserve">
+    <value>Ctrl+C pressed, program aborted.</value>
+  </data>
   <data name="InputProgramName" xml:space="preserve">
     <value>Input a program name:</value>
+  </data>
+  <data name="ProgramCompleted" xml:space="preserve">
+    <value>Program successfully completed.</value>
   </data>
   <data name="ProgramLoaded" xml:space="preserve">
     <value>Program with name '{0}' loaded.</value>

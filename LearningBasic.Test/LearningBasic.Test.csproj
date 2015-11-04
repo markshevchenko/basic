@@ -58,6 +58,7 @@
       <Link>Properties\Version.cs</Link>
     </Compile>
     <Compile Include="EvaluateResultTests.cs" />
+    <Compile Include="Evaluating\ProgramRunnerTests.cs" />
     <Compile Include="LinesExtensionsTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />
     <Compile Include="Mocks\MockProgramRepository.cs" />
@@ -75,8 +76,8 @@
     <Compile Include="Parsing\BasicScannerTests.cs" />
     <Compile Include="Parsing\TextReaderExtensionsTests.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensionsTests.cs" />
-    <Compile Include="RunTimeEnvironmentTests.cs" />
-    <Compile Include="ReadEvaluatePrintLoopTests.cs" />
+    <Compile Include="Evaluating\RunTimeEnvironmentTests.cs" />
+    <Compile Include="Evaluating\ReadEvaluatePrintLoopTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningBasic\LearningBasic.csproj">

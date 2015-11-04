@@ -55,6 +55,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evaluating\ProgramRunner.cs" />
+    <Compile Include="Evaluating\RunTimeException.cs" />
     <Compile Include="IO\FileProgramRepository.cs" />
     <Compile Include="IO\IOException.cs" />
     <Compile Include="IO\Operation.cs" />

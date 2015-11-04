@@ -49,5 +49,12 @@
         {
             LastWritten = string.Format(format, args) + "\n";
         }
+
+        public void Break()
+        {
+            var onBreak = OnBreak;
+            if (onBreak != null)
+                onBreak(this, EventArgs.Empty);
+        }
     }
 }

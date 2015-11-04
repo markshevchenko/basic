@@ -33,6 +33,9 @@
             if (scanner.TryReadLoad(out result))
                 return result;
 
+            if (scanner.TryReadToken(Token.Run))
+                return new Run();
+
             if (scanner.TryReadToken(Token.Quit))
                 return new Quit();
 

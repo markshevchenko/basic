@@ -13,11 +13,14 @@
             var scannerFactory = new BasicScannerFactory();
             var parser = new BasicParser(scannerFactory);
             var programRepository = new FileProgramRepository(parser);
-            var rte = new RunTimeEnvironment(inputOutput, programRepository);
-            var readEvaluatePrintLoop = new ReadEvaluatePrintLoop(rte, parser);
 
-            PrintSalute(inputOutput);
-            Run(readEvaluatePrintLoop);
+            using (var rte = new RunTimeEnvironment(inputOutput, programRepository))
+            {
+                var readEvaluatePrintLoop = new ReadEvaluatePrintLoop(rte, parser);
+
+                PrintSalute(inputOutput);
+                Run(readEvaluatePrintLoop);
+            }
         }
 
         private static void PrintSalute(IInputOutput inputOutput)

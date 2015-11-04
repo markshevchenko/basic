@@ -70,11 +70,29 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+C pressed, program aborted..
+        /// </summary>
+        internal static string CtrlCPressed {
+            get {
+                return ResourceManager.GetString("CtrlCPressed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input a program name:.
         /// </summary>
         internal static string InputProgramName {
             get {
                 return ResourceManager.GetString("InputProgramName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program successfully completed..
+        /// </summary>
+        internal static string ProgramCompleted {
+            get {
+                return ResourceManager.GetString("ProgramCompleted", resourceCulture);
             }
         }
         

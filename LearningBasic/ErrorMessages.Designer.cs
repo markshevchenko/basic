@@ -115,6 +115,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The line number {0} is not found..
+        /// </summary>
+        internal static string LineNumberNotFound {
+            get {
+                return ResourceManager.GetString("LineNumberNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The line number must belong to the range of {0} to {1}..
         /// </summary>
         internal static string LineNumberOutOfRange {
@@ -214,11 +223,38 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The program is not running..
+        /// </summary>
+        internal static string ProgramIsNotRunning {
+            get {
+                return ResourceManager.GetString("ProgramIsNotRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The program is running already..
+        /// </summary>
+        internal static string ProgramIsRunning {
+            get {
+                return ResourceManager.GetString("ProgramIsRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing range in REMOVE statement..
         /// </summary>
         internal static string RemoveMissingRange {
             get {
                 return ResourceManager.GetString("RemoveMissingRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run-time error occured: {0}.
+        /// </summary>
+        internal static string RunTimeErrorOccured {
+            get {
+                return ResourceManager.GetString("RunTimeErrorOccured", resourceCulture);
             }
         }
         
