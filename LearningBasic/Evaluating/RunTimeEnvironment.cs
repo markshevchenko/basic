@@ -98,6 +98,7 @@
             LastUsedName = name;
         }
 
+        /// <inheritdoc />
         public EvaluateResult Run()
         {
             if (programRunner != null)
@@ -125,6 +126,16 @@
             }
         }
 
+        /// <inheritdoc />
+        public void End()
+        {
+            if (programRunner == null)
+                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+
+            programRunner.Complete();
+        }
+
+        /// <inheritdoc />
         public void Goto(int number)
         {
             if (programRunner == null)
@@ -133,6 +144,7 @@
             programRunner.Goto(number);
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (IsDisposed)

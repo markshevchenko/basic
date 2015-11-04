@@ -87,6 +87,8 @@
     <Compile Include="Parsing\Ast\ObjectExtensions.cs" />
     <Compile Include="Parsing\Ast\Priority.cs" />
     <Compile Include="Parsing\Ast\Range.cs" />
+    <Compile Include="Parsing\Ast\Statements\End.cs" />
+    <Compile Include="Parsing\Ast\Statements\Goto.cs" />
     <Compile Include="Parsing\Ast\Statements\Input.cs" />
     <Compile Include="Parsing\Ast\Statements\Let.cs" />
     <Compile Include="Parsing\Ast\Statements\List.cs" />

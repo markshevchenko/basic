@@ -36,6 +36,9 @@
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
+            if (scanner.TryReadToken(Token.End))
+                return new End();
+
             if (scanner.TryReadToken(Token.Quit))
                 return new Quit();
 
@@ -187,6 +190,19 @@
                 string fileName;
                 scanner.ReadToken(Token.String, out fileName);
                 result = new Load(fileName);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadGoto(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Load))
+            {
+                IExpression number = scanner.ReadExpression();
+                result = new Goto(number);
                 return true;
             }
 

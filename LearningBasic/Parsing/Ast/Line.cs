@@ -66,11 +66,7 @@
             {
                 var number = int.Parse(numberAsString, NumberStyles.Integer, CultureInfo.InvariantCulture);
 
-                if (number < MinNumber || number > MaxNumber)
-                {
-                    var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
-                    throw new ParserException(message);
-                }
+                ThrowIfNumberOutOfRange(number);
 
                 return number;
             }
@@ -82,6 +78,15 @@
             {
                 throw new ParserException(ErrorMessages.CantParseLineNumber, exception);
             }
+        }
+
+        public static void ThrowIfNumberOutOfRange(int number)
+        {
+            if (number >= MinNumber && number <= MaxNumber)
+                return;
+
+            var message = string.Format(ErrorMessages.LineNumberOutOfRange, MinNumber, MaxNumber);
+            throw new ParserException(message);
         }
     }
 }

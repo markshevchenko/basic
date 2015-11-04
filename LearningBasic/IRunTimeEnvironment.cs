@@ -71,6 +71,12 @@
         /// <returns>The result of running.</returns>
         EvaluateResult Run();
 
+
+        /// <summary>
+        /// Ends the running program.
+        /// </summary>
+        void End();
+
         /// <summary>
         /// Sets the next executable <see cref="ILine">line</see> of the <see cref="Run">running</see> program.
         /// </summary>
