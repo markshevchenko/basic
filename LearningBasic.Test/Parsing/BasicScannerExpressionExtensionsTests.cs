@@ -227,6 +227,16 @@
         }
 
         [TestMethod]
+        public void ReadValue_WithRnd_ReturnsRnd()
+        {
+            var scanner = MakeScanner("rnd(100)");
+
+            var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Rnd));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void ReadValue_WithMinus_ThrowsParserException()
         {
