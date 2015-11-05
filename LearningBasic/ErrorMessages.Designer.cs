@@ -115,6 +115,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid type or count of parameters..
+        /// </summary>
+        internal static string InvalidParameters {
+            get {
+                return ResourceManager.GetString("InvalidParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The line number {0} is not found..
         /// </summary>
         internal static string LineNumberNotFound {

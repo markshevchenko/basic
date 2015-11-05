@@ -8,6 +8,8 @@
     /// </summary>
     public class RunTimeEnvironment : IRunTimeEnvironment, IDisposable
     {
+        public const string RandomKey = "@Random";
+
         private readonly IProgramRepository programRepository;
 
         /// <inheritdoc />
@@ -37,11 +39,6 @@
         public ProgramRunner Runner { get; private set; }
 
         /// <summary>
-        /// The <see cref="Random"/> object.
-        /// </summary>
-        public Random Random { get; private set; }
-
-        /// <summary>
         /// Creates an instance of <see cref="RunTimeEnvironment"/>.
         /// </summary>
         /// <param name="inputOutput">The input/output object.</param>
@@ -63,7 +60,7 @@
             IsDisposed = false;
             Variables = new Dictionary<string, dynamic>();
             Lines = new SortedList<int, IStatement>();
-            Random = new Random();
+            Variables[RandomKey] = new Random();
         }
 
         /// <inheritdoc />
@@ -153,7 +150,7 @@
         /// <inheritdoc />
         public virtual void Randomize(int seed)
         {
-            Random = new Random(seed);
+            Variables[RandomKey] = new Random(seed);
         }
 
         /// <inheritdoc />

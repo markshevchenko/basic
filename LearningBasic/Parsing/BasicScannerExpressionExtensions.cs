@@ -158,7 +158,11 @@
                 {
                     var parameters = scanner.ReadExpressions();
                     scanner.ReadToken(Token.RParen);
-                    throw new NotImplementedException();
+
+                    if (string.Equals("RND", text, StringComparison.InvariantCultureIgnoreCase))
+                        return new Rnd(parameters);
+
+                    return new Function(text, parameters);
                 }
                 else
                     return new ScalarVariable(text);

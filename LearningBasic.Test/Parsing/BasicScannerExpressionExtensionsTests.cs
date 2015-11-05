@@ -217,12 +217,13 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
-        public void ReadValue_WithFunction_ThrowsNotImplementedException()
+        public void ReadValue_WithFunction_ReturnsFunction()
         {
             var scanner = MakeScanner("foo123(x)");
 
             var value = scanner.ReadValue();
+
+            Assert.IsInstanceOfType(value, typeof(Function));
         }
 
         [TestMethod]

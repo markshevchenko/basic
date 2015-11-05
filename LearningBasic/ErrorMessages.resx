@@ -135,6 +135,9 @@
   <data name="InputInvalidVariableList" xml:space="preserve">
     <value>Invalid list of variables in the INPUT statement.</value>
   </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Invalid type or count of parameters.</value>
+  </data>
   <data name="LineNumberNotFound" xml:space="preserve">
     <value>The line number {0} is not found.</value>
   </data>
