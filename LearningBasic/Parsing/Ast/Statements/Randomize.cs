@@ -25,7 +25,7 @@
 
         public override string ToString()
         {
-            return "RANDOMIZE " + Seed.ToPrintable();
+            return "RANDOMIZE " + Seed;
         }
     }
 }

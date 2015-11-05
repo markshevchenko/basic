@@ -3,8 +3,9 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Ast;
-    using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Ast.Conditions;
     using LearningBasic.Parsing.Ast.Expressions;
+    using LearningBasic.Parsing.Ast.Statements;
 
     [TestClass]
     public class BasicScannerStatementExtensionsTests : BaseTests
@@ -344,6 +345,94 @@
             var actual = (result as Rem).Comment;
 
             Assert.AreEqual("", actual);
+        }
+
+        [TestMethod]
+        public void TryReadIfThenElse_WithConditionAndThen_StoresCondition()
+        {
+            var scanner = MakeScanner("IF a <> 0 THEN PRINT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+            var value = (result as IfThenElse).Condition;
+
+            Assert.IsInstanceOfType(value, typeof(NotEqual));
+        }
+
+        [TestMethod]
+        public void TryReadIfThenElse_WithConditionAndThen_StoresThen()
+        {
+            var scanner = MakeScanner("IF a <> 0 THEN PRINT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+            var value = (result as IfThenElse).Then;
+
+            Assert.IsInstanceOfType(value, typeof(Print));
+        }
+
+        [TestMethod]
+        public void TryReadIfThenElse_WithConditionAndThen_StoresNullElse()
+        {
+            var scanner = MakeScanner("IF a <> 0 THEN PRINT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+            var value = (result as IfThenElse).Else;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void TryReadIfThenElse_WithConditionThenAndElse_StoresElse()
+        {
+            var scanner = MakeScanner("IF a <> 0 THEN PRINT a ELSE INPUT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+            var value = (result as IfThenElse).Else;
+
+            Assert.IsInstanceOfType(value, typeof(Input));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadIfThenElse_WithInvalidCondition_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("IF a + b THEN PRINT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadIfThenElse_WithoutThenKeyword_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("IF a <> b PRINT a");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadIfThenElse_WithoutThenStatement_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("IF a <> b THEN");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadIfThenElse_WithoutElseStatement_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("IF a <> b THEN PRINT a ELSE");
+            IStatement result;
+
+            var condition = scanner.TryReadIfThenElse(out result);
         }
     }
 }

@@ -42,6 +42,9 @@
             if (scanner.TryReadRem(out result))
                 return result;
 
+            if (scanner.TryReadIfThenElse(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
@@ -239,6 +242,29 @@
                 string comment;
                 scanner.ReadToken(Token.Comment, out comment);
                 result = new Rem(comment);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadIfThenElse(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.If))
+            {
+                var condition = scanner.ReadCondition();
+                scanner.ReadToken(Token.Then);
+                var then = scanner.ReadStatementExcludingNext();
+
+                if (scanner.TryReadToken(Token.Else))
+                {
+                    var @else = scanner.ReadStatementExcludingNext();
+                    result = new IfThenElse(condition, then, @else);
+                }
+                else
+                    result = new IfThenElse(condition, then);
+
                 return true;
             }
 

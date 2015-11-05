@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return "GOTO " + Number.ToPrintable();
+            return "GOTO " + Number;
         }
     }
 }

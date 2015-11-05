@@ -32,12 +32,17 @@
                 return string.Empty;
 
             if (Value is string)
-                return '"' + (string)Value + '"';
+                return Quote(Value as string);
 
             if (Value is IConvertible)
                 return (Value as IConvertible).ToString(CultureInfo.InvariantCulture);
 
             return Value.ToString();
+        }
+
+        public static string Quote(string s)
+        {
+            return '"' + s.Replace("\"", "\"\"") + '"';
         }
 
         public static object Parse(string s)

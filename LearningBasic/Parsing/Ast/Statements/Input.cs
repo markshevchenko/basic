@@ -47,9 +47,9 @@
         public override string ToString()
         {
             if (Prompt == null)
-                return "INPUT " + LValue.ToString();
+                return "INPUT " + LValue;
             else
-                return "INPUT " + Prompt.ToPrintable() + ", " + LValue.ToString();
+                return "INPUT " + Prompt + ", " + LValue;
         }
 
         public static Expression ParseToObjectExpression(string s)

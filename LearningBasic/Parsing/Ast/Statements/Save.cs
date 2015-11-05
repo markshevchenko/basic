@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast.Statements
 {
+    using Expressions;
     using System;
 
     public class Save : IStatement
@@ -49,7 +50,7 @@
             if (Name == null)
                 return "SAVE";
 
-            return "SAVE " + Name.ToPrintable();
+            return "SAVE " + Constant.Quote(Name);
         }
     }
 }

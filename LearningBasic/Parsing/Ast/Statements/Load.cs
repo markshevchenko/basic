@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LearningBasic.Parsing.Ast.Statements
+﻿namespace LearningBasic.Parsing.Ast.Statements
 {
+    using System;
+    using LearningBasic.Parsing.Ast.Expressions;
+
     public class Load : IStatement
     {
         public string Name { get; private set; }
@@ -28,7 +25,7 @@ namespace LearningBasic.Parsing.Ast.Statements
 
         public override string ToString()
         {
-            return "LOAD " + Name.ToPrintable();
+            return "LOAD " + Constant.Quote(Name);
         }
     }
 }

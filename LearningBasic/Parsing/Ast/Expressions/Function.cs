@@ -52,7 +52,7 @@
 
         public override string ToString()
         {
-            var args = Args.Select(a => a.ToPrintable());
+            var args = Args.Select(a => a.ToString());
             return Name.ToUpper() + '(' + string.Join(", ", args) + ')';
         }
     }
