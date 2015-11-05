@@ -54,7 +54,7 @@
         /// <summary>
         /// The current statement to <see cref="IStatement.Execute(IRunTimeEnvironment)">evalutate</see>.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
         public IStatement CurrentStatement { get { return lines[lines.Keys[currentLineIndex]]; } }
 
         /// <summary>
