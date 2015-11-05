@@ -9,7 +9,7 @@
             : base(Associativity.Right, Priority.ArithmeticNegation, "+", operand)
         { }
 
-        protected override Expression Calculate(Expression operand)
+        protected override Expression BuildExpression(Expression operand)
         {
             return PerformBuiltInOperator(ExpressionType.UnaryPlus, operand);
         }

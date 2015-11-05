@@ -21,6 +21,11 @@
         LogicalNegation,
 
         /// <summary>
+        /// Comparison operator.
+        /// </summary>
+        Comparison,
+
+        /// <summary>
         /// Arithmetic ADD and SUBTRACT binary operators.
         /// </summary>
         ArithmeticAddition,

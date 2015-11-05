@@ -8,7 +8,7 @@
             : base(Associativity.Left, Priority.ArithmeticAddition, "+", left, right)
         { }
 
-        protected override Expression Calculate(Expression left, Expression right)
+        protected override Expression BuildExpression(Expression left, Expression right)
         {
             return PerformBuiltInOperator(ExpressionType.Add, left, right);
         }

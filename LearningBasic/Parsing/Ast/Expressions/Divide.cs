@@ -6,9 +6,11 @@
     {
         public Divide(IExpression left, IExpression right)
             : base(Associativity.Left, Priority.ArithmeticMultiplication, "/", left, right)
-        { }
+        {
+            DoInsertSpacebar = false;
+        }
 
-        protected override Expression Calculate(Expression left, Expression right)
+        protected override Expression BuildExpression(Expression left, Expression right)
         {
             return CallStaticMethod(typeof(BuiltInOperators), "Divide", left, right);
         }
