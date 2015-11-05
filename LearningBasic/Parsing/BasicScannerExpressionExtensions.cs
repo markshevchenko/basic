@@ -109,8 +109,8 @@
                 return new Positive(scanner.ReadMulOperand());
             else if (scanner.TryReadToken(Token.Minus))
                 return new Negative(scanner.ReadMulOperand());
-            else return scanner.ReadUnaryOperand();
-
+            else
+                return scanner.ReadUnaryOperand();
         }
 
         public static IExpression ReadUnaryOperand(this IScanner<Token> scanner)

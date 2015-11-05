@@ -68,6 +68,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Parsing\Ast\Associativity.cs" />
+    <Compile Include="Parsing\BasicScannerConditionExtensions.cs" />
     <Compile Include="Parsing\Ast\BuiltInFunctions.cs" />
     <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="Parsing\Ast\Conditions\And.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Parsing\Ast\Conditions\NotEqual.cs" />
     <Compile Include="Parsing\Ast\Conditions\Equal.cs" />
     <Compile Include="Parsing\Ast\Conditions\Not.cs" />
+    <Compile Include="Parsing\Ast\Conditions\Xor.cs" />
     <Compile Include="Parsing\Ast\Conditions\Or.cs" />
     <Compile Include="Parsing\Ast\Expressions\Add.cs" />
     <Compile Include="Parsing\Ast\Expressions\ArrayVariable.cs" />

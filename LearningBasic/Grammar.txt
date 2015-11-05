@@ -42,6 +42,7 @@ and-operand		: not-operand
 				;
 
 not-operand		: 'NOT' not-operand
+				| '(' condition ');
 				| relation
 				;
 

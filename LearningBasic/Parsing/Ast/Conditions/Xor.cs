@@ -10,7 +10,7 @@
 
         protected override Expression BuildExpression(Expression left, Expression right)
         {
-            return Expression.Xor(left, right);
+            return Expression.ExclusiveOr(left, right);
         }
     }
 }
