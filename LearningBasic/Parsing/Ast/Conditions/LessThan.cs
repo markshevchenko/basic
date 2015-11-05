@@ -10,7 +10,7 @@
 
         protected override Expression BuildExpression(Expression left, Expression right)
         {
-            return Expression.LessThan(left, right);
+            return PerformBuiltInOperator(ExpressionType.LessThan, left, right);
         }
     }
 }
