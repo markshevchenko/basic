@@ -50,6 +50,18 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void Close_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+
+            rte.Dispose();
+            rte.Close();
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Save_WithNullName_ThrowsArgumentNullException()
         {
@@ -88,6 +100,19 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void Save_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+            rte.Lines.Add(10, new End());
+
+            rte.Dispose();
+            rte.Save("file name");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Load_WithNullName_ThrowsArgumentNullException()
         {
@@ -104,7 +129,6 @@
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
             var rte = new RunTimeEnvironment(inputOutput, programRepository);
-            rte.Lines.Add(10, new End());
 
             rte.Load("the name of the file");
 
@@ -121,6 +145,18 @@
             rte.Load("the name of the file");
 
             Assert.AreEqual("the name of the file", rte.LastUsedName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void Load_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+
+            rte.Dispose();
+            rte.Load("file name");
         }
 
         [TestMethod]
@@ -169,6 +205,19 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void Run_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+            rte.Lines.Add(10, new End());
+
+            rte.Dispose();
+            rte.Run();
+        }
+
+        [TestMethod]
         public void End_WhenIsRunning_StopsRunning()
         {
             var inputOutput = MakeInputOutput();
@@ -195,6 +244,19 @@
             var end = new End();
 
             var result = end.Execute(rte);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void End_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+            rte.Lines.Add(10, new End());
+
+            rte.Dispose();
+            rte.End();
         }
 
         [TestMethod]
@@ -236,6 +298,19 @@
             var result = rte.Run();
 
             Assert.AreEqual(30, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void Goto_AfterDispose_ThrowsObjectDisposedException()
+        {
+            var inputOutput = MakeInputOutput("any string");
+            var programRepository = MakeProgramRepository();
+            var rte = new RunTimeEnvironment(inputOutput, programRepository);
+            rte.Lines.Add(10, new End());
+
+            rte.Dispose();
+            rte.Goto(10);
         }
     }
 }

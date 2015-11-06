@@ -10,7 +10,9 @@
     {
         public const string RandomKey = "@Random";
 
+        private readonly IInputOutput inputOutput;
         private readonly IProgramRepository programRepository;
+        private readonly IDictionary<string, dynamic> variables;
 
         /// <inheritdoc />
         public virtual bool IsClosed { get; private set; }
@@ -22,10 +24,10 @@
         public virtual string LastUsedName { get; private set; }
 
         /// <inheritdoc />
-        public virtual IInputOutput InputOutput { get; private set; }
+        public virtual IInputOutput InputOutput { get { return inputOutput; } }
 
         /// <inheritdoc />
-        public virtual IDictionary<string, dynamic> Variables { get; private set; }
+        public virtual IDictionary<string, dynamic> Variables { get { return variables; } }
 
         /// <inheritdoc />
         public virtual SortedList<int, IStatement> Lines { get; private set; }
@@ -51,27 +53,31 @@
             if (programRepository == null)
                 throw new ArgumentNullException("programRepository");
 
+            this.inputOutput = inputOutput;
+            this.inputOutput.OnBreak += InputOutput_OnBreak;
             this.programRepository = programRepository;
+            this.variables = new Dictionary<string, dynamic>();
+            this.variables[RandomKey] = new Random();
 
-            InputOutput = inputOutput;
-            InputOutput.OnBreak += InputOutput_OnBreak;
             LastUsedName = null;
             IsClosed = false;
             IsDisposed = false;
-            Variables = new Dictionary<string, dynamic>();
             Lines = new SortedList<int, IStatement>();
-            Variables[RandomKey] = new Random();
         }
 
         /// <inheritdoc />
         public virtual void Close()
         {
+            ThrowIfDisposed();
+
             IsClosed = true;
         }
 
         /// <inheritdoc />
         public virtual void Save(string name)
         {
+            ThrowIfDisposed();
+
             if (name == null)
                 throw new ArgumentNullException("name");
 
@@ -82,6 +88,8 @@
         /// <inheritdoc />
         public virtual void Load(string name)
         {
+            ThrowIfDisposed();
+
             if (name == null)
                 throw new ArgumentNullException("name");
 
@@ -93,6 +101,8 @@
         /// <inheritdoc />
         public virtual ProgramResult Run()
         {
+            ThrowIfDisposed();
+
             if (Runner != null)
                 throw new InvalidOperationException(ErrorMessages.ProgramIsRunning);
 
@@ -128,6 +138,8 @@
         /// <inheritdoc />
         public virtual void End()
         {
+            ThrowIfDisposed();
+
             if (Runner == null)
                 throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
 
@@ -137,6 +149,8 @@
         /// <inheritdoc />
         public virtual void Goto(int number)
         {
+            ThrowIfDisposed();
+
             if (Runner == null)
                 throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
 
@@ -146,24 +160,33 @@
         /// <inheritdoc />
         public virtual void Randomize(int seed)
         {
+            ThrowIfDisposed();
+
             Variables[RandomKey] = new Random(seed);
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            if (IsDisposed)
-                return;
-
             Dispose(true);
-
-            IsDisposed = true;
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool isDisposing)
         {
+            if (IsDisposed)
+                return;
+
             if (isDisposing)
                 InputOutput.OnBreak -= InputOutput_OnBreak;
+
+            IsDisposed = true;
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (IsDisposed)
+                throw new ObjectDisposedException(GetType().FullName);
         }
 
         private void InputOutput_OnBreak(object sender, EventArgs e)
