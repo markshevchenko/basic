@@ -32,11 +32,18 @@
         {
             var arrayAsObject = base.GetExpression(variables);
             var indexes = Indexes.Select(i => i.GetExpression(variables))
-                                 .Select(e => Expression.Subtract(e, Expression.Constant(1)))
+                                 .Select(Subrtract1AndConvertToInt32)
                                  .ToArray();
 
             var array = Expression.Convert(arrayAsObject, ArrayTypes[indexes.Length]);
             return Expression.ArrayAccess(array, indexes);
+        }
+
+        private static Expression Subrtract1AndConvertToInt32(Expression e)
+        {
+            var subtract1 = DynamicExpressionBuilder.BuildOperator(ExpressionType.Subtract, e, Expression.Constant(1));
+            var convertToInt32 = DynamicExpressionBuilder.BuildConvert(subtract1, typeof(int));
+            return convertToInt32;
         }
 
         public override string ToString()
