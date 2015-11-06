@@ -205,7 +205,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadRange_WithIncompleteRange_ThrowsParserException()
+        public void TryReadRange_WithIncompleteRange_ThrowsUnexpectedTokenException()
         {
             var scanner = MakeScanner("20-");
             Range result;
@@ -271,7 +271,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadLoad_WithoutFileName_ThrowsParserException()
+        public void TryReadLoad_WithoutFileName_ThrowsUnexpectedTokenException()
         {
             var scanner = MakeScanner("LOAD");
             IStatement result;
@@ -397,7 +397,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ParserException))]
-        public void TryReadIfThenElse_WithInvalidCondition_ThrowsUnexpectedTokenException()
+        public void TryReadIfThenElse_WithInvalidCondition_ThrowsParserException()
         {
             var scanner = MakeScanner("IF a + b THEN PRINT a");
             IStatement result;
@@ -417,7 +417,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ParserException))]
-        public void TryReadIfThenElse_WithoutThenStatement_ThrowsUnexpectedTokenException()
+        public void TryReadIfThenElse_WithoutThenStatement_ThrowsParserException()
         {
             var scanner = MakeScanner("IF a <> b THEN");
             IStatement result;
@@ -427,12 +427,22 @@
 
         [TestMethod]
         [ExpectedException(typeof(ParserException))]
-        public void TryReadIfThenElse_WithoutElseStatement_ThrowsUnexpectedTokenException()
+        public void TryReadIfThenElse_WithoutElseStatement_ThrowsParserException()
         {
             var scanner = MakeScanner("IF a <> b THEN PRINT a ELSE");
             IStatement result;
 
             var condition = scanner.TryReadIfThenElse(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadDim_WithoutArray_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("DIM 123");
+            IStatement result;
+
+            var condition = scanner.TryReadDim(out result);
         }
     }
 }

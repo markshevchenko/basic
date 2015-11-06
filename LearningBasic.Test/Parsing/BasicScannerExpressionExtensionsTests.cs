@@ -53,6 +53,33 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void ReadArray_WithoutLBraket_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("foo123 100]");
+
+            var array = scanner.ReadArray();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void ReadArray_WithoutExpression_ThrowsParserException()
+        {
+            var scanner = MakeScanner("foo123[]");
+
+            var array = scanner.ReadArray();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void ReadArray_WithoutRBraket_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("foo123[100");
+
+            var array = scanner.ReadArray();
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void ReadExpressions_WithEmptyString_ThrowsParserException()
         {

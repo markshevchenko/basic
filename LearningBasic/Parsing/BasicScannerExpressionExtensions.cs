@@ -26,9 +26,9 @@
 
                 if (scanner.TryReadToken(Token.LBracket))
                 {
-                    var parameters = scanner.ReadExpressions();
+                    var indexes = scanner.ReadExpressions();
                     scanner.ReadToken(Token.RBracket);
-                    result = new ArrayVariable(identifier, parameters);
+                    result = new ArrayVariable(identifier, indexes);
                     return true;
                 }
 
@@ -38,6 +38,16 @@
 
             result = null;
             return false;
+        }
+
+        public static ArrayVariable ReadArray(this IScanner<Token> scanner)
+        {
+            string identifier;
+            scanner.ReadToken(Token.Identifier, out identifier);
+            scanner.ReadToken(Token.LBracket);
+            var indexes = scanner.ReadExpressions();
+            scanner.ReadToken(Token.RBracket);
+            return new ArrayVariable(identifier, indexes);
         }
 
         public static IReadOnlyList<IExpression> ReadExpressions(this IScanner<Token> scanner)

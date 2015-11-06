@@ -61,6 +61,42 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}[{1}] created..
+        /// </summary>
+        internal static string ArrayOfDimension1Created {
+            get {
+                return ResourceManager.GetString("ArrayOfDimension1Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}[{1}, {2}] created..
+        /// </summary>
+        internal static string ArrayOfDimension2Created {
+            get {
+                return ResourceManager.GetString("ArrayOfDimension2Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}[{1}, {2}, {3}] created..
+        /// </summary>
+        internal static string ArrayOfDimension3Created {
+            get {
+                return ResourceManager.GetString("ArrayOfDimension3Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}[{1}, {2}, {3}, {4}] created..
+        /// </summary>
+        internal static string ArrayOfDimension4Created {
+            get {
+                return ResourceManager.GetString("ArrayOfDimension4Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BASIC interpreter terminated..
         /// </summary>
         internal static string BasicInterpreterTerminated {

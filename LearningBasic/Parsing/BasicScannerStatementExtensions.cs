@@ -45,6 +45,9 @@
             if (scanner.TryReadIfThenElse(out result))
                 return result;
 
+            if (scanner.TryReadDim(out result))
+                return result;
+
             if (scanner.TryReadToken(Token.Run))
                 return new Run();
 
@@ -265,6 +268,19 @@
                 else
                     result = new IfThenElse(condition, then);
 
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadDim(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.Dim))
+            {
+                var array = scanner.ReadArray();
+                result = new Dim(array);
                 return true;
             }
 

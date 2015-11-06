@@ -201,4 +201,7 @@
   <data name="UnrecognizedStatement" xml:space="preserve">
     <value>Unrecognized statement to compilation: '{0}'.</value>
   </data>
+  <data name="UnsupportedArrayDimension" xml:space="preserve">
+    <value>Array dimensions should be 1, 2, 3, or 4.</value>
+  </data>
 </root>

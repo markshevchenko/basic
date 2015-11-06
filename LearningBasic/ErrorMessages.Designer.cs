@@ -311,5 +311,14 @@ namespace LearningBasic {
                 return ResourceManager.GetString("UnrecognizedStatement", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array dimensions should be 1, 2, 3, or 4..
+        /// </summary>
+        internal static string UnsupportedArrayDimension {
+            get {
+                return ResourceManager.GetString("UnsupportedArrayDimension", resourceCulture);
+            }
+        }
     }
 }
