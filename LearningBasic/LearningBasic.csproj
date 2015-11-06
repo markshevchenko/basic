@@ -69,6 +69,8 @@
     </Compile>
     <Compile Include="Parsing\Ast\Associativity.cs" />
     <Compile Include="Parsing\Ast\Statements\Dim.cs" />
+    <Compile Include="Parsing\Ast\Statements\For.cs" />
+    <Compile Include="Parsing\Ast\Statements\ForNext.cs" />
     <Compile Include="Parsing\Ast\Statements\IfThenElse.cs" />
     <Compile Include="Parsing\BasicScannerConditionExtensions.cs" />
     <Compile Include="Parsing\Ast\BuiltInFunctions.cs" />

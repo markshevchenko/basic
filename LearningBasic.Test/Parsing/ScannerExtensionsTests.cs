@@ -1,6 +1,7 @@
 ﻿namespace LearningBasic.Test.Parsing
 {
     using LearningBasic.Parsing;
+    using LearningBasic.Parsing.Ast.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -85,6 +86,30 @@
                 scanner.TryReadToken(Token.Integer, out text);
 
                 Assert.AreEqual(string.Empty, text);
+            }
+        }
+
+        [TestMethod]
+        public void TryReadToken_WithExpectedTokenAndFactory_SetsValueOfFactory()
+        {
+            using (var scanner = MakeScanner("NEXT"))
+            {
+                IStatement value;
+                scanner.TryReadToken(Token.Next, () => new Next(), out value);
+
+                Assert.IsInstanceOfType(value, typeof(Next));
+            }
+        }
+
+        [TestMethod]
+        public void TryReadToken_WithUnexpectedTokenAndFactory_SetsDefaultValue()
+        {
+            using (var scanner = MakeScanner("QUIT"))
+            {
+                IStatement value;
+                scanner.TryReadToken(Token.Next, () => new Next(), out value);
+
+                Assert.IsNull(value);
             }
         }
     }

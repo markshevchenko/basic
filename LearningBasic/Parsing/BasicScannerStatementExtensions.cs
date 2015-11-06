@@ -11,53 +11,64 @@
         public static IStatement ReadStatementExcludingNext(this IScanner<Token> scanner)
         {
             IStatement result;
-
-            if (scanner.TryReadLet(out result))
+            if (scanner.TryReadStatementExcludingNext(out result))
                 return result;
-
-            if (scanner.TryReadPrint(out result))
-                return result;
-
-            if (scanner.TryReadInput(out result))
-                return result;
-
-            if (scanner.TryReadList(out result))
-                return result;
-
-            if (scanner.TryReadRemove(out result))
-                return result;
-
-            if (scanner.TryReadSave(out result))
-                return result;
-
-            if (scanner.TryReadLoad(out result))
-                return result;
-
-            if (scanner.TryReadGoto(out result))
-                return result;
-
-            if (scanner.TryReadRandomize(out result))
-                return result;
-
-            if (scanner.TryReadRem(out result))
-                return result;
-
-            if (scanner.TryReadIfThenElse(out result))
-                return result;
-
-            if (scanner.TryReadDim(out result))
-                return result;
-
-            if (scanner.TryReadToken(Token.Run))
-                return new Run();
-
-            if (scanner.TryReadToken(Token.End))
-                return new End();
-
-            if (scanner.TryReadToken(Token.Quit))
-                return new Quit();
 
             throw new ParserException(ErrorMessages.MissingStatement);
+        }
+
+        public static bool TryReadStatementExcludingNext(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadLet(out result))
+                return true;
+
+            if (scanner.TryReadPrint(out result))
+                return true;
+
+            if (scanner.TryReadInput(out result))
+                return true;
+
+            if (scanner.TryReadList(out result))
+                return true;
+
+            if (scanner.TryReadRemove(out result))
+                return true;
+
+            if (scanner.TryReadSave(out result))
+                return true;
+
+            if (scanner.TryReadLoad(out result))
+                return true;
+
+            if (scanner.TryReadGoto(out result))
+                return true;
+
+            if (scanner.TryReadRandomize(out result))
+                return true;
+
+            if (scanner.TryReadRem(out result))
+                return true;
+
+            if (scanner.TryReadIfThenElse(out result))
+                return true;
+
+            if (scanner.TryReadDim(out result))
+                return true;
+
+            if (scanner.TryReadFor(out result))
+                return true;
+
+            if (scanner.TryReadToken(Token.Run, () => new Run(), out result))
+                return true;
+
+            if (scanner.TryReadToken(Token.End, () => new End(), out result))
+                return true;
+
+            if (scanner.TryReadToken(Token.Quit, () => new Quit(), out result))
+                return true;
+
+            result = null;
+            return false;
         }
 
         public static bool TryReadLet(this IScanner<Token> scanner, out IStatement result)
@@ -281,6 +292,39 @@
             {
                 var array = scanner.ReadArray();
                 result = new Dim(array);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        public static bool TryReadFor(this IScanner<Token> scanner, out IStatement result)
+        {
+            if (scanner.TryReadToken(Token.For))
+            {
+                ILValue loopVariable = scanner.ReadLValue();
+                scanner.ReadToken(Token.Eq);
+                IExpression from = scanner.ReadExpression();
+                scanner.ReadToken(Token.To);
+                IExpression to = scanner.ReadExpression();
+
+                IExpression step = null;
+                if (scanner.TryReadToken(Token.Step))
+                    step = scanner.ReadExpression();
+
+                if (scanner.CurrentToken == Token.Next)
+                    throw new ParserException(ErrorMessages.MissingStatement);
+
+                IStatement statement;
+                if (scanner.TryReadStatementExcludingNext(out statement))
+                {
+                    scanner.ReadToken(Token.Next);
+                    result = new ForNext(loopVariable, from, to, step, statement);
+                }
+                else
+                    result = new For(loopVariable, from, to, step);
+
                 return true;
             }
 

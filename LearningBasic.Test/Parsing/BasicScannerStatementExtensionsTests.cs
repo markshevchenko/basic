@@ -50,6 +50,17 @@
         }
 
         [TestMethod]
+        public void TryReadStatementExcludingNext_WithNext_ReturnsFalse()
+        {
+            var scanner = MakeScanner("NEXT");
+            IStatement statement;
+
+            var condition = scanner.TryReadStatementExcludingNext(out statement);
+
+            Assert.IsFalse(condition);
+        }
+
+        [TestMethod]
         public void TryReadLet_WithLet_ReturnsTrue()
         {
             var scanner = MakeScanner("LET a = 100");
@@ -443,6 +454,122 @@
             IStatement result;
 
             var condition = scanner.TryReadDim(out result);
+        }
+
+        [TestMethod]
+        public void TryReadFor_WithoutStep_StoresNullStep()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO 10");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+            var value = (result as For).Step;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void TryReadFor_WithStep_StoresStep()
+        {
+            var scanner = MakeScanner("FOR I = 10 TO 1 STEP -1");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+            var value = (result as For).Step;
+
+            Assert.IsInstanceOfType(value, typeof(Negative));
+        }
+
+        [TestMethod]
+        public void TryReadFor_WithoutStatements_ReadFor()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO 10");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+
+            Assert.IsInstanceOfType(result, typeof(For));
+        }
+
+        [TestMethod]
+        public void TryReadFor_WithStatements_ReadForNext()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO 10 PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+
+            Assert.IsInstanceOfType(result, typeof(ForNext));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadFor_WithStatementsWithoutNext_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO 10 PRINT I");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutLoopVariable_ThrowsParserException()
+        {
+            var scanner = MakeScanner("FOR = 1 TO 10 PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadFor_WithoutEq_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("FOR I 1 TO 10 PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutFromExpression_ThrowsParserException()
+        {
+            var scanner = MakeScanner("FOR I = TO 10 PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void TryReadFor_WithoutTo_ThrowsUnexpectedTokenException()
+        {
+            var scanner = MakeScanner("FOR I = 1 10 PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutToExpression_ThrowsParserException()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO PRINT I NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutStatement_ThrowsParserException()
+        {
+            var scanner = MakeScanner("FOR I = 1 TO 10 NEXT");
+            IStatement result;
+
+            var condition = scanner.TryReadFor(out result);
         }
     }
 }

@@ -65,5 +65,19 @@
             text = string.Empty;
             return false;
         }
+
+        public static bool TryReadToken<TToken, TResult>(this IScanner<TToken> scanner, TToken token, Func<TResult> factory, out TResult result)
+            where TToken : struct
+        {
+            if (EqualityComparer<TToken>.Default.Equals(scanner.CurrentToken, token))
+            {
+                scanner.MoveNext();
+                result = factory();
+                return true;
+            }
+
+            result = default(TResult);
+            return false;
+        }
     }
 }
