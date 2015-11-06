@@ -16,17 +16,7 @@
             return s.Length;
         }
 
-        public static dynamic LEN(int[] array)
-        {
-            return array.Length;
-        }
-
-        public static dynamic LEN(double[] array)
-        {
-            return array.Length;
-        }
-
-        public static dynamic LEN(string[] array)
+        public static dynamic LEN(object[] array)
         {
             return array.Length;
         }
@@ -61,12 +51,12 @@
 
         public static dynamic MID(string s, int start)
         {
-            return s.Substring(1 + start);
+            return s.Substring(start - 1);
         }
 
         public static dynamic MID(string s, int start, int length)
         {
-            return s.Substring(1 + start, length);
+            return s.Substring(start - 1, length);
         }
 
         public static dynamic UPPER(string s)
@@ -180,17 +170,7 @@
             return s1.CompareTo(s2) > 0 ? s1 : s2;
         }
 
-        public static dynamic MAX(int[] array)
-        {
-            return array.Max();
-        }
-
-        public static dynamic MAX(double[] array)
-        {
-            return array.Max();
-        }
-
-        public static dynamic MAX(string[] array)
+        public static dynamic MAX(object[] array)
         {
             return array.Max();
         }
@@ -226,29 +206,9 @@
             return s1.CompareTo(s2) < 0 ? s1 : s2;
         }
 
-        public static dynamic MIN(int[] array)
+        public static dynamic MIN(object[] array)
         {
             return array.Min();
-        }
-
-        public static dynamic MIN(double[] array)
-        {
-            return array.Min();
-        }
-
-        public static dynamic MIN(string[] array)
-        {
-            return array.Min();
-        }
-
-        public static dynamic AVG(int[] array)
-        {
-            return array.Average();
-        }
-
-        public static dynamic AVG(double[] array)
-        {
-            return array.Average();
         }
 
         public static dynamic EXP(int i)
