@@ -7,17 +7,11 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var result = rte.Run();
-            if (result.IsBroken)
+            if (result == ProgramResult.Broken)
                 return new EvaluateResult(Messages.CtrlCPressed);
 
-            if (result.IsCompleted)
+            if (result == ProgramResult.Completed)
                 return new EvaluateResult(Messages.ProgramCompleted);
-
-            if (result.IsAborted)
-            {
-                var message = string.Format(ErrorMessages.RunTimeErrorOccured, result.Exception.Message);
-                return new EvaluateResult(message);
-            }
 
             throw new InvalidOperationException();
         }

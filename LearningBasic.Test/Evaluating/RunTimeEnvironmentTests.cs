@@ -157,7 +157,8 @@
         }
 
         [TestMethod]
-        public void Run_WhenIsRunning_AbortsRunning()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Run_WhenIsRunning_ThrowsInvalidOperationException()
         {
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
@@ -165,8 +166,6 @@
             rte.Lines.Add(10, new Run());
 
             var result = rte.Run();
-
-            Assert.IsTrue(result.IsAborted);
         }
 
         [TestMethod]
@@ -186,8 +185,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(RunTimeException))]
-        public void End_WhenIsNotRunning_ThrowsRunTimeException()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void End_WhenIsNotRunning_ThrowsInvalidOperationException()
         {
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
@@ -199,8 +198,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(RunTimeException))]
-        public void Goto_WhenIsNotRunning_ThrowsRunTimeException()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Goto_WhenIsNotRunning_ThrowsInvalidOperationException()
         {
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
@@ -212,7 +211,8 @@
         }
 
         [TestMethod]
-        public void Goto_WithNonExistentNumber_AbortsRunning()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Goto_WithNonExistentNumber_ThrowsArgumentOutOfRangeException()
         {
             var inputOutput = MakeInputOutput();
             var programRepository = MakeProgramRepository();
@@ -220,8 +220,6 @@
             rte.Lines.Add(10, new Goto(new Constant("20")));
 
             var result = rte.Run();
-
-            Assert.IsTrue(result.IsAborted);
         }
 
         [TestMethod]

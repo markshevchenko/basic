@@ -162,8 +162,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void Goto_WithNonExistingLineNumber_ThrowsInvalidOperationException()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Goto_WithNonExistingLineNumber_ThrowsArgumentOutOfRangeException()
         {
             var runner = new ProgramRunner(lines);
             const int nonExistingNumber = 200;

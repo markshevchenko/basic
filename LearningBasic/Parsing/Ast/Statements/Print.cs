@@ -22,7 +22,8 @@
             {
                 var compiled = expression.GetExpression(rte.Variables);
                 var value = compiled.CalculateValue();
-                rte.InputOutput.Write(value.ToString());
+                var valueAsString = value == null ? string.Empty : value.ToString();
+                rte.InputOutput.Write(valueAsString);
             }
 
             return EvaluateResult.Empty;

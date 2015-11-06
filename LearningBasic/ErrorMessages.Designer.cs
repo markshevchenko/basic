@@ -320,5 +320,14 @@ namespace LearningBasic {
                 return ResourceManager.GetString("UnsupportedArrayDimension", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of any dimension of an array can&apos;be 0..
+        /// </summary>
+        internal static string ZeroArraySize {
+            get {
+                return ResourceManager.GetString("ZeroArraySize", resourceCulture);
+            }
+        }
     }
 }

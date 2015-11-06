@@ -16,35 +16,34 @@
             Array = array;
         }
 
+        private readonly IReadOnlyDictionary<int, string> evaluateResultFormats = new Dictionary<int, string>
+        {
+            { 1, Messages.ArrayOfDimension1Created },
+            { 2, Messages.ArrayOfDimension2Created },
+            { 3, Messages.ArrayOfDimension3Created },
+            { 4, Messages.ArrayOfDimension4Created },
+        };
+
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var name = Array.Name;
-            var indexes = Array.Indexes
-                               .Select(i => i.GetExpression(rte.Variables))
-                               .Select(e => (int)e.CalculateValue())
-                               .ToArray();
+            var indexesAsObjects = Array.Indexes
+                                        .Select(i => i.GetExpression(rte.Variables))
+                                        .Select(e => e.CalculateValue())
+                                        .ToArray();
+            var indexes = indexesAsObjects.Select(o => (int)o)
+                                          .ToArray();
 
-            switch (indexes.Length)
-            {
-                case 1:
-                    rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes[0]);
-                    return new EvaluateResult(Messages.ArrayOfDimension1Created, indexes[0]);
+            if (indexes.Any(index => index == 0))
+                throw new InvalidOperationException(ErrorMessages.ZeroArraySize);
 
-                case 2:
-                    rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes[0], indexes[1]);
-                    return new EvaluateResult(Messages.ArrayOfDimension2Created, indexes[0], indexes[1]);
+            if (indexes.Length < 1 || indexes.Length > 4)
+                throw new InvalidOperationException(ErrorMessages.UnsupportedArrayDimension);
 
-                case 3:
-                    rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes[0], indexes[1], indexes[2]);
-                    return new EvaluateResult(Messages.ArrayOfDimension3Created, indexes[0], indexes[1], indexes[2]);
+            rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes);
 
-                case 4:
-                    rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes[0], indexes[1], indexes[2], indexes[3]);
-                    return new EvaluateResult(Messages.ArrayOfDimension4Created, indexes[0], indexes[1], indexes[2], indexes[3]);
-
-                default:
-                    throw new ParserException(ErrorMessages.UnsupportedArrayDimension);
-            }
+            var format = evaluateResultFormats[indexes.Length];
+            return new EvaluateResult(name + format, indexesAsObjects);
         }
 
         public override string ToString()

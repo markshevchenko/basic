@@ -204,4 +204,7 @@
   <data name="UnsupportedArrayDimension" xml:space="preserve">
     <value>Array dimensions should be 1, 2, 3, or 4.</value>
   </data>
+  <data name="ZeroArraySize" xml:space="preserve">
+    <value>The size of any dimension of an array can'be 0.</value>
+  </data>
 </root>

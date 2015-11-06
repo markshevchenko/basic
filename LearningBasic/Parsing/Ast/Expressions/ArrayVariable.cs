@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Ast.Expressions
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
@@ -20,16 +21,39 @@
 
         public override Expression GetExpression(IDictionary<string, dynamic> variables)
         {
-            var array = base.GetExpression(variables);
+            var arrayAsObject = base.GetExpression(variables);
             var indexes = Indexes.Select(i => i.GetExpression(variables))
-                                 .Select(e => Expression.Add(e, Expression.Constant(1)))
+                                 .Select(e => Expression.Subtract(e, Expression.Constant(1)))
                                  .ToArray();
+
+            var array = MakeArrayExpression(arrayAsObject, indexes.Length);
             return Expression.ArrayAccess(array, indexes);
         }
 
         public override string ToString()
         {
             return string.Format("{0}[{1}]", base.ToString(), string.Join(", ", Indexes));
+        }
+
+        public static Expression MakeArrayExpression(Expression arrayAsObject, int dimension)
+        {
+            switch (dimension)
+            {
+                case 1:
+                    return Expression.Convert(arrayAsObject, typeof(object[]));
+
+                case 2:
+                    return Expression.Convert(arrayAsObject, typeof(object[,]));
+
+                case 3:
+                    return Expression.Convert(arrayAsObject, typeof(object[,,]));
+
+                case 4:
+                    return Expression.Convert(arrayAsObject, typeof(object[,,,]));
+
+                default:
+                    throw new InvalidOperationException();
+            }
         }
     }
 }

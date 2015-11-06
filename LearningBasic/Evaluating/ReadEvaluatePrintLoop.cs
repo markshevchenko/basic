@@ -81,7 +81,19 @@
                 return EvaluateResult.Empty;
             }
             else
-                return line.Statement.Execute(rte);
+                return Evaluate(line.Statement);
+        }
+
+        private EvaluateResult Evaluate(IStatement statement)
+        {
+            try
+            {
+                return statement.Execute(rte);
+            }
+            catch (Exception exception)
+            {
+                return new EvaluateResult(ErrorMessages.RunTimeErrorOccured, exception.Message);
+            }
         }
 
         /// <summary>

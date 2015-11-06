@@ -61,7 +61,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}[{1}] created..
+        ///   Looks up a localized string similar to [{0}] created..
         /// </summary>
         internal static string ArrayOfDimension1Created {
             get {
@@ -70,7 +70,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}[{1}, {2}] created..
+        ///   Looks up a localized string similar to [{0}, {1}] created..
         /// </summary>
         internal static string ArrayOfDimension2Created {
             get {
@@ -79,7 +79,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}[{1}, {2}, {3}] created..
+        ///   Looks up a localized string similar to [{0}, {1}, {2}] created..
         /// </summary>
         internal static string ArrayOfDimension3Created {
             get {
@@ -88,7 +88,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}[{1}, {2}, {3}, {4}] created..
+        ///   Looks up a localized string similar to [{0}, {1}, {2}, {3}] created..
         /// </summary>
         internal static string ArrayOfDimension4Created {
             get {

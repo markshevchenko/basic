@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArrayOfDimension1Created" xml:space="preserve">
-    <value>{0}[{1}] created.</value>
+    <value>[{0}] created.</value>
   </data>
   <data name="ArrayOfDimension2Created" xml:space="preserve">
-    <value>{0}[{1}, {2}] created.</value>
+    <value>[{0}, {1}] created.</value>
   </data>
   <data name="ArrayOfDimension3Created" xml:space="preserve">
-    <value>{0}[{1}, {2}, {3}] created.</value>
+    <value>[{0}, {1}, {2}] created.</value>
   </data>
   <data name="ArrayOfDimension4Created" xml:space="preserve">
-    <value>{0}[{1}, {2}, {3}, {4}] created.</value>
+    <value>[{0}, {1}, {2}, {3}] created.</value>
   </data>
   <data name="BasicInterpreterTerminated" xml:space="preserve">
     <value>BASIC interpreter terminated.</value>

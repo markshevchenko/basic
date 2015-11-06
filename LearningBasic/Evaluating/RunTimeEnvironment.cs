@@ -94,16 +94,12 @@
         public virtual ProgramResult Run()
         {
             if (Runner != null)
-                throw new RunTimeException(ErrorMessages.ProgramIsRunning);
+                throw new InvalidOperationException(ErrorMessages.ProgramIsRunning);
 
             Runner = new ProgramRunner(Lines);
             try
             {
                 return Run(Runner);
-            }
-            catch (Exception exception)
-            {
-                return ProgramResult.CreateAborted(exception);
             }
             finally
             {
@@ -124,16 +120,16 @@
             }
 
             if (programRunner.IsBroke)
-                return ProgramResult.CreateBroken();
+                return ProgramResult.Broken;
 
-            return ProgramResult.CreateCompleted();
+            return ProgramResult.Completed;
         }
 
         /// <inheritdoc />
         public virtual void End()
         {
             if (Runner == null)
-                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+                throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
 
             Runner.Complete();
         }
@@ -142,7 +138,7 @@
         public virtual void Goto(int number)
         {
             if (Runner == null)
-                throw new RunTimeException(ErrorMessages.ProgramIsNotRunning);
+                throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
 
             Runner.Goto(number);
         }
