@@ -6,8 +6,18 @@
     /// <summary>
     /// Defines a contract of binary operator.
     /// </summary>
-    public abstract class BinaryOperator : NaryExpression
+    public abstract class BinaryOperator : IExpression
     {
+        /// <summary>
+        /// Gets the associativity of expression.
+        /// </summary>
+        public Associativity Associativity { get; private set; }
+
+        /// <summary>
+        /// Gets the priority of expression
+        /// </summary>
+        public Priority Priority { get; private set; }
+
         /// <summary>
         /// The string representation of operator, f.e. <c>"+"</c>, or <c>"AND"</c>.
         /// </summary>
@@ -43,8 +53,9 @@
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         protected BinaryOperator(Associativity associativity, Priority priority, string @operator, IExpression left, IExpression right)
-            : base(associativity, priority)
         {
+            Associativity = associativity;
+            Priority = priority;
             Operator = @operator;
             Left = left;
             Right = right;
@@ -52,7 +63,7 @@
         }
 
         /// <inheritdoc />
-        public override Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
         {
             var left = Left.GetExpression(variables);
             var right = Right.GetExpression(variables);

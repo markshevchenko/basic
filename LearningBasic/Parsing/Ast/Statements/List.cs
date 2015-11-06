@@ -20,13 +20,13 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             if (rte.Lines.Count == 0)
-                return EvaluateResult.Empty;
+                return EvaluateResult.None;
 
             var filterdLines = rte.Lines.Where(line => Range.Contains(line.Key));
             var printableLines = LinesExtensions.ToPrintable(filterdLines);
             PrintLines(rte.InputOutput, printableLines);
 
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

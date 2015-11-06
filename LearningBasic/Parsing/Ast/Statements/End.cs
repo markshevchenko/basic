@@ -6,7 +6,7 @@
         {
             rte.End();
 
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

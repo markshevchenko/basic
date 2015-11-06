@@ -78,7 +78,7 @@
             if (line.Number.HasValue)
             {
                 rte.Lines[line.Number.Value] = line.Statement;
-                return EvaluateResult.Empty;
+                return EvaluateResult.None;
             }
             else
                 return Evaluate(line.Statement);

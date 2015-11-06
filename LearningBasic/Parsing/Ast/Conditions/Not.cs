@@ -12,7 +12,7 @@
 
         protected override Expression BuildExpression(Expression operand)
         {
-            return PerformBuiltInOperator(ExpressionType.Not, operand);
+            return DynamicExpressionBuilder.BuildOperator(ExpressionType.Not, operand);
         }
     }
 }

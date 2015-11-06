@@ -9,7 +9,7 @@
         /// Executes the statement in the context of the specified <see cref="IRunTimeEnvironment"/>.
         /// </summary>
         /// <param name="rte">The run-time environment.</param>
-        /// <returns>The result of execution (a message or <see cref="EvaluateResult.Empty">nothing</see>).</returns>
+        /// <returns>The result of execution (a message or <see cref="EvaluateResult.None">nothing</see>).</returns>
         EvaluateResult Execute(IRunTimeEnvironment rte);
     }
 }

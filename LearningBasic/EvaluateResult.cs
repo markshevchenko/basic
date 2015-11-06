@@ -13,9 +13,9 @@
         private readonly string message;
 
         /// <summary>
-        /// The empty result (without a message).
+        /// The none result (without message).
         /// </summary>
-        public static EvaluateResult Empty = new EvaluateResult();
+        public static EvaluateResult None = new EvaluateResult();
 
         /// <summary>
         /// Indicates that the instance contains a message.

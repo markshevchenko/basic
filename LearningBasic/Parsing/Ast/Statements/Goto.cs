@@ -16,7 +16,7 @@
 
             rte.Goto((int)number);
 
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

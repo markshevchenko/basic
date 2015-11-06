@@ -71,7 +71,7 @@
             var repl = new ReadEvaluatePrintLoop(rte, parser);
 
             inputOutput.Write("still message");
-            repl.Print(EvaluateResult.Empty);
+            repl.Print(EvaluateResult.None);
 
             Assert.AreEqual("still message", inputOutput.LastWritten);
 

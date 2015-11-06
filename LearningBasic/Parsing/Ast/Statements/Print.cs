@@ -26,7 +26,7 @@
                 rte.InputOutput.Write(valueAsString);
             }
 
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

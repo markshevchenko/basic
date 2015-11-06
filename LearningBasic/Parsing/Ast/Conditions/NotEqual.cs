@@ -10,7 +10,7 @@
 
         protected override Expression BuildExpression(Expression left, Expression right)
         {
-            return PerformBuiltInOperator(ExpressionType.NotEqual, left, right);
+            return DynamicExpressionBuilder.BuildOperator(ExpressionType.NotEqual, left, right);
         }
     }
 }

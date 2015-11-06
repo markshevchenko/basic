@@ -12,7 +12,7 @@
 
         protected override Expression BuildExpression(Expression left, Expression right)
         {
-            return CallStaticMethod(typeof(BuiltInOperators), "Divide", left, right);
+            return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInOperators), "Divide", left, right);
         }
     }
 }

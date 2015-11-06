@@ -12,7 +12,7 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             // REM does nothing.
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

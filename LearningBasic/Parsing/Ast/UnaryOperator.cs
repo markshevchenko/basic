@@ -6,8 +6,18 @@
     /// <summary>
     /// Defines a contract of unary operator.
     /// </summary>
-    public abstract class UnaryOperator : NaryExpression
+    public abstract class UnaryOperator : IExpression
     {
+        /// <summary>
+        /// Gets the associativity of expression.
+        /// </summary>
+        public Associativity Associativity { get; private set; }
+
+        /// <summary>
+        /// Gets the priority of expression
+        /// </summary>
+        public Priority Priority { get; private set; }
+
         /// <summary>
         /// The string representation of operator, f.e. <c>"-"</c>, or <c>"NOT"</c>.
         /// </summary>
@@ -37,15 +47,16 @@
         /// <param name="@operator">The string representation of the operator.</param>
         /// <param name="operand">The single operand.</param>
         protected UnaryOperator(Associativity associativity, Priority priority, string @operator, IExpression operand)
-            : base(associativity, priority)
         {
+            Associativity = associativity;
+            Priority = priority;
             Operator = @operator;
             Operand = operand;
             DoInsertSpacebar = false;
         }
 
         /// <inheritdoc />
-        public override Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
         {
             var operand = Operand.GetExpression(variables);
             return BuildExpression(operand);

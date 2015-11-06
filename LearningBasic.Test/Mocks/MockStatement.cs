@@ -23,7 +23,7 @@ namespace LearningBasic.Test.Mocks
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             action();
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
     }
 }

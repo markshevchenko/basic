@@ -47,14 +47,14 @@
         [TestMethod]
         public void HasMessage_OfEmptyEvaluateResult_IsFalse()
         {
-            Assert.IsFalse(EvaluateResult.Empty.HasMessage);
+            Assert.IsFalse(EvaluateResult.None.HasMessage);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void Message_OfEmptyEvaluateResult_ThrowsInvalidOperationException()
         {
-            var message = EvaluateResult.Empty.Message;
+            var message = EvaluateResult.None.Message;
         }
     }
 }

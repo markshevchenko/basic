@@ -35,7 +35,7 @@
             if (Else != null)
                 return Else.Execute(rte);
 
-            return EvaluateResult.Empty;
+            return EvaluateResult.None;
         }
 
         public override string ToString()

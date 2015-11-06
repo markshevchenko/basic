@@ -11,7 +11,7 @@
 
         protected override Expression BuildExpression(Expression operand)
         {
-            return PerformBuiltInOperator(ExpressionType.UnaryPlus, operand);
+            return DynamicExpressionBuilder.BuildOperator(ExpressionType.UnaryPlus, operand);
         }
     }
 }

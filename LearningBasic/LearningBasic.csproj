@@ -68,6 +68,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Parsing\Ast\Associativity.cs" />
+    <Compile Include="Parsing\Ast\DynamicExpressionBuilder.cs" />
     <Compile Include="Parsing\Ast\Statements\Dim.cs" />
     <Compile Include="Parsing\Ast\Statements\For.cs" />
     <Compile Include="Parsing\Ast\Statements\ForNext.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Parsing\Ast\Expressions\Add.cs" />
     <Compile Include="Parsing\Ast\Expressions\ArrayVariable.cs" />
     <Compile Include="Parsing\Ast\Expressions\Function.cs" />
-    <Compile Include="Parsing\Ast\NaryExpression.cs" />
     <Compile Include="Parsing\Ast\Expressions\Positive.cs" />
     <Compile Include="Parsing\Ast\Expressions\Negative.cs" />
     <Compile Include="Parsing\Ast\Expressions\Power.cs" />
