@@ -58,6 +58,12 @@
         public int CurrentLineNumber { get { return lines.Keys[currentLineIndex]; } }
 
         /// <summary>
+        /// The next line number.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
+        public int NextLineNumber { get { return lines.Keys[currentLineIndex + 1]; } }
+
+        /// <summary>
         /// The current statement to <see cref="IStatement.Execute(IRunTimeEnvironment)">evalutate</see>.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>

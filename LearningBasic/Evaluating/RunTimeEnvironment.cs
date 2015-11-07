@@ -168,7 +168,7 @@
             ThrowIfDisposed();
             ThrowIfNotRunning();
 
-            var multilineLoop = new MultilineLoop(Runner.CurrentLineNumber, loop);
+            var multilineLoop = new MultilineLoop(Runner.NextLineNumber, loop);
             multilineLoops.Push(multilineLoop);
         }
 

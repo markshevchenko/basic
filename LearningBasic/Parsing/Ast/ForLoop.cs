@@ -57,14 +57,18 @@
             Step = step;
             IsOver = false;
 
-            var initialize = DynamicExpressionBuilder.BuildOperator(ExpressionType.Assign, Variable, From);
-            initialize.RunAndDropValue();
+            var source = From.Type == typeof(object) ? From : Expression.Convert(From, typeof(object));
+            var assign = Expression.Assign(Variable, source);
+            assign.RunAndDropValue();
         }
 
         public void TakeStep()
         {
-            var addStep = DynamicExpressionBuilder.BuildOperator(ExpressionType.AddAssign, Variable, Step);
-            addStep.RunAndDropValue();
+            var addStep = DynamicExpressionBuilder.BuildOperator(ExpressionType.Add, Variable, Step);
+            var convert = DynamicExpressionBuilder.BuildConvert(addStep, typeof(object));
+            var assign = Expression.Assign(Variable, convert);
+
+            assign.RunAndDropValue();
 
             IsOver = !IsInsideOfInterval(Variable, From, To);
         }

@@ -25,7 +25,7 @@
                 expression = Expression.Convert(expression, typeof(object));
 
             var compiledExpression = Expression.Lambda<Func<object>>(expression)
-                                                .Compile();
+                                               .Compile();
 
             return compiledExpression();
         }
@@ -37,7 +37,13 @@
         /// <param name="expression">The expression with side effects.</param>
         public static void RunAndDropValue(this Expression expression)
         {
-            var value = expression.Calculate();
+            if (expression == null)
+                throw new ArgumentNullException("expression");
+
+            var compiledExpression = Expression.Lambda<Action>(expression)
+                                               .Compile();
+
+            compiledExpression();
         }
 
         /// <summary>
