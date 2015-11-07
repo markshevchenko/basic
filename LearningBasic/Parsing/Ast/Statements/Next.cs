@@ -1,12 +1,12 @@
 ﻿namespace LearningBasic.Parsing.Ast.Statements
 {
-    using System;
-
     public class Next : IStatement
     {
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            throw new NotImplementedException();
+            rte.TakeLastMultilineLoopStep();
+
+            return EvaluateResult.None;
         }
         public override string ToString()
         {

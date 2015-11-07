@@ -17,7 +17,7 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var seedException = Seed.GetExpression(rte.Variables);
-            var seed = seedException.CalculateValue();
+            var seed = seedException.Calculate();
             rte.Randomize((int)seed);
 
             return new EvaluateResult(Messages.RandomizeSeedAccepted, seed);

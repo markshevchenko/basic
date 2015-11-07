@@ -40,7 +40,7 @@
             var lValue = LValue.GetExpression(rte.Variables);
             var assignment = Expression.Assign(lValue, rValue);
 
-            var value = assignment.CalculateValue();
+            var value = assignment.Calculate();
             return new EvaluateResult(value);
         }
 

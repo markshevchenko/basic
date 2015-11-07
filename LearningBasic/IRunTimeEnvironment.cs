@@ -82,5 +82,9 @@
         /// </summary>
         /// <param name="seed">A number used to calcuate a starting value for pseudo-random sequence.</param>
         void Randomize(int seed);
+
+        void StartMultilineLoop(ILoop loop);
+
+        bool TakeLastMultilineLoopStep();
     }
 }

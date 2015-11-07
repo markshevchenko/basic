@@ -7,7 +7,7 @@
     /// <summary>
     /// Implements the Read-Evaluate-Print step-by-step loop.
     /// </summary>
-    public class ReadEvaluatePrintLoop
+    public class ReadEvaluatePrintLoop : ILoop
     {
         private readonly IRunTimeEnvironment rte;
         private readonly ILineParser parser;
@@ -15,7 +15,7 @@
         /// <summary>
         /// Retrieves a <c>Boolean</c> value that indicates whether the specified loop has been terminated.
         /// </summary>
-        public bool IsTerminated { get { return rte.IsClosed; } }
+        public bool IsOver { get { return rte.IsClosed; } }
 
         /// <summary>
         /// Creates an instance of Read-Evaluate-Print loop object.

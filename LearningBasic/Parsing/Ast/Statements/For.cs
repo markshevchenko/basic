@@ -1,10 +1,10 @@
 ﻿namespace LearningBasic.Parsing.Ast.Statements
 {
-    using System;
+    using System.Collections.Generic;
 
     public class For : IStatement
     {
-        public ILValue LoopVariable { get; private set; }
+        public ILValue Variable { get; private set; }
 
         public IExpression From { get; private set; }
 
@@ -12,9 +12,9 @@
 
         public IExpression Step { get; private set; }
 
-        public For(ILValue loopVariable, IExpression from, IExpression to, IExpression step)
+        public For(ILValue variable, IExpression from, IExpression to, IExpression step)
         {
-            LoopVariable = loopVariable;
+            Variable = variable;
             From = from;
             To = to;
             Step = step;
@@ -22,15 +22,33 @@
 
         public virtual EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            throw new NotImplementedException();
+            var loop = CreateForLoop(rte.Variables);
+
+            rte.StartMultilineLoop(loop);
+
+            return EvaluateResult.None;
         }
 
         public override string ToString()
         {
             if (Step == null)
-                return "FOR " + LoopVariable + " = " + From + " TO " + To;
+                return "FOR " + Variable + " = " + From + " TO " + To;
 
-            return "FOR " + LoopVariable + " = " + From + " TO " + To + " STEP " + Step;
+            return "FOR " + Variable + " = " + From + " TO " + To + " STEP " + Step;
+        }
+
+        protected virtual ForLoop CreateForLoop(IDictionary<string, dynamic> variables)
+        {
+            var variable = Variable.GetExpression(variables);
+            var from = From.GetExpression(variables);
+            var to = To.GetExpression(variables);
+
+            if (Step == null)
+                return new ForLoop(variable, from, to);
+
+            var step = Step.GetExpression(variables);
+
+            return new ForLoop(variable, from, to, step);
         }
     }
 }

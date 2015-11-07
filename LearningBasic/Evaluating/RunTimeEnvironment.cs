@@ -10,12 +10,13 @@
     {
         public const string RandomKey = "@Random";
 
+        private readonly Stack<MultilineLoop> multilineLoops;
         private readonly IInputOutput inputOutput;
         private readonly IProgramRepository programRepository;
         private readonly IDictionary<string, dynamic> variables;
 
         /// <inheritdoc />
-        public virtual bool IsClosed { get; private set; }
+        public virtual bool IsClosed { get { return IsDisposed; } }
 
         /// <inheritdoc />
         public virtual bool IsRunning { get { return Runner != null; } }
@@ -58,9 +59,9 @@
             this.programRepository = programRepository;
             this.variables = new Dictionary<string, dynamic>();
             this.variables[RandomKey] = new Random();
+            this.multilineLoops = new Stack<MultilineLoop>();
 
             LastUsedName = null;
-            IsClosed = false;
             IsDisposed = false;
             Lines = new SortedList<int, IStatement>();
         }
@@ -70,13 +71,14 @@
         {
             ThrowIfDisposed();
 
-            IsClosed = true;
+            Dispose();
         }
 
         /// <inheritdoc />
         public virtual void Save(string name)
         {
             ThrowIfDisposed();
+            ThrowIfRunning();
 
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -89,6 +91,7 @@
         public virtual void Load(string name)
         {
             ThrowIfDisposed();
+            ThrowIfRunning();
 
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -102,9 +105,7 @@
         public virtual ProgramResult Run()
         {
             ThrowIfDisposed();
-
-            if (Runner != null)
-                throw new InvalidOperationException(ErrorMessages.ProgramIsRunning);
+            ThrowIfRunning();
 
             Runner = new ProgramRunner(Lines);
             try
@@ -139,9 +140,7 @@
         public virtual void End()
         {
             ThrowIfDisposed();
-
-            if (Runner == null)
-                throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
+            ThrowIfNotRunning();
 
             Runner.Complete();
         }
@@ -150,9 +149,7 @@
         public virtual void Goto(int number)
         {
             ThrowIfDisposed();
-
-            if (Runner == null)
-                throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
+            ThrowIfNotRunning();
 
             Runner.Goto(number);
         }
@@ -163,6 +160,38 @@
             ThrowIfDisposed();
 
             Variables[RandomKey] = new Random(seed);
+        }
+
+        /// <inheritdoc />
+        public void StartMultilineLoop(ILoop loop)
+        {
+            ThrowIfDisposed();
+            ThrowIfNotRunning();
+
+            var multilineLoop = new MultilineLoop(Runner.CurrentLineNumber, loop);
+            multilineLoops.Push(multilineLoop);
+        }
+
+        /// <inheritdoc />
+        public bool TakeLastMultilineLoopStep()
+        {
+            ThrowIfDisposed();
+            ThrowIfNotRunning();
+
+            if (multilineLoops.Count == 0)
+                throw new RunTimeException(ErrorMessages.NextWithoutFor);
+
+            var multilineLoop = multilineLoops.Peek();
+            multilineLoop.TakeStep();
+
+            if (multilineLoop.IsOver)
+            {
+                multilineLoops.Pop();
+                return false;
+            }
+
+            Goto(multilineLoop.StartLineNumber);
+            return true;
         }
 
         /// <inheritdoc />
@@ -189,9 +218,21 @@
                 throw new ObjectDisposedException(GetType().FullName);
         }
 
+        private void ThrowIfRunning()
+        {
+            if (IsRunning)
+                throw new InvalidOperationException(ErrorMessages.ProgramIsRunning);
+        }
+
+        private void ThrowIfNotRunning()
+        {
+            if (!IsRunning)
+                throw new InvalidOperationException(ErrorMessages.ProgramIsNotRunning);
+        }
+
         private void InputOutput_OnBreak(object sender, EventArgs e)
         {
-            if (Runner == null)
+            if (!IsRunning)
                 return;
 
             Runner.Break();

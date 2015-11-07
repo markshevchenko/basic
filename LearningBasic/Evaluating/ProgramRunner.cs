@@ -52,10 +52,16 @@
         }
 
         /// <summary>
+        /// The current line number.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
+        public int CurrentLineNumber { get { return lines.Keys[currentLineIndex]; } }
+
+        /// <summary>
         /// The current statement to <see cref="IStatement.Execute(IRunTimeEnvironment)">evalutate</see>.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
-        public IStatement CurrentStatement { get { return lines[lines.Keys[currentLineIndex]]; } }
+        public IStatement CurrentStatement { get { return lines[CurrentLineNumber]; } }
 
         /// <summary>
         /// Advances the <see cref="ProgramRunner"/> on the next line in order.

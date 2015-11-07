@@ -12,7 +12,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void CalculateValue_WithNull_ThrowsArgumentNullException()
         {
-            var value = ExpressionExtensions.CalculateValue(null);
+            var value = ExpressionExtensions.Calculate(null);
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@
         {
             var constant = Expression.Constant(2);
 
-            var actual = constant.CalculateValue();
+            var actual = constant.Calculate();
 
             Assert.AreEqual(2, actual);
         }

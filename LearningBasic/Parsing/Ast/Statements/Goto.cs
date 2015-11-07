@@ -12,7 +12,7 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var numberExpression = Number.GetExpression(rte.Variables);
-            var number = numberExpression.CalculateValue();
+            var number = numberExpression.Calculate();
 
             rte.Goto((int)number);
 

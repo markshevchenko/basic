@@ -36,7 +36,7 @@
             {
                 readEvaluatePrintLoop.TakeStep();
             }
-            while (!readEvaluatePrintLoop.IsTerminated);
+            while (!readEvaluatePrintLoop.IsOver);
         }
     }
 }

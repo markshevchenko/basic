@@ -29,7 +29,7 @@
             var name = Array.Name;
             var indexesAsObjects = Array.Indexes
                                         .Select(i => i.GetExpression(rte.Variables))
-                                        .Select(e => e.CalculateValue())
+                                        .Select(e => e.Calculate())
                                         .ToArray();
             var indexes = indexesAsObjects.Select(o => (int)o)
                                           .ToArray();

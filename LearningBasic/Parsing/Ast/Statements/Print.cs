@@ -21,7 +21,7 @@
             foreach (var expression in Expressions)
             {
                 var compiled = expression.GetExpression(rte.Variables);
-                var value = compiled.CalculateValue();
+                var value = compiled.Calculate();
                 var valueAsString = value == null ? string.Empty : value.ToString();
                 rte.InputOutput.Write(valueAsString);
             }

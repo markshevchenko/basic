@@ -171,6 +171,9 @@
   <data name="MissingTerminal" xml:space="preserve">
     <value>Missing constant, variable, array, parenthesis, or function call.</value>
   </data>
+  <data name="NextWithoutFor" xml:space="preserve">
+    <value>NEXT statement without FOR statement.</value>
+  </data>
   <data name="PrintInvalidSemicolon" xml:space="preserve">
     <value>You can't specify a semicolon in the PRINT statement without parameters.</value>
   </data>

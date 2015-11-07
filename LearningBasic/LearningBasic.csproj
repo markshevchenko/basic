@@ -55,8 +55,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evaluating\MultilineLoop.cs" />
     <Compile Include="Evaluating\ProgramRunner.cs" />
     <Compile Include="Evaluating\RunTimeException.cs" />
+    <Compile Include="ILoop.cs" />
     <Compile Include="IO\FileProgramRepository.cs" />
     <Compile Include="IO\IOException.cs" />
     <Compile Include="IO\Operation.cs" />
@@ -69,6 +71,7 @@
     </Compile>
     <Compile Include="Parsing\Ast\Associativity.cs" />
     <Compile Include="Parsing\Ast\DynamicExpressionBuilder.cs" />
+    <Compile Include="Parsing\Ast\ForLoop.cs" />
     <Compile Include="Parsing\Ast\Statements\Dim.cs" />
     <Compile Include="Parsing\Ast\Statements\For.cs" />
     <Compile Include="Parsing\Ast\Statements\ForNext.cs" />

@@ -27,7 +27,7 @@
             var right = Right.GetExpression(rte.Variables);
             var rightAsObject = Expression.Convert(right, typeof(object));
             var assignment = Expression.Assign(left, rightAsObject);
-            var value = assignment.CalculateValue();
+            var value = assignment.Calculate();
             return new EvaluateResult(value);
         }
 

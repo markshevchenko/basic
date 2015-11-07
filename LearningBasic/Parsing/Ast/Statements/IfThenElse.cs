@@ -27,7 +27,7 @@
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
             var conditionExpression = Condition.GetExpression(rte.Variables);
-            var condition = (bool)conditionExpression.CalculateValue();
+            var condition = (bool)conditionExpression.Calculate();
 
             if (condition)
                 return Then.Execute(rte);

@@ -223,6 +223,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NEXT statement without FOR statement..
+        /// </summary>
+        internal static string NextWithoutFor {
+            get {
+                return ResourceManager.GetString("NextWithoutFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can&apos;t specify a semicolon in the PRINT statement without parameters..
         /// </summary>
         internal static string PrintInvalidSemicolon {
