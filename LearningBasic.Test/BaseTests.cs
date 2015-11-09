@@ -7,6 +7,7 @@
     using LearningBasic.RunTime;
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Basic;
+    using LearningBasic.Parsing.Code;
     using LearningBasic.Parsing.Code.Expressions;
     using LearningBasic.Parsing.Code.Statements;
     using LearningBasic.Mocks;
@@ -80,6 +81,16 @@
         protected static MockStatement MakeStatement(Action action)
         {
             return new MockStatement(action);
+        }
+
+        protected static IExpression MakeExpression()
+        {
+            return new Constant("123");
+        }
+
+        protected static IDictionary<string, dynamic> MakeVariables()
+        {
+            return new Dictionary<string, dynamic>();
         }
     }
 }

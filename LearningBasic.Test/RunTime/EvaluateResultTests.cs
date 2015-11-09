@@ -11,7 +11,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void EvaluateResult_WithNullMessage_ThrowsArgumentNullException()
         {
-            var result = new EvaluateResult((string)null);
+            var result = new EvaluateResult(null);
         }
 
         [TestMethod]
@@ -43,6 +43,27 @@
         public void Message_OfEmptyEvaluateResult_ThrowsInvalidOperationException()
         {
             var message = EvaluateResult.None.Message;
+        }
+
+        [TestMethod]
+        public void Equals_WithSameMessage_ReturnsTrue()
+        {
+            var expected = new EvaluateResult("avoid " + "interning");
+            var actual = new EvaluateResult("avoid" + " interning");
+
+            var condition = expected.Equals(actual);
+
+            Assert.IsTrue(condition);
+        }
+
+        [TestMethod]
+        public void Equals_WithNull_ReturnsFalse()
+        {
+            var value = new EvaluateResult("");
+
+            var condition = value.Equals(null);
+
+            Assert.IsFalse(condition);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace LearningBasic
+﻿namespace LearningBasic.RunTime
 {
     using System;
     using LearningBasic.IO;
     using LearningBasic.Parsing;
-    using LearningBasic.RunTime;
 
     /// <summary>
     /// Implements the Read-Evaluate-Print step-by-step loop.

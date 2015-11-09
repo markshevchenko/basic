@@ -21,6 +21,12 @@
             compiledValue = Expression.Constant(Value);
         }
 
+        public Constant(object value)
+        {
+            Value = value;
+            compiledValue = Expression.Constant(Value);
+        }
+
         public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
         {
             return compiledValue;

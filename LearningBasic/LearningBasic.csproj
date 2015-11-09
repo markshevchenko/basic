@@ -57,7 +57,7 @@
     <Compile Include="RunTime\IRunTimeEnvironment.cs" />
     <Compile Include="Parsing\ParserException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadEvaluatePrintLoop.cs" />
+    <Compile Include="RunTime\ReadEvaluatePrintLoop.cs" />
     <Compile Include="RunTime\IStatement.cs" />
     <Compile Include="RunTime\MultilineLoop.cs" />
     <Compile Include="RunTime\ProgramResult.cs" />
