@@ -1,9 +1,7 @@
-﻿namespace LearningBasic.Test.Parsing.Ast
+﻿namespace LearningBasic.Parsing.Code
 {
     using System;
-    using LearningBasic.Parsing;
-    using LearningBasic.Parsing.Ast;
-    using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Code.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

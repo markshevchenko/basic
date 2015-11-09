@@ -1,7 +1,8 @@
-﻿namespace LearningBasic.Test.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using LearningBasic.Parsing;
-    using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Basic;
+    using LearningBasic.Parsing.Code.Statements;
+    using LearningBasic.RunTime;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -19,8 +20,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void ReadToken_WithUnexpectedToken_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void ReadToken_WithUnexpectedToken_ThrowsParserException()
         {
             using (var scanner = MakeScanner("PRINT 123"))
             {

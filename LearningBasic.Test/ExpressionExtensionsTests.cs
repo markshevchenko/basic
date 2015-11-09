@@ -1,8 +1,9 @@
-﻿namespace LearningBasic.Test
+﻿namespace LearningBasic
 {
     using System;
     using System.Globalization;
     using System.Linq.Expressions;
+    using LearningBasic.Parsing.Code;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

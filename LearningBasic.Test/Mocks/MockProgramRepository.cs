@@ -1,28 +1,28 @@
-﻿namespace LearningBasic.Test.Mocks
+﻿namespace LearningBasic.Mocks
 {
+    using System;
     using System.Collections.Generic;
     using LearningBasic.IO;
+    using LearningBasic.RunTime;
 
     public class MockProgramRepository : IProgramRepository
     {
-        public const string ValidFileName = "valid file name";
-
-        public IDictionary<int, IStatement> Lines { get; private set; }
-
         public string LastFileName { get; private set; }
 
-        public MockProgramRepository(IDictionary<int, IStatement> lines)
+        public IReadOnlyList<ILine> Lines { get; private set; }
+
+        public MockProgramRepository(IReadOnlyList<ILine> lines)
         {
             Lines = lines;
         }
 
-        public IDictionary<int, IStatement> Load(string name)
+        public IReadOnlyList<ILine> Load(string name)
         {
             LastFileName = name;
             return Lines;
         }
 
-        public void Save(string name, IDictionary<int, IStatement> lines)
+        public void Save(string name, IReadOnlyList<ILine> lines)
         {
             Lines = lines;
             LastFileName = name;

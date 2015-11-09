@@ -1,47 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C72FB842-2608-4A2A-B8BC-83E0C131B9B8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{7E7F3A77-694F-46C8-BCAD-590CB93D6D21}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LearningBasic</RootNamespace>
-    <AssemblyName>LearningBASIC</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <AssemblyName>LearningBasic</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,146 +34,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="ErrorMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluating\MultilineLoop.cs" />
-    <Compile Include="Evaluating\ProgramRunner.cs" />
-    <Compile Include="Evaluating\RunTimeException.cs" />
-    <Compile Include="ILoop.cs" />
-    <Compile Include="IO\FileProgramRepository.cs" />
-    <Compile Include="IO\IOException.cs" />
-    <Compile Include="IO\Operation.cs" />
-    <Compile Include="IProgramRepository.cs" />
-    <Compile Include="LinesExtensions.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Parsing\Ast\Associativity.cs" />
-    <Compile Include="Parsing\Ast\DynamicExpressionBuilder.cs" />
-    <Compile Include="Parsing\Ast\ForLoop.cs" />
-    <Compile Include="Parsing\Ast\Statements\Dim.cs" />
-    <Compile Include="Parsing\Ast\Statements\For.cs" />
-    <Compile Include="Parsing\Ast\Statements\ForNext.cs" />
-    <Compile Include="Parsing\Ast\Statements\IfThenElse.cs" />
-    <Compile Include="Parsing\BasicScannerConditionExtensions.cs" />
-    <Compile Include="Parsing\Ast\BuiltInFunctions.cs" />
-    <Compile Include="ExpressionExtensions.cs" />
-    <Compile Include="Parsing\Ast\Conditions\And.cs" />
-    <Compile Include="Parsing\Ast\Conditions\LessThan.cs" />
-    <Compile Include="Parsing\Ast\Conditions\LessThanOrEqual.cs" />
-    <Compile Include="Parsing\Ast\Conditions\GreaterThanOrEqual.cs" />
-    <Compile Include="Parsing\Ast\Conditions\GreaterThan.cs" />
-    <Compile Include="Parsing\Ast\Conditions\NotEqual.cs" />
-    <Compile Include="Parsing\Ast\Conditions\Equal.cs" />
-    <Compile Include="Parsing\Ast\Conditions\Not.cs" />
-    <Compile Include="Parsing\Ast\Conditions\Xor.cs" />
-    <Compile Include="Parsing\Ast\Conditions\Or.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Add.cs" />
-    <Compile Include="Parsing\Ast\Expressions\ArrayVariable.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Function.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Positive.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Negative.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Power.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Rnd.cs" />
-    <Compile Include="Parsing\Ast\UnaryOperator.cs" />
-    <Compile Include="Parsing\Ast\BinaryOperator.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Constant.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Modulo.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Divide.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Multiply.cs" />
-    <Compile Include="Parsing\Ast\Expressions\ScalarVariable.cs" />
-    <Compile Include="Parsing\Ast\Expressions\Subtract.cs" />
-    <Compile Include="Parsing\Ast\IExpression.cs" />
-    <Compile Include="Parsing\Ast\ILValue.cs" />
-    <Compile Include="Parsing\Ast\Priority.cs" />
-    <Compile Include="Parsing\Ast\Range.cs" />
-    <Compile Include="Parsing\Ast\Statements\End.cs" />
-    <Compile Include="Parsing\Ast\Statements\Goto.cs" />
-    <Compile Include="Parsing\Ast\Statements\Input.cs" />
-    <Compile Include="Parsing\Ast\Statements\Let.cs" />
-    <Compile Include="Parsing\Ast\Statements\List.cs" />
-    <Compile Include="Parsing\Ast\Statements\Load.cs" />
-    <Compile Include="Parsing\Ast\Statements\Next.cs" />
-    <Compile Include="Parsing\Ast\Statements\Print.cs" />
-    <Compile Include="Parsing\Ast\Statements\PrintLine.cs" />
-    <Compile Include="Parsing\Ast\Statements\Quit.cs" />
-    <Compile Include="IAstNode.cs" />
-    <Compile Include="ILine.cs" />
-    <Compile Include="IStatement.cs" />
-    <Compile Include="Parsing\Ast\Line.cs" />
-    <Compile Include="Parsing\Ast\BuiltInOperators.cs" />
-    <Compile Include="IO\ConsoleInputOutput.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
-    <Compile Include="IInputOutput.cs" />
-    <Compile Include="ILineParser.cs" />
-    <Compile Include="IRunTimeEnvironment.cs" />
-    <Compile Include="IScanner.cs" />
-    <Compile Include="IScannerFactory.cs" />
-    <Compile Include="Parsing\Ast\Statements\Randomize.cs" />
-    <Compile Include="Parsing\Ast\Statements\Rem.cs" />
-    <Compile Include="Parsing\Ast\Statements\Remove.cs" />
-    <Compile Include="Parsing\Ast\Statements\Run.cs" />
-    <Compile Include="Parsing\Ast\Statements\Save.cs" />
-    <Compile Include="Parsing\BasicScannerExpressionExtensions.cs" />
-    <Compile Include="Parsing\BasicParser.cs" />
-    <Compile Include="Parsing\BasicScannerStatementExtensions.cs" />
-    <Compile Include="Parsing\ParserException.cs" />
-    <Compile Include="Parsing\ScannerExtensions.cs" />
-    <Compile Include="Parsing\UnexpectedTokenException.cs" />
-    <Compile Include="Evaluating\ReadEvaluatePrintLoop.cs" />
-    <Compile Include="EvaluateResult.cs" />
-    <Compile Include="Evaluating\RunTimeEnvironment.cs" />
-    <Compile Include="Parsing\BasicScannerFactory.cs" />
-    <Compile Include="Parsing\BasicScanner.cs" />
-    <Compile Include="Parsing\BasicTextReaderExtensions.cs" />
-    <Compile Include="Parsing\TextReaderExtensions.cs" />
-    <Compile Include="Parsing\Token.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="ProgramResult.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parsing\UnexpectedCharacterException.cs" />
-    <Compile Include="Parsing\UnexpectedEndOfFileException.cs" />
+    <Compile Include="IO\IInputOutput.cs" />
+    <Compile Include="IO\IProgramRepository.cs" />
+    <Compile Include="Parsing\ILineParser.cs" />
     <Compile Include="Properties\Version.cs" />
+    <Compile Include="RunTime\EvaluateResult.cs" />
+    <Compile Include="RunTime\ILine.cs" />
+    <Compile Include="RunTime\ILoop.cs" />
+    <Compile Include="IO\IOException.cs" />
+    <Compile Include="RunTime\IRunTimeEnvironment.cs" />
+    <Compile Include="Parsing\ParserException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadEvaluatePrintLoop.cs" />
+    <Compile Include="RunTime\IStatement.cs" />
+    <Compile Include="RunTime\MultilineLoop.cs" />
+    <Compile Include="RunTime\ProgramResult.cs" />
+    <Compile Include="RunTime\ProgramRunner.cs" />
+    <Compile Include="RunTime\RunTimeEnvironment.cs" />
+    <Compile Include="RunTime\RunTimeException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Grammar.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ErrorMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

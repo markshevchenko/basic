@@ -6,8 +6,8 @@
     <ProjectGuid>{33C10BE6-F5FD-405F-A0A3-060761E772D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LearningBasic.Test</RootNamespace>
-    <AssemblyName>LearningBASIC unit tests</AssemblyName>
+    <RootNamespace>LearningBasic</RootNamespace>
+    <AssemblyName>LearningBASIC.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,9 +57,8 @@
     <Compile Include="..\LearningBasic\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="EvaluateResultTests.cs" />
-    <Compile Include="Evaluating\ProgramRunnerTests.cs" />
-    <Compile Include="LinesExtensionsTests.cs" />
+    <Compile Include="RunTime\EvaluateResultTests.cs" />
+    <Compile Include="RunTime\ProgramRunnerTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />
     <Compile Include="Mocks\MockProgramRepository.cs" />
     <Compile Include="Mocks\MockStatement.cs" />
@@ -77,13 +76,21 @@
     <Compile Include="Parsing\BasicScannerTests.cs" />
     <Compile Include="Parsing\TextReaderExtensionsTests.cs" />
     <Compile Include="Parsing\BasicTextReaderExtensionsTests.cs" />
-    <Compile Include="Evaluating\RunTimeEnvironmentTests.cs" />
-    <Compile Include="Evaluating\ReadEvaluatePrintLoopTests.cs" />
+    <Compile Include="RunTime\RunTimeEnvironmentTests.cs" />
+    <Compile Include="RunTime\ReadEvaluatePrintLoopTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LearningBasic\LearningBasic.csproj">
+    <ProjectReference Include="..\LearningBasic.Console\LearningBasic.Console.csproj">
       <Project>{c72fb842-2608-4a2a-b8bc-83e0c131b9b8}</Project>
-      <Name>Basic</Name>
+      <Name>LearningBasic.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningBasic.Parsing\LearningBasic.Parsing.csproj">
+      <Project>{deb7253c-d063-4386-97c3-75160495288f}</Project>
+      <Name>LearningBasic.Parsing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningBasic\LearningBasic.csproj">
+      <Project>{7e7f3a77-694f-46c8-bcad-590cb93d6d21}</Project>
+      <Name>LearningBasic</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

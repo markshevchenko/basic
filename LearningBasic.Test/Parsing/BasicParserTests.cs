@@ -1,7 +1,6 @@
-﻿namespace LearningBasic.Test.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using LearningBasic.Parsing;
-    using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Code.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

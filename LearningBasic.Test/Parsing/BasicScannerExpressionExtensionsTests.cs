@@ -1,9 +1,8 @@
-﻿namespace LearningBasic.Test.Parsing
+﻿namespace LearningBasic.Parsing
 {
-    using System;
-    using LearningBasic.Parsing;
-    using LearningBasic.Parsing.Ast;
-    using LearningBasic.Parsing.Ast.Expressions;
+    using LearningBasic.Parsing.Basic;
+    using LearningBasic.Parsing.Code;
+    using LearningBasic.Parsing.Code.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -53,8 +52,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void ReadArray_WithoutLBraket_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void ReadArray_WithoutLBraket_ThrowsParserException()
         {
             var scanner = MakeScanner("foo123 100]");
 
@@ -71,8 +70,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void ReadArray_WithoutRBraket_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void ReadArray_WithoutRBraket_ThrowsParserException()
         {
             var scanner = MakeScanner("foo123[100");
 

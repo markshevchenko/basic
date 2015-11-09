@@ -1,6 +1,5 @@
-﻿namespace LearningBasic.Test.Parsing.Ast.Expressions
+﻿namespace LearningBasic.Parsing.Code.Expressions
 {
-    using LearningBasic.Parsing.Ast.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

@@ -1,5 +1,6 @@
-﻿namespace LearningBasic.Test.Mocks
+﻿namespace LearningBasic.Mocks
 {
+    using LearningBasic.IO;
     using System;
 
     public class MockInputOutput : IInputOutput

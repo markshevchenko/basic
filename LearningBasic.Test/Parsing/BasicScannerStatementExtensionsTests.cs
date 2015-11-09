@@ -1,11 +1,12 @@
-﻿namespace LearningBasic.Test.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using LearningBasic.Parsing;
-    using LearningBasic.Parsing.Ast;
-    using LearningBasic.Parsing.Ast.Conditions;
-    using LearningBasic.Parsing.Ast.Expressions;
-    using LearningBasic.Parsing.Ast.Statements;
+    using LearningBasic.Parsing.Basic;
+    using LearningBasic.Parsing.Code;
+    using LearningBasic.Parsing.Code.Conditions;
+    using LearningBasic.Parsing.Code.Expressions;
+    using LearningBasic.Parsing.Code.Statements;
+    using LearningBasic.RunTime;
 
     [TestClass]
     public class BasicScannerStatementExtensionsTests : BaseTests
@@ -215,8 +216,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadRange_WithIncompleteRange_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadRange_WithIncompleteRange_ThrowsParserException()
         {
             var scanner = MakeScanner("20-");
             Range result;
@@ -281,8 +282,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadLoad_WithoutFileName_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadLoad_WithoutFileName_ThrowsParserException()
         {
             var scanner = MakeScanner("LOAD");
             IStatement result;
@@ -417,8 +418,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadIfThenElse_WithoutThenKeyword_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadIfThenElse_WithoutThenKeyword_ThrowsParserException()
         {
             var scanner = MakeScanner("IF a <> b PRINT a");
             IStatement result;
@@ -447,8 +448,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadDim_WithoutArray_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadDim_WithoutArray_ThrowsParserException()
         {
             var scanner = MakeScanner("DIM 123");
             IStatement result;
@@ -503,8 +504,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadFor_WithStatementsWithoutNext_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithStatementsWithoutNext_ThrowsParserException()
         {
             var scanner = MakeScanner("FOR I = 1 TO 10 PRINT I");
             IStatement result;
@@ -523,8 +524,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadFor_WithoutEq_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutEq_ThrowsParserException()
         {
             var scanner = MakeScanner("FOR I 1 TO 10 PRINT I NEXT");
             IStatement result;
@@ -543,8 +544,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void TryReadFor_WithoutTo_ThrowsUnexpectedTokenException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadFor_WithoutTo_ThrowsParserException()
         {
             var scanner = MakeScanner("FOR I = 1 10 PRINT I NEXT");
             IStatement result;

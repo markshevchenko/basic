@@ -10,6 +10,7 @@
 
 namespace LearningBasic {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace LearningBasic {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LearningBasic.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LearningBasic.ErrorMessages", typeof(ErrorMessages).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,173 +62,20 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t load file &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Label {0} is not found..
         /// </summary>
-        internal static string CantLoadFile {
+        internal static string LabelNotFound {
             get {
-                return ResourceManager.GetString("CantLoadFile", resourceCulture);
+                return ResourceManager.GetString("LabelNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t parse line number &apos;{0}&apos;..
+        ///   Looks up a localized string similar to No more source lines..
         /// </summary>
-        internal static string CantParseLineNumber {
+        internal static string NoMoreLines {
             get {
-                return ResourceManager.GetString("CantParseLineNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t save empty program..
-        /// </summary>
-        internal static string CantSaveEmptyProgram {
-            get {
-                return ResourceManager.GetString("CantSaveEmptyProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t save file &apos;{0}&apos;..
-        /// </summary>
-        internal static string CantSaveFile {
-            get {
-                return ResourceManager.GetString("CantSaveFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must specify at least one variable in the INPUT statement..
-        /// </summary>
-        internal static string InputEmptyVariableList {
-            get {
-                return ResourceManager.GetString("InputEmptyVariableList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid list of variables in the INPUT statement..
-        /// </summary>
-        internal static string InputInvalidVariableList {
-            get {
-                return ResourceManager.GetString("InputInvalidVariableList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid type or count of parameters..
-        /// </summary>
-        internal static string InvalidParameters {
-            get {
-                return ResourceManager.GetString("InvalidParameters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The line number {0} is not found..
-        /// </summary>
-        internal static string LineNumberNotFound {
-            get {
-                return ResourceManager.GetString("LineNumberNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The line number must belong to the range of {0} to {1}..
-        /// </summary>
-        internal static string LineNumberOutOfRange {
-            get {
-                return ResourceManager.GetString("LineNumberOutOfRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing array&apos;s dimensions and bounds..
-        /// </summary>
-        internal static string MissingArray {
-            get {
-                return ResourceManager.GetString("MissingArray", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing assignment..
-        /// </summary>
-        internal static string MissingAssignment {
-            get {
-                return ResourceManager.GetString("MissingAssignment", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing condition..
-        /// </summary>
-        internal static string MissingCondition {
-            get {
-                return ResourceManager.GetString("MissingCondition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing expression..
-        /// </summary>
-        internal static string MissingExpression {
-            get {
-                return ResourceManager.GetString("MissingExpression", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing file name..
-        /// </summary>
-        internal static string MissingFileName {
-            get {
-                return ResourceManager.GetString("MissingFileName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing variable or array..
-        /// </summary>
-        internal static string MissingLValue {
-            get {
-                return ResourceManager.GetString("MissingLValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing relation operator =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=..
-        /// </summary>
-        internal static string MissingRelationOperator {
-            get {
-                return ResourceManager.GetString("MissingRelationOperator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing statement..
-        /// </summary>
-        internal static string MissingStatement {
-            get {
-                return ResourceManager.GetString("MissingStatement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing constant, variable, array, parenthesis, or function call..
-        /// </summary>
-        internal static string MissingTerminal {
-            get {
-                return ResourceManager.GetString("MissingTerminal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NEXT statement without FOR statement..
-        /// </summary>
-        internal static string NextWithoutFor {
-            get {
-                return ResourceManager.GetString("NextWithoutFor", resourceCulture);
+                return ResourceManager.GetString("NoMoreLines", resourceCulture);
             }
         }
         
@@ -241,7 +89,7 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The program is not running..
+        ///   Looks up a localized string similar to The program is not running now..
         /// </summary>
         internal static string ProgramIsNotRunning {
             get {
@@ -259,15 +107,6 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing range in REMOVE statement..
-        /// </summary>
-        internal static string RemoveMissingRange {
-            get {
-                return ResourceManager.GetString("RemoveMissingRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Run-time error occured: {0}.
         /// </summary>
         internal static string RunTimeErrorOccured {
@@ -277,65 +116,11 @@ namespace LearningBasic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Too many argument of the &apos;{0}&apos; function: {1}..
+        ///   Looks up a localized string similar to NEXT statement without FOR statement..
         /// </summary>
-        internal static string TooManyArguments {
+        internal static string UnexpectedEndOfLoop {
             get {
-                return ResourceManager.GetString("TooManyArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unexpected character &apos;{0}&apos;..
-        /// </summary>
-        internal static string UnexpectedCharacter {
-            get {
-                return ResourceManager.GetString("UnexpectedCharacter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unexpected end of file..
-        /// </summary>
-        internal static string UnexpectedEndOfFile {
-            get {
-                return ResourceManager.GetString("UnexpectedEndOfFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Token &apos;{0}&apos; is expected, token &apos;{1}&apos; is read actually..
-        /// </summary>
-        internal static string UnexpectedToken {
-            get {
-                return ResourceManager.GetString("UnexpectedToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unrecognized statement to compilation: &apos;{0}&apos;..
-        /// </summary>
-        internal static string UnrecognizedStatement {
-            get {
-                return ResourceManager.GetString("UnrecognizedStatement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Array dimensions should be 1, 2, 3, or 4..
-        /// </summary>
-        internal static string UnsupportedArrayDimension {
-            get {
-                return ResourceManager.GetString("UnsupportedArrayDimension", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The size of any dimension of an array can&apos;be 0..
-        /// </summary>
-        internal static string ZeroArraySize {
-            get {
-                return ResourceManager.GetString("ZeroArraySize", resourceCulture);
+                return ResourceManager.GetString("UnexpectedEndOfLoop", resourceCulture);
             }
         }
     }

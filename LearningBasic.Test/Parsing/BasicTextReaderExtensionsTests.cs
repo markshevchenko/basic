@@ -1,7 +1,7 @@
-﻿namespace LearningBasic.Test.Parsing
+﻿namespace LearningBasic.Parsing
 {
     using System.Text;
-    using LearningBasic.Parsing;
+    using LearningBasic.Parsing.Basic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -204,7 +204,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedEndOfFileException))]
+        [ExpectedException(typeof(ParserException))]
         public void TryReadString_WithoutClosingQuote_ThrowsUnexpectedEndOfFileException()
         {
             using (var reader = MakeReader("\" a string example "))
@@ -301,8 +301,8 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedCharacterException))]
-        public void TryReadIntegerOrFloatNumber_WithoutFractionalPart_ThrowsUnexpectedCharacterException()
+        [ExpectedException(typeof(ParserException))]
+        public void TryReadIntegerOrFloatNumber_WithoutFractionalPart_ThrowsParserException()
         {
             using (var reader = MakeReader("3.abc"))
             {

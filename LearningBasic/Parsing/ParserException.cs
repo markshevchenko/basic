@@ -1,12 +1,16 @@
 ﻿namespace LearningBasic.Parsing
 {
     using System;
+#if !PORTABLE
     using System.Runtime.Serialization;
+#endif
 
     /// <summary>
     /// The exception tha is thrown when parsing error occured.
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class ParserException : Exception
     {
         /// <inheritdoc />
@@ -20,13 +24,14 @@
         { }
 
         /// <inheritdoc />
-        public ParserException(string message, Exception innerException)
-            : base(message, innerException)
+        public ParserException(string message, Exception inner)
+            : base(message, inner)
         { }
 
-        /// <inheritdoc />
+#if !PORTABLE
         protected ParserException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         { }
+#endif
     }
 }
