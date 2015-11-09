@@ -23,6 +23,16 @@
         }
 
         [TestMethod]
+        public void ToString_OfNonEmptyEvaluateResult_ReturnsMessage()
+        {
+            var result = new EvaluateResult("avoid the " + "interning");
+
+            var actual = result.ToString();
+
+            Assert.AreEqual("avoid the interning", actual);
+        }
+
+        [TestMethod]
         public void EvaluateResult_WithMessage_IsNotNone()
         {
             var result = new EvaluateResult("message");
@@ -62,6 +72,26 @@
             var value = new EvaluateResult("");
 
             var condition = value.Equals(null);
+
+            Assert.IsFalse(condition);
+        }
+
+        public void OperatorEqual_WithSameMessages_ReturnsTrue()
+        {
+            var expected = new EvaluateResult("avoid " + "interning");
+            var actual = new EvaluateResult("avoid" + " interning");
+
+            var condition = expected == actual;
+
+            Assert.IsTrue(condition);
+        }
+
+        public void OperatorNotEqual_WithSameMessages_ReturnsFalse()
+        {
+            var expected = new EvaluateResult("avoid " + "interning");
+            var actual = new EvaluateResult("avoid" + " interning");
+
+            var condition = expected != actual;
 
             Assert.IsFalse(condition);
         }

@@ -83,6 +83,11 @@
             return new MockStatement(action);
         }
 
+        protected static MockStatement MakeStatement(EvaluateResult result)
+        {
+            return new MockStatement(result);
+        }
+
         protected static IExpression MakeExpression()
         {
             return new Constant("123");
@@ -91,6 +96,11 @@
         protected static IDictionary<string, dynamic> MakeVariables()
         {
             return new Dictionary<string, dynamic>();
+        }
+
+        protected static MockLoop MakeLoop(int counter)
+        {
+            return new MockLoop(counter);
         }
     }
 }

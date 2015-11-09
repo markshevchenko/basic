@@ -57,6 +57,7 @@
     <Compile Include="..\LearningBasic\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
+    <Compile Include="Mocks\MockLoop.cs" />
     <Compile Include="Parsing\Basic\ScannerConditionExtensionsTests.cs" />
     <Compile Include="Parsing\Code\Conditions\AndTests.cs" />
     <Compile Include="Parsing\Code\Conditions\GreaterThanOrEqualTests.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Parsing\Basic\TextReaderExtensionsTests.cs" />
     <Compile Include="RunTime\RunTimeEnvironmentTests.cs" />
     <Compile Include="RunTime\ReadEvaluatePrintLoopTests.cs" />
+    <Compile Include="RunTime\MultilineLoopTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningBasic.Console\LearningBasic.Console.csproj">

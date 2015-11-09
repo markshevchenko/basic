@@ -96,7 +96,7 @@
         /// This method takes a decision checking whether the <see cref="ILine.Label"/> is <c>null</c> or empty.
         /// If you want a different strategy, you can override the method in an inheritor class.
         /// </remarks>
-        protected virtual bool DoEvaluateImmediately(ILine line)
+        protected internal virtual bool DoEvaluateImmediately(ILine line)
         {
             if (line == null)
                 throw new ArgumentNullException("line");
@@ -104,7 +104,7 @@
             return string.IsNullOrEmpty(line.Label);
         }
 
-        private EvaluateResult Evaluate(IStatement statement)
+        internal EvaluateResult Evaluate(IStatement statement)
         {
             try
             {

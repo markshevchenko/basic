@@ -3,10 +3,31 @@
     using LearningBasic.Parsing;
     using LearningBasic.Parsing.Code.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
 
     [TestClass]
     public class ReadEvaluatePrintLoopTests : BaseTests
     {
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadEvaluatePrintLoop_WithNullRte_ThrowsArgumentNullException()
+        {
+            IRunTimeEnvironment rte = null;
+            ILineParser parser = MakeParser();
+
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadEvaluatePrintLoop_WithNullParser_ThrowsArgumentNullException()
+        {
+            IRunTimeEnvironment rte = MakeRunTimeEnvironment("PRINT \"Windows\";");
+            ILineParser parser = null;
+
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+        }
+
         [TestMethod]
         public void Read_WithPrintStatement_ReturnsParsedPrintStatement()
         {
@@ -73,7 +94,71 @@
             repl.Print(EvaluateResult.None);
 
             Assert.AreEqual("still message", inputOutput.LastWritten);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DoEvaluateImmediately_WithNull_ThrowsArgumentNullException()
+        {
+            var parser = MakeParser();
+            var inputOutput = MakeInputOutput();
+            var rte = MakeRunTimeEnvironment(inputOutput);
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            var condition = repl.DoEvaluateImmediately(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(RunTimeException))]
+        public void Evaluate_WithExceptedStatement_ThrowsRunTimeException()
+        {
+            var parser = MakeParser();
+            var inputOutput = MakeInputOutput();
+            var rte = MakeRunTimeEnvironment(inputOutput);
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            var statement = MakeStatement(() => { throw new Exception(); });
+
+            repl.Evaluate(statement);
+
+            var condition = repl.DoEvaluateImmediately(null);
+        }
+
+        [TestMethod]
+        public void Evaluate_WithResultedStatement_ReturnsResult()
+        {
+            var parser = MakeParser();
+            var inputOutput = MakeInputOutput();
+            var rte = MakeRunTimeEnvironment(inputOutput);
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            var statement = MakeStatement(new EvaluateResult("message"));
+
+            var result = repl.Evaluate(statement);
+
+            Assert.AreEqual("message", result.Message);
+        }
+
+        [TestMethod]
+        public void IsOver_AfterCreation_IsFalse()
+        {
+            var parser = MakeParser();
+            var rte = MakeRunTimeEnvironment("PRINT \"Windows\";");
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            Assert.IsFalse(repl.IsOver);
+        }
+
+        [TestMethod]
+        public void IsOver_WhenRteClosed_IsTrue()
+        {
+            var parser = MakeParser();
+            var rte = MakeRunTimeEnvironment("PRINT \"Windows\";");
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            rte.Close();
+
+            Assert.IsTrue(repl.IsOver);
         }
     }
 }
