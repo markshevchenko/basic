@@ -6,17 +6,17 @@
     using LearningBasic.RunTime;
 
     /// <summary>
-    /// Implements BASIC per-line parser.
+    /// Implements BASIC-specific parser.
     /// </summary>
-    public class BasicParser : ILineParser
+    public class Parser : ILineParser
     {
         private readonly IScannerFactory<Token> scannerFactory;
 
         /// <summary>
-        /// Initializes an instance of the <see cref="BasicParser"/> with the specified scanner factory.
+        /// Initializes an instance of the <see cref="Parser"/> with the specified scanner factory.
         /// </summary>
         /// <param name="scannerFactory">The factory of BASIC scanners.</param>
-        public BasicParser(IScannerFactory<Token> scannerFactory)
+        public Parser(IScannerFactory<Token> scannerFactory)
         {
             if (scannerFactory == null)
                 throw new ArgumentNullException("scannerFactory");
@@ -51,10 +51,10 @@
 
         private static Line ReadStatementWithLineNumber(IScanner<Token> scanner, string lineNumber)
         {
-            if (scanner.TryReadToken(Token.Next))
-                return new Line(lineNumber, new Next());
+            IStatement statement;
+            if (!scanner.TryReadToken(Token.Next, () => new Next(), out statement))
+                statement = scanner.ReadStatementExcludingNext();
 
-            var statement = scanner.ReadStatementExcludingNext();
             return new Line(lineNumber, statement);
         }
 

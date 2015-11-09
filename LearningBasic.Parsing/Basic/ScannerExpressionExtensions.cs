@@ -5,7 +5,10 @@
     using LearningBasic.Parsing.Code;
     using LearningBasic.Parsing.Code.Expressions;
 
-    public static class BasicScannerExpressionExtensions
+    /// <summary>
+    /// Implements extension methods to parse BASIC expressions.
+    /// </summary>
+    public static class ScannerExpressionExtensions
     {
         public static ILValue ReadLValue(this IScanner<Token> scanner)
         {

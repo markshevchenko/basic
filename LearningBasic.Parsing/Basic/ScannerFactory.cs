@@ -3,14 +3,14 @@
     using System.IO;
 
     /// <summary>
-    /// Implements BASIC scanner factory.
+    /// Implements BASIC-specific scanner factory.
     /// </summary>
-    public class BasicScannerFactory : IScannerFactory<Token>
+    public class ScannerFactory : IScannerFactory<Token>
     {
         /// <inheritdoc />
         public IScanner<Token> Create(TextReader inputStream)
         {
-            return new BasicScanner(inputStream);
+            return new Scanner(inputStream);
         }
     }
 }

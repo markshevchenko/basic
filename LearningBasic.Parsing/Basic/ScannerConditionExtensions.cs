@@ -3,7 +3,10 @@
     using LearningBasic.Parsing.Code;
     using LearningBasic.Parsing.Code.Conditions;
 
-    public static class BasicScannerConditionExtensions
+    /// <summary>
+    /// Implements extension methods to parse BASIC conditions (comparisons and logical expressions).
+    /// </summary>
+    public static class ScannerConditionExtensions
     {
         public static IExpression ReadCondition(this IScanner<Token> scanner)
         {

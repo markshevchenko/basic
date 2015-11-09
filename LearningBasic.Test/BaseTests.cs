@@ -19,16 +19,16 @@
             return new StringReader(inputString);
         }
 
-        protected static BasicScanner MakeScanner(string inputString)
+        protected static Scanner MakeScanner(string inputString)
         {
             var reader = MakeReader(inputString);
 
-            return new BasicScanner(reader);
+            return new Scanner(reader);
         }
 
-        protected static BasicParser MakeParser()
+        protected static Parser MakeParser()
         {
-            return new BasicParser(new BasicScannerFactory());
+            return new Parser(new ScannerFactory());
         }
 
         protected static MockInputOutput MakeInputOutput()

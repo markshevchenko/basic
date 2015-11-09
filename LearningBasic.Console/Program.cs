@@ -10,8 +10,8 @@
         private static void Main(string[] args)
         {
             var inputOutput = new ConsoleInputOutput();
-            var scannerFactory = new BasicScannerFactory();
-            var parser = new BasicParser(scannerFactory);
+            var scannerFactory = new ScannerFactory();
+            var parser = new Parser(scannerFactory);
             var programRepository = new FileProgramRepository(parser);
 
             using (var rte = new RunTimeEnvironment(inputOutput, programRepository))

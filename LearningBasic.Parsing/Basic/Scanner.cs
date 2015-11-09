@@ -5,9 +5,9 @@
     using System.Text;
 
     /// <summary>
-    /// Implements BASIC scanner.
+    /// Implements BASIC-specific scanner.
     /// </summary>
-    public class BasicScanner : IScanner<Token>
+    public class Scanner : IScanner<Token>
     {
         /// <summary>
         /// Enumerates reading states.
@@ -19,7 +19,7 @@
             Comment,
         };
 
-        private readonly TextReader inputStream;
+        private readonly TextReader reader;
         private Token currentToken;
         private string currentText;
 
@@ -56,16 +56,16 @@
         }
 
         /// <summary>
-        /// Creates the instance of the BASIC scanner.
+        /// Initializes an instance of the <see cref="Scanner"/> class with the specified text reader.
         /// </summary>
-        /// <param name="inputStream">The input stream.</param>
-        /// <remarks>The input stream will be disposed at the scanner's <see cref="Dispose">dispose</see>.</remarks>
-        public BasicScanner(TextReader inputStream)
+        /// <param name="reader">The text reader.</param>
+        /// <remarks>The textreader will be disposed at the scanner's <see cref="Dispose">dispose</see>.</remarks>
+        public Scanner(TextReader reader)
         {
-            if (inputStream == null)
+            if (reader == null)
                 throw new ArgumentNullException("inputStream");
 
-            this.inputStream = inputStream;
+            this.reader = reader;
 
             Initialize();
         }
@@ -102,35 +102,35 @@
 
         private Token ReadToken(StringBuilder target)
         {
-            inputStream.SkipWhile(char.IsWhiteSpace);
+            reader.SkipWhile(char.IsWhiteSpace);
 
-            if (inputStream.IsEof())
+            if (reader.IsEof())
                 return Token.Eof;
 
             Token token;
             if (TryReadBasicToken(target, out token))
                 return token;
 
-            var nextCharacter = (char)inputStream.Peek();
+            var nextCharacter = (char)reader.Peek();
             var message = string.Format(ErrorMessages.UnexpectedCharacter, nextCharacter);
             throw new ParserException(message);
         }
 
         private bool TryReadBasicToken(StringBuilder target, out Token token)
         {
-            if (inputStream.TryReadPunctuationMark(target, out token))
+            if (reader.TryReadPunctuationMark(target, out token))
                 return true;
 
-            if (inputStream.TryReadOperator(target, out token))
+            if (reader.TryReadOperator(target, out token))
                 return true;
 
-            if (inputStream.TryReadString(target, out token))
+            if (reader.TryReadString(target, out token))
                 return true;
 
-            if (inputStream.TryReadIntegerOrFloatNumber(target, out token))
+            if (reader.TryReadIntegerOrFloatNumber(target, out token))
                 return true;
 
-            if (inputStream.TryReadIdentifierOrKeyword(target, out token))
+            if (reader.TryReadIdentifierOrKeyword(target, out token))
                 return true;
 
             return false;
@@ -138,8 +138,8 @@
 
         private Token ReadComment(StringBuilder target)
         {
-            inputStream.SkipWhile(char.IsWhiteSpace);
-            inputStream.TakeWhile(c => true, target);
+            reader.SkipWhile(char.IsWhiteSpace);
+            reader.TakeWhile(c => true, target);
 
             return Token.Comment;
         }
@@ -161,7 +161,7 @@
                 return;
 
             if (isDisposing)
-                inputStream.Dispose();
+                reader.Dispose();
 
             IsDisposed = true;
         }

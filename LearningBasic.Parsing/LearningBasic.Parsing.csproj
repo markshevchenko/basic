@@ -97,13 +97,13 @@
     <Compile Include="Code\Statements\Run.cs" />
     <Compile Include="Code\Statements\Save.cs" />
     <Compile Include="Code\UnaryOperator.cs" />
-    <Compile Include="Basic\BasicParser.cs" />
-    <Compile Include="Basic\BasicScanner.cs" />
-    <Compile Include="Basic\BasicScannerConditionExtensions.cs" />
-    <Compile Include="Basic\BasicScannerExpressionExtensions.cs" />
-    <Compile Include="Basic\BasicScannerFactory.cs" />
-    <Compile Include="Basic\BasicScannerStatementExtensions.cs" />
-    <Compile Include="Basic\BasicTextReaderExtensions.cs" />
+    <Compile Include="Basic\Parser.cs" />
+    <Compile Include="Basic\Scanner.cs" />
+    <Compile Include="Basic\ScannerConditionExtensions.cs" />
+    <Compile Include="Basic\ScannerExpressionExtensions.cs" />
+    <Compile Include="Basic\ScannerFactory.cs" />
+    <Compile Include="Basic\ScannerStatementExtensions.cs" />
+    <Compile Include="Basic\TextReaderExtensions.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

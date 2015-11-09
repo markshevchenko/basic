@@ -5,9 +5,9 @@
     using LearningBasic.RunTime;
 
     /// <summary>
-    /// Implements methods to parse BASIC statements and to build Abstract Syntax Tree's nodes.
+    /// Implements extension methods to parse BASIC statements.
     /// </summary>
-    public static class BasicScannerStatementExtensions
+    public static class ScannerStatementExtensions
     {
         public static IStatement ReadStatementExcludingNext(this IScanner<Token> scanner)
         {

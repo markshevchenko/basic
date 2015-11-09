@@ -5,7 +5,10 @@
     using System.IO;
     using System.Text;
 
-    public static class BasicTextReaderExtensions
+    /// <summary>
+    /// Implements <see cref="TextReader"/> extension methods to describe BASIC-specific lexical rules.
+    /// </summary>
+    public static class TextReaderExtensions
     {
         public static bool TryReadPunctuationMark(this TextReader inputStream, StringBuilder text, out Token token)
         {
