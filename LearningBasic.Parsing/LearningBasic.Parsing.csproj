@@ -88,6 +88,7 @@
     <Compile Include="Code\Statements\List.cs" />
     <Compile Include="Code\Statements\Load.cs" />
     <Compile Include="Code\Statements\Next.cs" />
+    <Compile Include="Code\Statements\Nop.cs" />
     <Compile Include="Code\Statements\Print.cs" />
     <Compile Include="Code\Statements\PrintLine.cs" />
     <Compile Include="Code\Statements\Quit.cs" />

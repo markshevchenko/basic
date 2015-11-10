@@ -73,6 +73,11 @@
             return new RunTimeEnvironment(inputOutput, programRepository);
         }
 
+        protected static RunTimeEnvironment MakeRunTimeEnvironment(IProgramRepository programRepository)
+        {
+            return new RunTimeEnvironment(MakeInputOutput(), programRepository);
+        }
+
         protected static MockStatement MakeStatement()
         {
             return new MockStatement();

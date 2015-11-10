@@ -7,7 +7,7 @@
     /// </summary>
     public class MultilineLoop : ILoop
     {
-        private readonly ILoop decoratedLoop;
+        internal ILoop DecoratedLoop { get; private set; }
 
         /// <summary>
         /// Gets a start line of the multiline loop.
@@ -15,7 +15,7 @@
         public ILine StartLine { get; private set; }
 
         /// <inheritdoc />
-        public bool IsOver {  get { return decoratedLoop.IsOver; } }
+        public bool IsOver {  get { return DecoratedLoop.IsOver; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultilineLoop"/> with the start line number and the decorated loop.
@@ -31,13 +31,13 @@
                 throw new ArgumentNullException("loop");
 
             StartLine = startLine;
-            decoratedLoop = loop;
+            DecoratedLoop = loop;
         }
 
         /// <inheritdoc />
         public void TakeStep()
         {
-            decoratedLoop.TakeStep();
+            DecoratedLoop.TakeStep();
         }
     }
 

@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents the BASIC line that is a statement with a possible line number.
     /// </summary>
-    public class Line : ILine, IComparable<Line>
+    public class Line : ILine, IComparable, IComparable<Line>
     {
         public const int MinNumber = 1;
         public const int MaxNumber = 99999;
@@ -43,7 +43,9 @@
         /// <summary>
         /// Initializes an instance of <see cref="Line"/> with the specified label and statement.
         /// </summary>
-        /// <param name="label">The label of line.</param>
+        /// <param name="label">
+        /// The label of the line, i.e. string representation of the number of the line.
+        /// </param>
         /// <param name="statement">The statement.</param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="label"/> or
@@ -59,6 +61,24 @@
 
             Label = label;
             Number = Parse(label);
+            Statement = statement;
+        }
+
+        /// <summary>
+        /// Initializes an instance of <see cref="Line"/> with the specified number and statement.
+        /// </summary>
+        /// <param name="number">The number of the line.</param>
+        /// <param name="statement">The statement.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="statement"/> is <c>null</c>.
+        /// </exception>
+        public Line(int number, IStatement statement)
+        {
+            if (statement == null)
+                throw new ArgumentNullException("statement");
+
+            Label = number.ToString(CultureInfo.InvariantCulture);
+            Number = number;
             Statement = statement;
         }
 
@@ -118,6 +138,17 @@
                 return -1;
 
             return 0;
+        }
+
+        /// <inheritdoc />
+        public int CompareTo(object obj)
+        {
+            var line = obj as Line;
+
+            if (line == null)
+                return -1;
+
+            return CompareTo(line);
         }
     }
 }

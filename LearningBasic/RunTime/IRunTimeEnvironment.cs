@@ -42,18 +42,30 @@
         IReadOnlyList<ILine> Lines { get; }
 
         /// <summary>
+        /// Searches the entire sorted list of lines for a specified line and returns
+        /// zero-based index of the line.
+        /// </summary>
+        /// <param name="line">The line to locate.</param>
+        /// <returns>
+        /// The zero-based index of a line int sorted list, if item is found; otherwise,
+        /// a negative number that is the bitwise complement of the index of the next
+        /// line that is larger than a line or, if there is no larger line, the bitwise
+        /// complement of the count of <see cref="Lines"/>.
+        /// </returns>
+        int BinarySearch(ILine line);
+
+        /// <summary>
         /// Adds the specified line to the program, or updates existing line, if it has the same label.
         /// </summary>
         /// <param name="line">The program line.</param>
         void AddOrUpdate(ILine line);
 
         /// <summary>
-        /// Removes the lines belonging the specified range.
+        /// Removes a range of element form the list of lines.
         /// </summary>
-        /// <param name="from">The first line to remove.</param>
-        /// <param name="to">The last line to remove.</param>
-        /// <returns>The count of lines removed actually.</returns>
-        int Remove(ILine from, ILine to);
+        /// <param name="index">The zero-based starting index of the range of lines to remove.</param>
+        /// <param name="count">The number of lines to remove.</param>
+        void RemoveRange(int index, int count);
 
         /// <summary>
         /// Closes the run-time environment.
@@ -100,7 +112,8 @@
         /// Starts the loop.
         /// </summary>
         /// <param name="loop">The loop to repeated running.</param>
-        void StartLoop(ILoop loop);
+        /// <returns><c>true</c> if new loop started, <c>false</c> if the loop is already started.</returns>
+        bool StartLoop(ILoop loop);
 
         /// <summary>
         /// Gets a value indicating whether the last <see cref="StartLoop(ILoop)">started loop</see> is over.

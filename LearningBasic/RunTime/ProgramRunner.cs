@@ -47,7 +47,7 @@
         }
 
         /// <summary>
-        ///  The running line.
+        /// The running line.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">The <see cref="ProgramRunner"/> is not in running state.</exception>
         public ILine RunningLine { get { return lines[runningLineIndex]; } }
@@ -127,6 +127,16 @@
         {
             runningLineIndex = lines.Count;
             executionOrder = ExecutionOrder.ArbitraryLine;
+        }
+
+        /// <summary>
+        /// Executes the statement of the <see cref="RunningLine"/>.
+        /// </summary>
+        /// <param name="rte">The run-time environment.</param>
+        /// <returns>The result of the statement.</returns>
+        public EvaluateResult ExecuteCurrentStatement(IRunTimeEnvironment rte)
+        {
+            return RunningLine.Statement.Execute(rte);
         }
     }
 }

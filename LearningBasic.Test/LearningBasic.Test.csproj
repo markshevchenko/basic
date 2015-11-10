@@ -69,6 +69,7 @@
     <Compile Include="Parsing\Code\Conditions\GreaterThanTests.cs" />
     <Compile Include="Parsing\Code\Conditions\LessThanOrEqualTests.cs" />
     <Compile Include="Parsing\Code\Conditions\XorTests.cs" />
+    <Compile Include="RteLoop.cs" />
     <Compile Include="RunTime\EvaluateResultTests.cs" />
     <Compile Include="RunTime\ProgramRunnerTests.cs" />
     <Compile Include="Mocks\MockInputOutput.cs" />

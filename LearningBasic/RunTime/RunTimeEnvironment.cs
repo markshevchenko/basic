@@ -12,7 +12,6 @@
     {
         public const string RandomKey = "@Random";
 
-        private readonly Stack<MultilineLoop> stackOfLoops;
         private readonly IInputOutput inputOutput;
         private readonly IProgramRepository programRepository;
         private readonly Dictionary<string, dynamic> variables;
@@ -54,6 +53,11 @@
         public ProgramRunner Runner { get; private set; }
 
         /// <summary>
+        /// The stack of multiline loops.
+        /// </summary>
+        internal Stack<MultilineLoop> StackOfLoops { get; private set; }
+
+        /// <summary>
         /// Creates an instance of <see cref="RunTimeEnvironment"/>.
         /// </summary>
         /// <param name="inputOutput">The input/output object.</param>
@@ -71,16 +75,34 @@
             this.programRepository = programRepository;
             this.variables = new Dictionary<string, dynamic>();
             this.variables[RandomKey] = new Random();
-            this.stackOfLoops = new Stack<MultilineLoop>();
 
             LastUsedName = null;
             IsDisposed = false;
             Lines = new List<ILine>();
+            StackOfLoops = new Stack<MultilineLoop>();
+        }
+
+        /// <inheritdoc />
+        public int BinarySearch(ILine line)
+        {
+            if (line == null)
+                throw new ArgumentNullException("line");
+
+            if (string.IsNullOrEmpty(line.Label))
+                throw new ArgumentException(ErrorMessages.EmptyLabel, "line");
+
+            return Lines.BinarySearch(line);
         }
 
         /// <inheritdoc />
         public void AddOrUpdate(ILine line)
         {
+            if (line == null)
+                throw new ArgumentNullException("line");
+
+            if (string.IsNullOrEmpty(line.Label))
+                throw new ArgumentException(ErrorMessages.EmptyLabel, "line");
+
             var index = Lines.BinarySearch(line);
 
             if (index < 0)
@@ -89,21 +111,11 @@
                 Lines[index] = line;
         }
 
+
         /// <inheritdoc />
-        public int Remove(ILine from, ILine to)
+        public void RemoveRange(int index, int count)
         {
-            var fromIndex = Lines.BinarySearch(from);
-            if (fromIndex < 0)
-                fromIndex = ~fromIndex;
-
-            var toIndex = Lines.BinarySearch(to);
-            if (toIndex < 0)
-                toIndex = ~toIndex;
-
-            var count = toIndex - fromIndex + 1;
-            Lines.RemoveRange(fromIndex, count);
-
-            return count;
+            Lines.RemoveRange(index, count);
         }
 
         /// <inheritdoc />
@@ -147,28 +159,36 @@
             ThrowIfDisposed();
             ThrowIfRunning();
 
-            Runner = new ProgramRunner(Lines);
+            StartRun();
             try
             {
-                return Run(Runner);
+                return TakeRunSteps();
             }
             finally
             {
-                Runner = null;
+                StopRun();
             }
         }
 
-        private ProgramResult Run(ProgramRunner programRunner)
+        protected virtual internal void StartRun()
         {
-            while (programRunner.MoveNext())
-            {
-                programRunner.RunningLine.Statement.Execute(this);
-            }
+            Runner = new ProgramRunner(Lines);
+        }
 
-            if (programRunner.IsBroke)
+        protected virtual internal ProgramResult TakeRunSteps()
+        {
+            while (Runner.MoveNext())
+                Runner.ExecuteCurrentStatement(this);
+
+            if (Runner.IsBroke)
                 return ProgramResult.Broken;
 
             return ProgramResult.Completed;
+        }
+
+        protected virtual internal void StopRun()
+        {
+            Runner = null;
         }
 
         /// <inheritdoc />
@@ -198,19 +218,24 @@
         }
 
         /// <inheritdoc />
-        public void StartLoop(ILoop loop)
+        public bool StartLoop(ILoop loop)
         {
             ThrowIfDisposed();
             ThrowIfNotRunning();
 
+            if (loop == null)
+                throw new ArgumentNullException("loop");
+
             var loopStartLine = Runner.RunningLine;
-            var isLoopAlreadyStarted = stackOfLoops.Any(l => l.StartLine == loopStartLine);
+            var isLoopAlreadyStarted = StackOfLoops.Any(l => l.StartLine == loopStartLine);
 
             if (isLoopAlreadyStarted)
-                return;
+                return false;
 
             var multilineLoop = new MultilineLoop(loopStartLine, loop);
-            stackOfLoops.Push(multilineLoop);
+            StackOfLoops.Push(multilineLoop);
+
+            return true;
         }
 
         /// <inheritdoc />
@@ -222,7 +247,7 @@
                 ThrowIfNotRunning();
                 ThrowIfThereIsNotLastLoop();
 
-                return stackOfLoops.Peek().IsOver;
+                return StackOfLoops.Peek().IsOver;
             }
         }
 
@@ -233,7 +258,7 @@
             ThrowIfNotRunning();
             ThrowIfThereIsNotLastLoop();
 
-            stackOfLoops.Peek().TakeStep();
+            StackOfLoops.Peek().TakeStep();
         }
 
         /// <inheritdoc />
@@ -243,7 +268,7 @@
             ThrowIfNotRunning();
             ThrowIfThereIsNotLastLoop();
 
-            stackOfLoops.Pop();
+            StackOfLoops.Pop();
         }
 
         /// <inheritdoc />
@@ -253,7 +278,13 @@
             ThrowIfNotRunning();
             ThrowIfThereIsNotLastLoop();
 
-            Goto(stackOfLoops.Peek().StartLine.Label);
+            var startLabel = GetStartLabelOfLastLoop();
+            Goto(startLabel);
+        }
+
+        internal string GetStartLabelOfLastLoop()
+        {
+            return StackOfLoops.Peek().StartLine.Label;
         }
 
         /// <inheritdoc />
@@ -272,6 +303,14 @@
                 InputOutput.OnBreak -= InputOutput_OnBreak;
 
             IsDisposed = true;
+        }
+
+        internal void InputOutput_OnBreak(object sender, EventArgs e)
+        {
+            if (!IsRunning)
+                return;
+
+            Runner.Break();
         }
 
         private void ThrowIfDisposed()
@@ -294,16 +333,8 @@
 
         private void ThrowIfThereIsNotLastLoop()
         {
-            if (stackOfLoops.Count == 0)
+            if (StackOfLoops.Count == 0)
                 throw new InvalidOperationException(ErrorMessages.UnexpectedEndOfLoop);
-        }
-
-        private void InputOutput_OnBreak(object sender, EventArgs e)
-        {
-            if (!IsRunning)
-                return;
-
-            Runner.Break();
         }
     }
 }

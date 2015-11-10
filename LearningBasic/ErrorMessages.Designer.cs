@@ -62,6 +62,15 @@ namespace LearningBasic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t process empty label..
+        /// </summary>
+        internal static string EmptyLabel {
+            get {
+                return ResourceManager.GetString("EmptyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Label {0} is not found..
         /// </summary>
         internal static string LabelNotFound {

@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using LearningBasic.RunTime;
+    using System.Globalization;
 
     public class Remove : IStatement
     {
@@ -18,10 +19,21 @@
 
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            var from = new Line(Range.Min.ToString(), new StubStatement());
-            var to = new Line(Range.Max.ToString(), new StubStatement());
+            var lowLine = new Line(Range.Min, new Nop());
+            var highLine = new Line(Range.Min, new Nop());
 
-            int count = rte.Remove(from, to);
+            var lowIndex = rte.BinarySearch(lowLine);
+            var highIndex = rte.BinarySearch(highLine);
+
+            if (lowIndex < 0)
+                lowIndex = ~lowIndex;
+
+            if (highIndex < 0)
+                highIndex = ~highIndex - 1;
+
+            int count = highIndex - lowIndex + 1;
+
+            rte.RemoveRange(lowIndex, count);
 
             var message = string.Format(Messages.RemoveResult, count);
             return new EvaluateResult(message);
@@ -30,14 +42,6 @@
         public override string ToString()
         {
             return "REMOVE " + Range.ToString();
-        }
-
-        private class StubStatement : IStatement
-        {
-            public EvaluateResult Execute(IRunTimeEnvironment rte)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

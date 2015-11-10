@@ -29,6 +29,20 @@
         }
 
         [TestMethod]
+        public void TakeStep_WithLetStatement_ReturnsTheResultOfExpression()
+        {
+            var inputOutput = MakeInputOutput("LET foo = 2.718281828");
+            var rte = MakeRunTimeEnvironment(inputOutput);
+            var parser = MakeParser();
+            var repl = new ReadEvaluatePrintLoop(rte, parser);
+
+            repl.TakeStep();
+            var actual = inputOutput.LastWritten;
+
+            StringAssert.Contains(actual, "2.718281828");
+        }
+
+        [TestMethod]
         public void Read_WithPrintStatement_ReturnsParsedPrintStatement()
         {
             var parser = MakeParser();
