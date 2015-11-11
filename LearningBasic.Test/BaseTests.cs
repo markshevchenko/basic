@@ -12,6 +12,9 @@
     using LearningBasic.Parsing.Code.Statements;
     using LearningBasic.Mocks;
 
+    /// <summary>
+    /// Implements helper methods for unit tests.
+    /// </summary>
     public abstract class BaseTests
     {
         protected static TextReader MakeReader(string inputString)

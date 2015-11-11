@@ -7,7 +7,7 @@
     /// <summary>
     /// Implementes methods to build dynamic <see cref="Expression">expressions</see>.
     /// </summary>
-    public static class DynamicExpressionBuilder
+    public static class DynamicBuilder
     {
         /// <summary>
         /// Builds an <see cref="Expression"/> that represents a call to
@@ -45,7 +45,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicBuilder), argumentInfo);
 
             var classExpression = Expression.Constant(type);
 
@@ -74,7 +74,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicBuilder), argumentInfo);
 
             var classExpression = Expression.Constant(type);
 
@@ -105,7 +105,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.InvokeMember(CSharpBinderFlags.None, name, null, typeof(DynamicBuilder), argumentInfo);
 
             var classExpression = Expression.Constant(type);
 
@@ -129,7 +129,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.UnaryOperation(CSharpBinderFlags.None, type, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.UnaryOperation(CSharpBinderFlags.None, type, typeof(DynamicBuilder), argumentInfo);
 
             return Expression.Dynamic(binder, typeof(object), arg1);
         }
@@ -153,7 +153,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.BinaryOperation(CSharpBinderFlags.None, type, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.BinaryOperation(CSharpBinderFlags.None, type, typeof(DynamicBuilder), argumentInfo);
 
             return Expression.Dynamic(binder, typeof(object), arg1, arg2);
         }
@@ -166,7 +166,7 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.BinaryOperation(CSharpBinderFlags.BinaryOperationLogical, ExpressionType.And, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.BinaryOperation(CSharpBinderFlags.BinaryOperationLogical, ExpressionType.And, typeof(DynamicBuilder), argumentInfo);
 
             return Expression.Dynamic(binder, typeof(object), arg1, arg2);
         }
@@ -179,14 +179,14 @@
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             };
 
-            var binder = Binder.BinaryOperation(CSharpBinderFlags.BinaryOperationLogical, ExpressionType.Or, typeof(DynamicExpressionBuilder), argumentInfo);
+            var binder = Binder.BinaryOperation(CSharpBinderFlags.BinaryOperationLogical, ExpressionType.Or, typeof(DynamicBuilder), argumentInfo);
 
             return Expression.Dynamic(binder, typeof(object), arg1, arg2);
         }
 
         public static Expression BuildConvert(Expression arg, Type type)
         {
-            var binder = Binder.Convert(CSharpBinderFlags.None, type, typeof(DynamicExpressionBuilder));
+            var binder = Binder.Convert(CSharpBinderFlags.None, type, typeof(DynamicBuilder));
 
             return Expression.Dynamic(binder, type, arg);
         }

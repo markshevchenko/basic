@@ -69,6 +69,21 @@
     <Compile Include="Parsing\Code\Conditions\GreaterThanTests.cs" />
     <Compile Include="Parsing\Code\Conditions\LessThanOrEqualTests.cs" />
     <Compile Include="Parsing\Code\Conditions\XorTests.cs" />
+    <Compile Include="Parsing\Code\BuiltInFunctionsTests.cs" />
+    <Compile Include="Parsing\Code\BinaryOperatorTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\PositiveTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\PowerTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\ModuloTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\DivideTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\MultiplyTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\SubtractTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\AddTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\NegativeTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\ArrayVariableTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\FunctionTests.cs" />
+    <Compile Include="Parsing\Code\Expressions\RndTests.cs" />
+    <Compile Include="Parsing\Code\UnaryOperatorTests.cs" />
+    <Compile Include="Parsing\Code\ForLoopTests.cs" />
     <Compile Include="RteLoop.cs" />
     <Compile Include="RunTime\EvaluateResultTests.cs" />
     <Compile Include="RunTime\ProgramRunnerTests.cs" />
@@ -92,6 +107,7 @@
     <Compile Include="RunTime\RunTimeEnvironmentTests.cs" />
     <Compile Include="RunTime\ReadEvaluatePrintLoopTests.cs" />
     <Compile Include="RunTime\MultilineLoopTests.cs" />
+    <Compile Include="WriteableExpressionVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningBasic.Console\LearningBasic.Console.csproj">

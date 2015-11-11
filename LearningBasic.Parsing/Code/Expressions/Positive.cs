@@ -1,6 +1,5 @@
 ﻿namespace LearningBasic.Parsing.Code.Expressions
 {
-    using System;
     using System.Linq.Expressions;
 
     public class Positive : UnaryOperator
@@ -11,7 +10,7 @@
 
         protected override Expression BuildExpression(Expression operand)
         {
-            return DynamicExpressionBuilder.BuildOperator(ExpressionType.UnaryPlus, operand);
+            return DynamicBuilder.BuildStaticCall(typeof(BuiltInOperators), "Positive", operand);
         }
     }
 }

@@ -23,11 +23,19 @@
         }
 
         [TestMethod]
-        public void Line_WithNumber_StoresThisNumberAsInteger()
+        public void Line_WithNumericLabel_ConvertsLabelToIntegerNumber()
         {
             var value = new Line("100", new Quit());
 
             Assert.AreEqual(100, value.Number);
+        }
+
+        [TestMethod]
+        public void Line_WithIntegerNumber_ConvertsNumberToStringLabel()
+        {
+            var value = new Line(100, new Quit());
+
+            Assert.AreEqual("100", value.Label);
         }
 
         [TestMethod]
@@ -52,7 +60,7 @@
         }
 
         [TestMethod]
-        public void Parse_WithMinNumber_ReturnsMinNumber()
+        public void Parse_WithMinNumber_StoresMinNumber()
         {
             var actual = Line.Parse(Line.MinNumber.ToString());
 
@@ -69,7 +77,7 @@
         }
 
         [TestMethod]
-        public void Parse_WithMaxNumber_ReturnsMaxNumber()
+        public void Parse_WithMaxNumber_StoresMaxNumber()
         {
             var actual = Line.Parse(Line.MaxNumber.ToString());
 
@@ -93,6 +101,16 @@
             var actual = Line.Parse(middleNumber.ToString());
 
             Assert.AreEqual(middleNumber, actual);
+        }
+
+        [TestMethod]
+        public void ToString_WithNumberAndQuit_PrintsNumberQuit()
+        {
+            var value = new Line(100, new Quit());
+
+            var actual = value.ToString();
+
+            Assert.AreEqual("100 QUIT", actual);
         }
     }
 }

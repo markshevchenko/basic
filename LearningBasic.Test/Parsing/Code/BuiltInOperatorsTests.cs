@@ -54,12 +54,12 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DivideByZeroException))]
-        public void Power_WithDoubleZeroBaseIntegerNegativeExponent_ThrowsDivideByZeroException()
+        public void Power_WithDoubleZeroBaseIntegerNegativeExponent_ReturnsInfinity()
         {
-            var value = BuiltInOperators.Power(0.0, -1);
-        }
+            var value = (double)BuiltInOperators.Power(0.0, -1);
 
+            Assert.IsTrue(double.IsInfinity(value));
+        }
 
         [TestMethod]
         public void Power_WithDouble2AndInteger3_ReturnsDouble8()

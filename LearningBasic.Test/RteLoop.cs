@@ -1,9 +1,9 @@
 ﻿namespace LearningBasic
 {
     using LearningBasic.Mocks;
-    using Parsing;
+    using LearningBasic.Parsing;
+    using LearningBasic.Parsing.Code.Statements;
     using LearningBasic.RunTime;
-    using Parsing.Code.Statements;
 
     /// <summary>
     /// Helper object to represent run-time environment with runned loop.

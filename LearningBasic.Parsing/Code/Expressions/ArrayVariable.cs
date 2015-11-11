@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
 
     public class ArrayVariable : ScalarVariable
     {
@@ -41,8 +40,8 @@
 
         private static Expression Subrtract1AndConvertToInt32(Expression e)
         {
-            var subtract1 = DynamicExpressionBuilder.BuildOperator(ExpressionType.Subtract, e, Expression.Constant(1));
-            var convertToInt32 = DynamicExpressionBuilder.BuildConvert(subtract1, typeof(int));
+            var subtract1 = DynamicBuilder.BuildOperator(ExpressionType.Subtract, e, Expression.Constant(1));
+            var convertToInt32 = DynamicBuilder.BuildConvert(subtract1, typeof(int));
             return convertToInt32;
         }
 

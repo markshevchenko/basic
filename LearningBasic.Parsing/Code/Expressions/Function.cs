@@ -35,16 +35,16 @@
             switch (args.Length)
             {
                 case 0:
-                    return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name);
+                    return DynamicBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name);
 
                 case 1:
-                    return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0]);
+                    return DynamicBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0]);
 
                 case 2:
-                    return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0], args[1]);
+                    return DynamicBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0], args[1]);
 
                 case 3:
-                    return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0], args[1], args[2]);
+                    return DynamicBuilder.BuildStaticCall(typeof(BuiltInFunctions), Name, args[0], args[1], args[2]);
 
                 default:
                     var message = string.Format(ErrorMessages.TooManyArguments, Name, args.Length);
@@ -55,7 +55,7 @@
         public override string ToString()
         {
             var args = Args.Select(a => a.ToString());
-            return Name.ToUpper() + '(' + string.Join(", ", args) + ')';
+            return Name + '(' + string.Join(", ", args) + ')';
         }
     }
 }

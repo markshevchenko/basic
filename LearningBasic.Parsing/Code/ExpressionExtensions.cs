@@ -5,7 +5,7 @@
     using System.Reflection;
 
     /// <summary>
-    /// Implements extension methods for <see cref="Expression"/>s.
+    /// Implements extension methods for <see cref="Expression"/> trees.
     /// </summary>
     public static class ExpressionExtensions
     {

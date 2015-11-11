@@ -2,6 +2,7 @@
 {
     using System.Linq.Expressions;
     using LearningBasic.RunTime;
+    using System;
 
     /// <summary>
     /// Implements <c>FOR</c> loop.
@@ -52,6 +53,18 @@
         /// <param name="step">The step expression.</param>
         public ForLoop(Expression variable, Expression from, Expression to, Expression step)
         {
+            if (variable == null)
+                throw new ArgumentNullException("variable");
+
+            if (from == null)
+                throw new ArgumentNullException("from");
+
+            if (to == null)
+                throw new ArgumentNullException("to");
+
+            if (step == null)
+                throw new ArgumentNullException("step");
+
             Variable = variable;
             From = from;
             To = to;
@@ -65,13 +78,13 @@
 
         public void TakeStep()
         {
-            var addStep = DynamicExpressionBuilder.BuildOperator(ExpressionType.Add, Variable, Step);
-            var convert = DynamicExpressionBuilder.BuildConvert(addStep, typeof(object));
+            var addStep = DynamicBuilder.BuildOperator(ExpressionType.Add, Variable, Step);
+            var convert = DynamicBuilder.BuildConvert(addStep, typeof(object));
             var assign = Expression.Assign(Variable, convert);
 
             assign.RunAndDropValue();
 
-            IsOver = !IsInsideOfInterval(Variable, From, To);
+            IsOver = !IsBelongsToInterval(Variable, From, To);
         }
 
         /// <summary>
@@ -82,21 +95,33 @@
         /// <param name="from">The start bound expression.</param>
         /// <param name="to">The end bound expression.</param>
         /// <returns><c>true</c> if the variable belongs to the interval; otherwise, <c>false</c>.</returns>
-        public static bool IsInsideOfInterval(Expression variable, Expression from, Expression to)
+        internal static bool IsBelongsToInterval(Expression variable, Expression from, Expression to)
         {
-            var c1 = DynamicExpressionBuilder.BuildOperator(ExpressionType.GreaterThanOrEqual, variable, from);
-            var c2 = DynamicExpressionBuilder.BuildOperator(ExpressionType.LessThanOrEqual, variable, to);
-            var c3 = DynamicExpressionBuilder.BuildOperator(ExpressionType.GreaterThanOrEqual, variable, to);
-            var c4 = DynamicExpressionBuilder.BuildOperator(ExpressionType.LessThanOrEqual, variable, from);
+            var isBelongsToDirectInterval = BelongsToDirectInterval(variable, from, to);
+            var isBelongsToInverseInterval = BelongsToInverseInterval(variable, from, to);
 
-            var c5 = DynamicExpressionBuilder.BuildLogicalAnd(c1, c2);
-            var c6 = DynamicExpressionBuilder.BuildLogicalAnd(c3, c4);
+            var result = DynamicBuilder.BuildLogicalOr(isBelongsToDirectInterval, isBelongsToInverseInterval);
 
-            var c7 = DynamicExpressionBuilder.BuildLogicalOr(c5, c6);
+            var resultAsBool = (bool)DynamicBuilder.BuildConvert(result, typeof(bool))
+                                                      .Calculate();
 
-            var c8 = DynamicExpressionBuilder.BuildConvert(c7, typeof(bool));
+            return resultAsBool;
+        }
 
-            return (bool)c8.Calculate();
+        private static Expression BelongsToDirectInterval(Expression variable, Expression from, Expression to)
+        {
+            var greaterThanOrEqualFrom = DynamicBuilder.BuildOperator(ExpressionType.GreaterThanOrEqual, variable, from);
+            var lessThanOrEqualTo = DynamicBuilder.BuildOperator(ExpressionType.LessThanOrEqual, variable, to);
+
+            return DynamicBuilder.BuildLogicalAnd(greaterThanOrEqualFrom, lessThanOrEqualTo);
+        }
+
+        private static Expression BelongsToInverseInterval(Expression variable, Expression from, Expression to)
+        {
+            var greaterThanOrEqualTo = DynamicBuilder.BuildOperator(ExpressionType.GreaterThanOrEqual, variable, to);
+            var lessThanOrEqualFrom = DynamicBuilder.BuildOperator(ExpressionType.LessThanOrEqual, variable, from);
+
+            return DynamicBuilder.BuildLogicalAnd(greaterThanOrEqualTo, lessThanOrEqualFrom);
         }
     }
 }

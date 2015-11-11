@@ -29,13 +29,6 @@
         public IExpression Operand { get; private set; }
 
         /// <summary>
-        /// Gets the value indicating whether insert to insert a spacebar between operator sign in operand
-        /// when calling the <see cref="ToString"/> method.
-        /// </summary>
-        /// <remarks><c>false</c> is default value.</remarks>
-        protected bool DoInsertSpacebar { get; set; }
-
-        /// <summary>
         /// Initializes a nes instance of the <see cref="UnaryOperator"/> class with specified
         /// associativity, priority, operator, and operand.
         /// </summary>
@@ -52,7 +45,6 @@
             Priority = priority;
             Operator = @operator;
             Operand = operand;
-            DoInsertSpacebar = false;
         }
 
         /// <inheritdoc />
@@ -72,13 +64,28 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            var operand = Operand.ToString();
-
-            if (Priority > Operand.Priority)
-                operand = '(' + operand + ')';
-
-            var format = DoInsertSpacebar ? "{0} {1}" : "{0}{1}";
-            return string.Format(format, Operator, operand);
+            return Operator + OperandAsString;
         }
+
+        /// <summary>
+        /// Gets a string representation of the <see cref="Operand"/>,
+        /// enclosing it in parentheses if needed.
+        /// </summary>
+        protected virtual string OperandAsString
+        {
+            get
+            {
+                if (MustEncloseOperandInParentheses)
+                    return "(" + Operand + ")";
+
+                return Operand.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether to enclose the operand in parentheses
+        /// to show the correct order of calculation.
+        /// </summary>
+        protected internal bool MustEncloseOperandInParentheses { get { return Priority > Operand.Priority; } }
     }
 }

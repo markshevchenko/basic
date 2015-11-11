@@ -9,6 +9,9 @@
     /// </summary>
     public static class BuiltInFunctions
     {
+        internal const string TestFunctionName = "_test";
+        internal const int TestExpected = 100;
+
         public const string DefaultDelimiter = " ";
 
         public static dynamic LEN(string s)
@@ -81,7 +84,7 @@
 
         public static dynamic INSTR(int start, string s1, string s2)
         {
-            return 1 + s1.IndexOf(s2, 1 + start);
+            return 1 + s1.IndexOf(s2, start - 1);
         }
 
         public static dynamic INSTRREV(string s1, string s2)
@@ -91,7 +94,7 @@
 
         public static dynamic INSTRREV(int start, string s1, string s2)
         {
-            return 1 + s1.LastIndexOf(s2, 1 + start);
+            return 1 + s1.LastIndexOf(s2, start - 1);
         }
 
         public static dynamic REPLACE(string s, string find, string replacement)
@@ -99,12 +102,12 @@
             return s.Replace(find, replacement);
         }
 
-        public static dynamic JOIN(string[] array)
+        public static dynamic JOIN(object[] array)
         {
             return string.Join(DefaultDelimiter, array);
         }
 
-        public static dynamic JOIN(string[] array, string delimiter)
+        public static dynamic JOIN(object[] array, string delimiter)
         {
             return string.Join(delimiter, array);
         }
@@ -144,22 +147,6 @@
             return Math.Max(i1, i2);
         }
 
-        public static dynamic MAX(int i1, double d2)
-        {
-            if (i1 >= d2)
-                return i1;
-
-            return d2;
-        }
-
-        public static dynamic MAX(double d1, int i2)
-        {
-            if (i2 >= d1)
-                return i2;
-
-            return d1;
-        }
-
         public static dynamic MAX(double d1, double d2)
         {
             return Math.Max(d1, d2);
@@ -180,22 +167,6 @@
             return Math.Min(i1, i2);
         }
 
-        public static dynamic MIN(int i1, double d2)
-        {
-            if (i1 <= d2)
-                return i1;
-
-            return d2;
-        }
-
-        public static dynamic MIN(double d1, int i2)
-        {
-            if (i2 <= d1)
-                return i2;
-
-            return d1;
-        }
-
         public static dynamic MIN(double d1, double d2)
         {
             return Math.Min(d1, d2);
@@ -211,19 +182,9 @@
             return array.Min();
         }
 
-        public static dynamic EXP(int i)
-        {
-            return Math.Exp(i);
-        }
-
         public static dynamic EXP(double d)
         {
             return Math.Exp(d);
-        }
-
-        public static dynamic LN(int i)
-        {
-            return Math.Log(i);
         }
 
         public static dynamic LN(double d)
@@ -231,19 +192,9 @@
             return Math.Log(d);
         }
 
-        public static dynamic LOG(int i)
-        {
-            return Math.Log10(i);
-        }
-
         public static dynamic LOG(double d)
         {
             return Math.Log10(d);
-        }
-
-        public static dynamic SQRT(int i)
-        {
-            return Math.Sqrt(i);
         }
 
         public static dynamic SQRT(double d)
@@ -251,19 +202,9 @@
             return Math.Sqrt(d);
         }
 
-        public static dynamic SIN(int i)
-        {
-            return Math.Sin(i);
-        }
-
         public static dynamic SIN(double d)
         {
             return Math.Sin(d);
-        }
-
-        public static dynamic COS(int i)
-        {
-            return Math.Cos(i);
         }
 
         public static dynamic COS(double d)
@@ -271,19 +212,9 @@
             return Math.Cos(d);
         }
 
-        public static dynamic TAN(int i)
-        {
-            return Math.Tan(i);
-        }
-
         public static dynamic TAN(double d)
         {
             return Math.Tan(d);
-        }
-
-        public static dynamic ASIN(int i)
-        {
-            return Math.Asin(i);
         }
 
         public static dynamic ASIN(double d)
@@ -291,39 +222,14 @@
             return Math.Asin(d);
         }
 
-        public static dynamic ACOS(int i)
-        {
-            return Math.Acos(i);
-        }
-
         public static dynamic ACOS(double d)
         {
             return Math.Acos(d);
         }
 
-        public static dynamic ATAN(int i)
-        {
-            return Math.Atan(i);
-        }
-
         public static dynamic ATAN(double d)
         {
             return Math.Atan(d);
-        }
-
-        public static dynamic ATAN2(int y, int x)
-        {
-            return Math.Atan2(y, x);
-        }
-
-        public static dynamic ATAN2(int y, double x)
-        {
-            return Math.Atan2(y, x);
-        }
-
-        public static dynamic ATAN2(double y, int x)
-        {
-            return Math.Atan2(y, x);
         }
 
         public static dynamic ATAN2(double y, double x)
@@ -349,6 +255,26 @@
         public static dynamic FLOOR(double d)
         {
             return Math.Floor(d);
+        }
+
+        public static dynamic _TEST()
+        {
+            return TestExpected;
+        }
+
+        public static dynamic _TEST(int i)
+        {
+            return TestExpected;
+        }
+
+        public static dynamic _TEST(int i, int j)
+        {
+            return TestExpected;
+        }
+
+        public static dynamic _TEST(int i, int j, int k)
+        {
+            return TestExpected;
         }
     }
 }

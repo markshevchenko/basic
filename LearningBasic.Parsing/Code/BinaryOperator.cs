@@ -34,13 +34,6 @@
         public IExpression Right { get; private set; }
 
         /// <summary>
-        /// Gets the value indicating whether insert to insert a spacebar between operator sign in operands
-        /// when calling the <see cref="ToString"/> method.
-        /// </summary>
-        /// <remarks><c>true</c> is default value.</remarks>
-        protected bool DoInsertSpacebar { get; set; }
-
-        /// <summary>
         /// Initializes a nes instance of the <see cref="BinaryOperator"/> class with specified
         /// associativity, priority, operator, left, and right operands.
         /// </summary>
@@ -59,7 +52,6 @@
             Operator = @operator;
             Left = left;
             Right = right;
-            DoInsertSpacebar = true;
         }
 
         /// <inheritdoc />
@@ -81,17 +73,55 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            var left = Left.ToString();
-            var right = Right.ToString();
+            return LeftAsString + " " + Operator + " " + RightAsString;
+        }
 
-            if (Left.Priority < Priority || (Left.Priority == Priority && Associativity == Associativity.Right))
-                left = '(' + left + ')';
+        /// <summary>
+        /// Gets a string representation of the <see cref="Left"/> operand,
+        /// enclosing it in parentheses if needed.
+        /// </summary>
+        protected virtual string LeftAsString
+        {
+            get
+            {
+                if (MustEncloseLeftOperandInParentheses)
+                    return "(" + Left + ")";
 
-            if (Right.Priority < Priority || (Right.Priority == Priority && Associativity == Associativity.Left))
-                right = '(' + right + ')';
+                return Left.ToString();
+            }
+        }
 
-            var format = DoInsertSpacebar ? "{0} {1} {2}" : "{0}{1}{2}";
-            return string.Format(format, left, Operator, right);
+        /// <summary>
+        /// Gets a string representation of the <see cref="Right"/> operand,
+        /// enclosing it in parentheses if needed.
+        /// </summary>
+        protected virtual string RightAsString
+        {
+            get
+            {
+                if (MustEncloseRightOperandInParentheses)
+                    return "(" + Right + ")";
+
+                return Right.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether to enclose the left operand in parentheses
+        /// to show the correct order of calculation.
+        /// </summary>
+        protected internal bool MustEncloseLeftOperandInParentheses
+        {
+            get { return Left.Priority < Priority || (Left.Priority == Priority && Associativity == Associativity.Right); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether to enclose the right operand in parentheses
+        /// to show the correct order of calculation.
+        /// </summary>
+        protected internal bool MustEncloseRightOperandInParentheses
+        {
+            get { return Right.Priority < Priority || (Right.Priority == Priority && Associativity == Associativity.Left); }
         }
     }
 }

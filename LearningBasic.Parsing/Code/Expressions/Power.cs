@@ -10,7 +10,7 @@
 
         protected override Expression BuildExpression(Expression left, Expression right)
         {
-            return DynamicExpressionBuilder.BuildStaticCall(typeof(BuiltInOperators), "Power", left, right);
+            return DynamicBuilder.BuildStaticCall(typeof(BuiltInOperators), "Power", left, right);
         }
     }
 }

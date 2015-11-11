@@ -56,7 +56,7 @@
     <Compile Include="Code\Conditions\NotEqual.cs" />
     <Compile Include="Code\Conditions\Or.cs" />
     <Compile Include="Code\Conditions\Xor.cs" />
-    <Compile Include="Code\DynamicExpressionBuilder.cs" />
+    <Compile Include="Code\DynamicBuilder.cs" />
     <Compile Include="Code\ExpressionExtensions.cs" />
     <Compile Include="Code\Expressions\Add.cs" />
     <Compile Include="Code\Expressions\ArrayVariable.cs" />
