@@ -82,6 +82,10 @@
     <Compile Include="Parsing\Code\Expressions\ArrayVariableTests.cs" />
     <Compile Include="Parsing\Code\Expressions\FunctionTests.cs" />
     <Compile Include="Parsing\Code\Expressions\RndTests.cs" />
+    <Compile Include="Parsing\Code\Statements\DimTests.cs" />
+    <Compile Include="Parsing\Code\Statements\EndTests.cs" />
+    <Compile Include="Parsing\Code\Statements\ForTests.cs" />
+    <Compile Include="Parsing\Code\Statements\ForNextTests.cs" />
     <Compile Include="Parsing\Code\UnaryOperatorTests.cs" />
     <Compile Include="Parsing\Code\ForLoopTests.cs" />
     <Compile Include="RteLoop.cs" />
