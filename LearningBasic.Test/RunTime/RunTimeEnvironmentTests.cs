@@ -432,47 +432,24 @@
         }
 
         [TestMethod]
-        public void StartLoop_WithNewLoop_ReturnsTrue()
+        public void IsNewLoop_WithNewLoop_ReturnsTrue()
         {
             var rteLoop = new RteLoop(3);
 
-            var condition = rteLoop.Rte.StartLoop(rteLoop.Loop);
+            var condition = rteLoop.Rte.IsNewLoop;
 
             Assert.IsTrue(condition);
         }
 
         [TestMethod]
-        public void StartLoop_WithExistingLoop_ReturnsFalse()
+        public void IsNewLoop_WithExistingLoop_ReturnsFalse()
         {
             var rteLoop = new RteLoop(3);
 
             rteLoop.Rte.StartLoop(rteLoop.Loop);
-            var condition = rteLoop.Rte.StartLoop(rteLoop.Loop);
+            var condition = rteLoop.Rte.IsNewLoop;
 
             Assert.IsFalse(condition);
-        }
-
-        [TestMethod]
-        public void StartLoop_WithNewLoop_PushesLoop()
-        {
-            var rteLoop = new RteLoop(3);
-
-            var condition = rteLoop.Rte.StartLoop(rteLoop.Loop);
-            var actual = rteLoop.Rte.StackOfLoops.Peek().DecoratedLoop;
-
-            Assert.AreEqual(rteLoop.Loop, actual);
-        }
-
-        [TestMethod]
-        public void StartLoop_WithExistingLoop_DoesntPushLoop()
-        {
-            var rteLoop = new RteLoop(3);
-
-            rteLoop.Rte.StartLoop(rteLoop.Loop);
-            Assert.AreEqual(1, rteLoop.Rte.StackOfLoops.Count);
-
-            rteLoop.Rte.StartLoop(rteLoop.Loop);
-            Assert.AreEqual(1, rteLoop.Rte.StackOfLoops.Count);
         }
 
         [TestMethod]

@@ -51,7 +51,7 @@
             if (Name == null)
                 return "SAVE";
 
-            return "SAVE " + Constant.Quote(Name);
+            return "SAVE " + Constant.ToString(Name);
         }
     }
 }

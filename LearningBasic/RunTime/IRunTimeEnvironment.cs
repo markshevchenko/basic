@@ -109,11 +109,16 @@
         void Randomize(int seed);
 
         /// <summary>
+        /// Gets a value indicating whether running line contains non-started miltiline loop.
+        /// </summary>
+        bool IsNewLoop { get; }
+
+        /// <summary>
         /// Starts the loop.
         /// </summary>
         /// <param name="loop">The loop to repeated running.</param>
         /// <returns><c>true</c> if new loop started, <c>false</c> if the loop is already started.</returns>
-        bool StartLoop(ILoop loop);
+        void StartLoop(ILoop loop);
 
         /// <summary>
         /// Gets a value indicating whether the last <see cref="StartLoop(ILoop)">started loop</see> is over.

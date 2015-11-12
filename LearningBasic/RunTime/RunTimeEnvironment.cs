@@ -217,8 +217,19 @@
             Variables[RandomKey] = new Random(seed);
         }
 
+        public bool IsNewLoop
+        {
+            get
+            {
+                ThrowIfDisposed();
+                ThrowIfNotRunning();
+
+                return StackOfLoops.All(loop => loop.StartLine != Runner.RunningLine);
+            }
+        }
+
         /// <inheritdoc />
-        public bool StartLoop(ILoop loop)
+        public void StartLoop(ILoop loop)
         {
             ThrowIfDisposed();
             ThrowIfNotRunning();
@@ -226,16 +237,8 @@
             if (loop == null)
                 throw new ArgumentNullException("loop");
 
-            var loopStartLine = Runner.RunningLine;
-            var isLoopAlreadyStarted = StackOfLoops.Any(l => l.StartLine == loopStartLine);
-
-            if (isLoopAlreadyStarted)
-                return false;
-
-            var multilineLoop = new MultilineLoop(loopStartLine, loop);
+            var multilineLoop = new MultilineLoop(Runner.RunningLine, loop);
             StackOfLoops.Push(multilineLoop);
-
-            return true;
         }
 
         /// <inheritdoc />
