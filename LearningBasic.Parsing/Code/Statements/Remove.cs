@@ -19,21 +19,11 @@
 
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            var lowLine = new Line(Range.Min, new Nop());
-            var highLine = new Line(Range.Min, new Nop());
+            int start;
+            int count;
+            Range.GetBounds(rte, out start, out count);
 
-            var lowIndex = rte.BinarySearch(lowLine);
-            var highIndex = rte.BinarySearch(highLine);
-
-            if (lowIndex < 0)
-                lowIndex = ~lowIndex;
-
-            if (highIndex < 0)
-                highIndex = ~highIndex - 1;
-
-            int count = highIndex - lowIndex + 1;
-
-            rte.RemoveRange(lowIndex, count);
+            rte.RemoveRange(start, count);
 
             var message = string.Format(Messages.RemoveResult, count);
             return new EvaluateResult(message);

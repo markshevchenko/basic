@@ -22,10 +22,12 @@
             if (rte.Lines.Count == 0)
                 return EvaluateResult.None;
 
-            var filterdLines = rte.Lines.OfType<Line>()
-                                        .Where(line => Range.Contains(line.Number.Value));
+            int start;
+            int count;
+            Range.GetBounds(rte, out start, out count);
+            var filteredLines = rte.Lines.Skip(start).Take(count);
 
-            foreach (var line in filterdLines)
+            foreach (var line in filteredLines)
                 rte.InputOutput.WriteLine(line.ToString());
 
             return EvaluateResult.None;
