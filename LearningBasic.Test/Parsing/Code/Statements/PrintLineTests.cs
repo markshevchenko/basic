@@ -7,7 +7,7 @@
     public class PrintLineTests : BaseTests
     {
         [TestMethod]
-        public void Execute_OfPrint_PrintsValue()
+        public void Execute_OfPrintLine_PrintsValue()
         {
             var inputOutput = MakeInputOutput();
             var rte = MakeRunTimeEnvironment(inputOutput);
@@ -15,7 +15,7 @@
 
             printLine.Execute(rte);
 
-            StringAssert.Contains(inputOutput.LastWritten, "ABC");
+            Assert.AreEqual("ABC", inputOutput.OutputStrings[0]);
         }
     }
 }

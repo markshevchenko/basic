@@ -89,7 +89,10 @@
     <Compile Include="Parsing\Code\Statements\IfThenElseTests.cs" />
     <Compile Include="Parsing\Code\Statements\InputTests.cs" />
     <Compile Include="Parsing\Code\Statements\LoadTests.cs" />
+    <Compile Include="Parsing\Code\Statements\PrintLineTests.cs" />
     <Compile Include="Parsing\Code\Statements\PrintTests.cs" />
+    <Compile Include="Parsing\Code\Statements\QuitTests.cs" />
+    <Compile Include="Parsing\Code\Statements\RandomizeTests.cs" />
     <Compile Include="Parsing\Code\UnaryOperatorTests.cs" />
     <Compile Include="Parsing\Code\ForLoopTests.cs" />
     <Compile Include="RteLoop.cs" />

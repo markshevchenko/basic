@@ -26,7 +26,7 @@
 
         public override string ToString()
         {
-            return "LOAD " + Constant.Quote(Name);
+            return "LOAD " + Constant.ToString(Name);
         }
     }
 }

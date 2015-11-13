@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq.Expressions;
+    using LearningBasic.Parsing.Code.Expressions;
     using LearningBasic.RunTime;
 
     public class Let : IStatement
@@ -29,7 +30,7 @@
             var rightAsObject = Expression.Convert(right, typeof(object));
             var assignment = Expression.Assign(left, rightAsObject);
             var value = assignment.Calculate();
-            var result = value.ToString();
+            var result = Constant.ToString(value);
             return new EvaluateResult(result);
         }
 

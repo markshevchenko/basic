@@ -37,9 +37,9 @@
             var repl = new ReadEvaluatePrintLoop(rte, parser);
 
             repl.TakeStep();
-            var actual = inputOutput.LastWritten;
+            var actual = inputOutput.OutputStrings[0];
 
-            StringAssert.Contains(actual, "2.718281828");
+            Assert.AreEqual("2.718281828", actual);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@
 
             var result = repl.Evaluate(line);
 
-            Assert.AreEqual("Windows", inputOutput.LastWritten);
+            Assert.AreEqual("Windows", inputOutput.OutputStrings[0]);
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@
 
             repl.Print(result);
 
-            Assert.AreEqual("message\n", inputOutput.LastWritten);
+            Assert.AreEqual("message", inputOutput.OutputStrings[0]);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@
             inputOutput.Write("still message");
             repl.Print(EvaluateResult.None);
 
-            Assert.AreEqual("still message", inputOutput.LastWritten);
+            Assert.AreEqual("still message", inputOutput.OutputStrings[0]);
         }
 
         [TestMethod]

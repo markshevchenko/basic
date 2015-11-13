@@ -15,7 +15,7 @@
 
             print.Execute(rte);
 
-            StringAssert.Contains(inputOutput.LastWritten, "ABC");
+            Assert.AreEqual("ABC", inputOutput.OutputStrings[0]);
         }
     }
 }

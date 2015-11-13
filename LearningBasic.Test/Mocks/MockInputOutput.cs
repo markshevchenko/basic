@@ -1,54 +1,69 @@
 ﻿namespace LearningBasic.Mocks
 {
-    using LearningBasic.IO;
     using System;
+    using System.Collections.Generic;
+    using LearningBasic.IO;
 
     public class MockInputOutput : IInputOutput
     {
-        private readonly string inputString;
+        private readonly string[] inputStrings;
+        private readonly List<string> outputStrings;
+        private int lastInputedStringIndex;
 
         public event EventHandler OnBreak;
 
-        public string LastWritten { get; private set; }
+        public IReadOnlyList<string> OutputStrings { get { return outputStrings; } }
 
-        public MockInputOutput()
+        private string LastOutputString
         {
-            inputString = null;
+            get { return outputStrings[outputStrings.Count - 1]; }
+            set { outputStrings[outputStrings.Count - 1] = value; }
         }
 
-        public MockInputOutput(string inputString)
+        public MockInputOutput()
+            : this(new string[0])
+        { }
+
+        public MockInputOutput(params string[] inputStrings)
         {
-            this.inputString = inputString;
+            this.inputStrings = inputStrings;
+            this.lastInputedStringIndex = -1;
+            this.outputStrings = new List<string> { string.Empty };
         }
 
         public string ReadLine()
         {
-            return inputString;
+            if (lastInputedStringIndex == inputStrings.Length - 1)
+                throw new InvalidOperationException();
+
+            return inputStrings[++lastInputedStringIndex];
         }
 
         public void Write(string s)
         {
-            LastWritten = s;
+            LastOutputString += s;
         }
 
         public void Write(string format, params object[] args)
         {
-            LastWritten = string.Format(format, args);
+            LastOutputString += string.Format(format, args);
         }
 
         public void WriteLine()
         {
-            LastWritten = "\n";
+            outputStrings.Add(string.Empty);
         }
 
         public void WriteLine(string s)
         {
-            LastWritten = s + "\n";
+            Write(s);
+            WriteLine();
         }
 
         public void WriteLine(string format, params object[] args)
         {
-            LastWritten = string.Format(format, args) + "\n";
+            Write(format, args);
+            WriteLine();
         }
 
         public void Break()

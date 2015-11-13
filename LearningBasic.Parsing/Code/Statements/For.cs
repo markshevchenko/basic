@@ -23,9 +23,12 @@
 
         public virtual EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            var loop = CreateForLoop(rte.Variables);
+            if (!rte.IsLoopStarted)
+            {
+                var loop = CreateForLoop(rte.Variables);
 
-            rte.StartLoop(loop);
+                rte.StartLoop(loop);
+            }
 
             return EvaluateResult.None;
         }

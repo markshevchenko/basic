@@ -109,11 +109,17 @@
         void Randomize(int seed);
 
         /// <summary>
+        /// Gets a value indicating whether loop at current running line is started already.
+        /// </summary>
+        /// <returns><c>true</c> if the loop is already started; otherwise, <c>false</c>.</returns>
+        bool IsLoopStarted { get; }
+
+        /// <summary>
         /// Starts the loop.
         /// </summary>
         /// <param name="loop">The loop to repeated running.</param>
         /// <returns><c>true</c> if new loop started, <c>false</c> if the loop is already started.</returns>
-        bool StartLoop(ILoop loop);
+        void StartLoop(ILoop loop);
 
         /// <summary>
         /// Gets a value indicating whether the last <see cref="StartLoop(ILoop)">started loop</see> is over.

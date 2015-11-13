@@ -34,21 +34,21 @@
 
         public override string ToString()
         {
-            if (Value == null)
-                return string.Empty;
-
-            if (Value is string)
-                return Quote(Value as string);
-
-            if (Value is IConvertible)
-                return (Value as IConvertible).ToString(CultureInfo.InvariantCulture);
-
-            return Value.ToString();
+            return ToString(Value);
         }
 
-        public static string Quote(string s)
+        public static string ToString(object value)
         {
-            return '"' + s.Replace("\"", "\"\"") + '"';
+            if (value == null)
+                return string.Empty;
+
+            if (value is string)
+                return '"' + (value as string).Replace("\"", "\"\"") + '"';
+
+            if (value is IConvertible)
+                return (value as IConvertible).ToString(CultureInfo.InvariantCulture);
+
+            return value.ToString();
         }
 
         public static object Parse(string s)
