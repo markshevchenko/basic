@@ -11,7 +11,7 @@
             if (range.IsDefined)
             {
                 var lowLine = new Line(range.Min, new Nop());
-                var highLine = new Line(range.Min, new Nop());
+                var highLine = new Line(range.Max, new Nop());
 
                 var lowIndex = rte.BinarySearch(lowLine);
                 var highIndex = rte.BinarySearch(highLine);
@@ -25,9 +25,11 @@
                 start = lowIndex;
                 count = highIndex - lowIndex + 1;
             }
-
-            start = 0;
-            count = rte.Lines.Count;
+            else
+            {
+                start = 0;
+                count = rte.Lines.Count;
+            }
         }
     }
 }

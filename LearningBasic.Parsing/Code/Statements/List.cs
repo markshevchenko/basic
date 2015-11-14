@@ -19,9 +19,6 @@
 
         public EvaluateResult Execute(IRunTimeEnvironment rte)
         {
-            if (rte.Lines.Count == 0)
-                return EvaluateResult.None;
-
             int start;
             int count;
             Range.GetBounds(rte, out start, out count);

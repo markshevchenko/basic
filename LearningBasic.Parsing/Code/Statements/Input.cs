@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Linq.Expressions;
     using LearningBasic.RunTime;
+    using LearningBasic.Parsing.Code.Expressions;
 
     public class Input : IStatement
     {
@@ -51,7 +52,7 @@
             if (Prompt == null)
                 return "INPUT " + LValue;
             else
-                return "INPUT " + Prompt + ", " + LValue;
+                return "INPUT " + Constant.ToString(Prompt) + ", " + LValue;
         }
 
         public static Expression ParseToObjectExpression(string s)

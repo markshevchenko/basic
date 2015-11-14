@@ -118,7 +118,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RangeExtensions.cs" />
+    <Compile Include="Code\RangeExtensions.cs" />
     <Compile Include="ScannerExtensions.cs" />
     <Compile Include="TextReaderExtensions.cs" />
     <Compile Include="Basic\Token.cs" />
