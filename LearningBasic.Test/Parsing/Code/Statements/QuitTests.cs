@@ -15,5 +15,15 @@
 
             Assert.IsTrue(rte.IsClosed);
         }
+
+        [TestMethod]
+        public void Execute_OfQuit_Converts()
+        {
+            var quit = new Quit();
+
+            var actual = quit.ToString();
+
+            Assert.AreEqual("QUIT", actual);
+        }
     }
 }

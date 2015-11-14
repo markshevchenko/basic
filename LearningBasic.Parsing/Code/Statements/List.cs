@@ -33,9 +33,9 @@
         public override string ToString()
         {
             if (Range.IsDefined)
-                return "LIST";
+                return "LIST " + Range;
 
-            return "LIST " + Range;
+            return "LIST";
         }
     }
 }

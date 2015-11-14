@@ -95,6 +95,8 @@
     <Compile Include="Parsing\Code\Statements\QuitTests.cs" />
     <Compile Include="Parsing\Code\Statements\RandomizeTests.cs" />
     <Compile Include="Parsing\Code\Statements\ListTests.cs" />
+    <Compile Include="Parsing\Code\Statements\RemoveTests.cs" />
+    <Compile Include="Parsing\Code\Statements\RunTests.cs" />
     <Compile Include="Parsing\Code\UnaryOperatorTests.cs" />
     <Compile Include="Parsing\Code\ForLoopTests.cs" />
     <Compile Include="Parsing\Code\RangeExtensionsTests.cs" />

@@ -17,5 +17,15 @@
 
             Assert.AreEqual("ABC", inputOutput.OutputStrings[0]);
         }
+
+        [TestMethod]
+        public void Execute_OfPrint_Converts()
+        {
+            var print = new Print(new[] { new Constant("Abc"), new Constant(123) });
+
+            var actual = print.ToString();
+
+            Assert.AreEqual("PRINT \"Abc\", 123;", actual);
+        }
     }
 }

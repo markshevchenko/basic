@@ -26,5 +26,15 @@
 
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Execute_OfList_Converts()
+        {
+            var list = new List();
+
+            var actual = list.ToString();
+
+            Assert.AreEqual("LIST", actual);
+        }
     }
 }

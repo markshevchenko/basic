@@ -20,5 +20,15 @@ namespace LearningBasic.Parsing.Code.Statements
 
             Assert.AreNotEqual(notExpected, actual);
         }
+
+        [TestMethod]
+        public void ToString_OfRandomize_Converts()
+        {
+            var randomize = new Randomize(new Constant(100));
+
+            var actual = randomize.ToString();
+
+            Assert.AreEqual("RANDOMIZE 100", actual);
+        }
     }
 }

@@ -18,5 +18,15 @@
 
             Assert.IsFalse(shouldNotBeTrue);
         }
+
+        [TestMethod]
+        public void ToString_OfEnd_Converts()
+        {
+            var end = new End();
+
+            var actual = end.ToString();
+
+            Assert.AreEqual("END", actual);
+        }
     }
 }

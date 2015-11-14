@@ -43,5 +43,15 @@
 
             Assert.AreEqual("filename", rte.LastUsedName);
         }
+
+        [TestMethod]
+        public void Execute_OfLoad_Converts()
+        {
+            var load = new Load("Abc");
+
+            var actual = load.ToString();
+
+            Assert.AreEqual("LOAD \"Abc\"", actual);
+        }
     }
 }

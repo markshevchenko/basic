@@ -19,5 +19,15 @@ namespace LearningBasic.Parsing.Code.Statements
 
             Assert.AreEqual(12345, actual);
         }
+
+        [TestMethod]
+        public void ToString_OfInput_Converts()
+        {
+            var input = new Input("Pro\"mpt", new ScalarVariable("X"));
+
+            var actual = input.ToString();
+
+            Assert.AreEqual("INPUT \"Pro\"\"mpt\", X", actual);
+        }
     }
 }

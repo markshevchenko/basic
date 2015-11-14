@@ -22,5 +22,19 @@ namespace LearningBasic.Parsing.Code.Statements
 
             Assert.AreEqual(50, shoudBeEqualTo50);
         }
+
+        [TestMethod]
+        public void ToString_OfForNext_Converts()
+        {
+            var forNext = new ForNext(new ScalarVariable("I"),
+                                      new Constant("1"),
+                                      new Constant("5"),
+                                      new Constant("1"),
+                                      new PrintLine(new[] { new ScalarVariable("I") }));
+
+            var actual = forNext.ToString();
+
+            Assert.AreEqual("FOR I = 1 TO 5 STEP 1 PRINT I NEXT", actual);
+        }
     }
 }

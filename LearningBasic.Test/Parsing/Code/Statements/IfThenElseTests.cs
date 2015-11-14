@@ -1,5 +1,6 @@
 ﻿namespace LearningBasic.Parsing.Code.Statements
 {
+    using Conditions;
     using LearningBasic.Parsing.Code.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,36 +11,48 @@
         public void Execute_OfIfWithTrue_ExecutesThen()
         {
             var rte = MakeRunTimeEnvironment();
-            var shouldBeEqualsTo1 = 0;
+            var shouldBeEqualTo1 = 0;
 
-            var ifThenElse = new IfThenElse(new Constant(true), MakeStatement(() => { shouldBeEqualsTo1 = 1; }));
+            var ifThenElse = new IfThenElse(new Constant(true), MakeStatement(() => { shouldBeEqualTo1 = 1; }));
             ifThenElse.Execute(rte);
 
-            Assert.AreEqual(1, shouldBeEqualsTo1);
+            Assert.AreEqual(1, shouldBeEqualTo1);
         }
 
         [TestMethod]
         public void Execute_OfIfWithFalse_DoesntExecuteThen()
         {
             var rte = MakeRunTimeEnvironment();
-            var shouldBeEqualsTo0 = 0;
+            var shouldBeEqualTo0 = 0;
 
-            var ifThenElse = new IfThenElse(new Constant(false), MakeStatement(() => { shouldBeEqualsTo0 = 1; }));
+            var ifThenElse = new IfThenElse(new Constant(false), MakeStatement(() => { shouldBeEqualTo0 = 1; }));
             ifThenElse.Execute(rte);
 
-            Assert.AreEqual(0, shouldBeEqualsTo0);
+            Assert.AreEqual(0, shouldBeEqualTo0);
         }
 
         [TestMethod]
         public void Execute_OfIfWithFalse_ExecutesElse()
         {
             var rte = MakeRunTimeEnvironment();
-            var shouldBeEqualsTo2 = 0;
+            var shouldBeEqualTo2 = 0;
 
-            var ifThenElse = new IfThenElse(new Constant(false), MakeStatement(() => { shouldBeEqualsTo2 = 1; }), MakeStatement(() => { shouldBeEqualsTo2 = 2; }));
+            var ifThenElse = new IfThenElse(new Constant(false), MakeStatement(() => { shouldBeEqualTo2 = 1; }), MakeStatement(() => { shouldBeEqualTo2 = 2; }));
             ifThenElse.Execute(rte);
 
-            Assert.AreEqual(2, shouldBeEqualsTo2);
+            Assert.AreEqual(2, shouldBeEqualTo2);
+        }
+
+        [TestMethod]
+        public void Execute_OfIfThenElse_Converts()
+        {
+            var ifThenElse = new IfThenElse(new GreaterThan(new ScalarVariable("A"),
+                                                            new Constant("1")),
+                                            new PrintLine(new[] { new ScalarVariable("A") }));
+
+            var actual = ifThenElse.ToString();
+
+            Assert.AreEqual("IF A > 1 THEN PRINT A", actual);
         }
     }
 }

@@ -47,5 +47,15 @@
 
             Assert.AreEqual(199, actual.GetUpperBound(1));
         }
+
+        [TestMethod]
+        public void ToString_OfDim_Converts()
+        {
+            var dim = new Dim(new ArrayVariable("A", new[] { new Constant("1") }));
+
+            var actual = dim.ToString();
+
+            Assert.AreEqual("DIM A[1]", actual);
+        }
     }
 }
