@@ -1,7 +1,7 @@
 ﻿namespace LearningBasic.Parsing.Code
 {
-    using System.Collections.Generic;
     using System.Linq.Expressions;
+    using LearningBasic.RunTime;
 
     /// <summary>
     /// Defines a contract of binary operator.
@@ -55,7 +55,7 @@
         }
 
         /// <inheritdoc />
-        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(Variables variables)
         {
             var left = Left.GetExpression(variables);
             var right = Right.GetExpression(variables);

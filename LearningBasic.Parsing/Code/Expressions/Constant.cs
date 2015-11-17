@@ -1,9 +1,9 @@
 ﻿namespace LearningBasic.Parsing.Code.Expressions
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq.Expressions;
+    using LearningBasic.RunTime;
 
     public class Constant : IExpression
     {
@@ -27,7 +27,7 @@
             compiledValue = Expression.Constant(Value);
         }
 
-        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(Variables variables)
         {
             return compiledValue;
         }

@@ -26,7 +26,7 @@
             string name = GetFileName(rte);
             rte.Save(name);
 
-            var message = string.Format(Messages.ProgramSaved, rte.LastUsedName);
+            var message = string.Format(Messages.ProgramSaved, rte.Variables.LastUsedProgramName);
             return new EvaluateResult(message);
         }
 
@@ -34,13 +34,13 @@
         {
             if (Name == null)
             {
-                if (rte.LastUsedName == null)
+                if (rte.Variables.LastUsedProgramName == null)
                 {
                     rte.InputOutput.Write(Messages.InputProgramName);
                     return rte.InputOutput.ReadLine();
                 }
                 else
-                    return rte.LastUsedName;
+                    return rte.Variables.LastUsedProgramName;
             }
             else
                 return Name;

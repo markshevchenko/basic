@@ -13,10 +13,10 @@ namespace LearningBasic.Parsing.Code.Statements
         {
             var rte = MakeRunTimeEnvironment();
             var randomize = new Randomize(new Constant(100));
-            var notExpected = rte.Variables[RunTimeEnvironment.RandomKey];
+            var notExpected = rte.Variables.Random;
 
             randomize.Execute(rte);
-            var actual = rte.Variables[RunTimeEnvironment.RandomKey];
+            var actual = rte.Variables.Random;
 
             Assert.AreNotEqual(notExpected, actual);
         }

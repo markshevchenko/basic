@@ -17,9 +17,9 @@
             : base("RND", args)
         { }
 
-        public override Expression GetExpression(IDictionary<string, dynamic> variables)
+        public override Expression GetExpression(Variables variables)
         {
-            var random = Expression.Constant(variables[RunTimeEnvironment.RandomKey]);
+            var random = Expression.Constant(variables.Random);
             var args = Args.Select(p => p.GetExpression(variables))
                            .ToArray();
 

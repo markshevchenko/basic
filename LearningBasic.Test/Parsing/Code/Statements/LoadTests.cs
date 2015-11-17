@@ -41,7 +41,7 @@
 
             load.Execute(rte);
 
-            Assert.AreEqual("filename", rte.LastUsedName);
+            Assert.AreEqual("filename", rte.Variables.LastUsedProgramName);
         }
 
         [TestMethod]

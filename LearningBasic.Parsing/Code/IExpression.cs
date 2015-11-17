@@ -1,7 +1,7 @@
 ﻿namespace LearningBasic.Parsing.Code
 {
-    using System.Collections.Generic;
     using System.Linq.Expressions;
+    using LearningBasic.RunTime;
 
     /// <summary>
     /// Declares a generic expression that can be compiled to <see cref="Expression"/>.
@@ -25,6 +25,6 @@
         /// </summary>
         /// <param name="variables">The variables dictionary to get and set variables' values.</param>
         /// <returns>.NET expression object.</returns>
-        Expression GetExpression(IDictionary<string, dynamic> variables);
+        Expression GetExpression(Variables variables);
     }
 }

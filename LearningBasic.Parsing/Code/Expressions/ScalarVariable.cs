@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
+    using LearningBasic.RunTime;
 
     public class ScalarVariable : ILValue
     {
@@ -19,7 +20,7 @@
             Name = name.ToUpper();
         }
 
-        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(Variables variables)
         {
             var dictionary = Expression.Constant(variables);
             var name = Expression.Constant(Name);

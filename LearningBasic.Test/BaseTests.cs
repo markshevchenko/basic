@@ -101,9 +101,9 @@
             return new Constant("123");
         }
 
-        protected static IDictionary<string, dynamic> MakeVariables()
+        protected static Variables MakeVariables()
         {
-            return new Dictionary<string, dynamic>();
+            return new Variables();
         }
 
         protected static MockLoop MakeLoop(int counter)

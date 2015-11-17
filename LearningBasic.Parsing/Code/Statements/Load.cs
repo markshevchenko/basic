@@ -20,7 +20,7 @@
         {
             rte.Load(Name);
 
-            var message = string.Format(Messages.ProgramLoaded, rte.LastUsedName);
+            var message = string.Format(Messages.ProgramLoaded, rte.Variables.LastUsedProgramName);
             return new EvaluateResult(message);
         }
 

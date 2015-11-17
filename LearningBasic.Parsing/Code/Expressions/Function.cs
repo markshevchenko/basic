@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using LearningBasic.RunTime;
 
     public class Function : IExpression
     {
@@ -27,7 +28,7 @@
             Args = args;
         }
 
-        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(Variables variables)
         {
             var args = Args.Select(p => p.GetExpression(variables))
                            .ToArray();

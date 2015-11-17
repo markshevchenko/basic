@@ -1,7 +1,7 @@
 ﻿namespace LearningBasic.Parsing.Code
 {
-    using System.Collections.Generic;
     using System.Linq.Expressions;
+    using LearningBasic.RunTime;
 
     /// <summary>
     /// Defines a contract of unary operator.
@@ -48,7 +48,7 @@
         }
 
         /// <inheritdoc />
-        public virtual Expression GetExpression(IDictionary<string, dynamic> variables)
+        public virtual Expression GetExpression(Variables variables)
         {
             var operand = Operand.GetExpression(variables);
             return BuildExpression(operand);

@@ -41,7 +41,7 @@
             return "FOR " + Variable + " = " + From + " TO " + To + " STEP " + Step;
         }
 
-        protected virtual ForLoop CreateForLoop(IDictionary<string, dynamic> variables)
+        protected virtual ForLoop CreateForLoop(Variables variables)
         {
             var variable = Variable.GetExpression(variables);
             var from = From.GetExpression(variables);

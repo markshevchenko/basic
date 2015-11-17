@@ -19,14 +19,6 @@
         bool IsRunning { get; }
 
         /// <summary>
-        /// Gets the last used program name.
-        /// </summary>
-        /// <remarks>
-        /// The property is changed by <see cref="Load(string)"/> and <see cref="Save(string)"/> methods.
-        /// </remarks>
-        string LastUsedName { get; }
-
-        /// <summary>
         /// Gets the <see cref="IInputOutput">input/output</see> object.
         /// </summary>
         IInputOutput InputOutput { get; }
@@ -34,7 +26,7 @@
         /// <summary>
         /// Gets the variables dictionary.
         /// </summary>
-        IDictionary<string, dynamic> Variables { get; }
+        Variables Variables { get; }
 
         /// <summary>
         /// Gets the program lines.

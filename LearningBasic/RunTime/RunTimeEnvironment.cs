@@ -10,11 +10,9 @@
     /// </summary>
     public class RunTimeEnvironment : IRunTimeEnvironment, IDisposable
     {
-        public const string RandomKey = "@Random";
-
         private readonly IInputOutput inputOutput;
         private readonly IProgramRepository programRepository;
-        private readonly Dictionary<string, dynamic> variables;
+        private readonly Variables variables;
 
         /// <inheritdoc />
         public virtual bool IsClosed { get { return IsDisposed; } }
@@ -23,18 +21,12 @@
         public virtual bool IsRunning { get { return Runner != null; } }
 
         /// <inheritdoc />
-        public virtual string LastUsedName { get; private set; }
-
-        /// <inheritdoc />
         public virtual IInputOutput InputOutput { get { return inputOutput; } }
 
         /// <summary>
         /// Gets the dictionary of the existing variables.
         /// </summary>
-        public virtual Dictionary<string, dynamic> Variables { get { return variables; } }
-
-        /// <inheritdoc />
-        IDictionary<string, dynamic> IRunTimeEnvironment.Variables { get { return Variables; } }
+        public virtual Variables Variables { get { return variables; } }
 
         /// <summary>
         /// Gets the list of the program lines.
@@ -73,10 +65,8 @@
             this.inputOutput = inputOutput;
             this.inputOutput.OnBreak += InputOutput_OnBreak;
             this.programRepository = programRepository;
-            this.variables = new Dictionary<string, dynamic>();
-            this.variables[RandomKey] = new Random();
+            this.variables = new Variables();
 
-            LastUsedName = null;
             IsDisposed = false;
             Lines = new List<ILine>();
             StackOfLoops = new Stack<MultilineLoop>();
@@ -136,7 +126,7 @@
                 throw new ArgumentNullException("name");
 
             programRepository.Save(name, Lines);
-            LastUsedName = name;
+            variables.LastUsedProgramName = name;
         }
 
         /// <inheritdoc />
@@ -150,7 +140,7 @@
 
             var lines = programRepository.Load(name);
             Lines = new List<ILine>(lines);
-            LastUsedName = name;
+            variables.LastUsedProgramName = name;
         }
 
         /// <inheritdoc />
@@ -214,7 +204,7 @@
         {
             ThrowIfDisposed();
 
-            Variables[RandomKey] = new Random(seed);
+            Variables.Random = new Random(seed);
         }
 
         /// <inheritdoc />

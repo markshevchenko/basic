@@ -189,7 +189,7 @@
 
             rte.Save("the name of the file");
 
-            Assert.AreEqual("the name of the file", rte.LastUsedName);
+            Assert.AreEqual("the name of the file", rte.Variables.LastUsedProgramName);
         }
 
         [TestMethod]
@@ -230,7 +230,7 @@
 
             rte.Load("the name of the file");
 
-            Assert.AreEqual("the name of the file", rte.LastUsedName);
+            Assert.AreEqual("the name of the file", rte.Variables.LastUsedProgramName);
         }
 
         [TestMethod]
@@ -390,12 +390,12 @@
         {
             var rte = MakeRunTimeEnvironment();
 
-            var notExpected = rte.Variables[RunTimeEnvironment.RandomKey];
+            var notExpected = rte.Variables.Random;
 
             const int randomInteger = 54321;
             rte.Randomize(randomInteger);
 
-            var actual = rte.Variables[RunTimeEnvironment.RandomKey];
+            var actual = rte.Variables.Random;
 
             Assert.AreNotEqual(notExpected, actual);
 
