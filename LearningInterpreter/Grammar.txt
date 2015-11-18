@@ -1,0 +1,133 @@
+﻿start-rule		: INTEGER ('NEXT' | statement)
+				| statement
+				;
+
+statement		: 'DIM' IDENTIFIER array
+				| 'RANDOMIZE' expression
+				| 'PRINT' expressions ';'?
+				| 'INPUT' (STRING ',')? l-value
+				| 'IF' condition 'THEN' statement ('ELSE' statement)?
+				| 'FOR' l-value '=' expression 'TO' expression ('STEP' expression)? (statement 'NEXT')?
+				| 'GOTO' expression
+				| 'REMOVE' range
+				| 'LIST' range?
+				| 'SAVE' STRING?
+				| 'LOAD' STRING
+				| 'REM' COMMENT
+				| 'RUN'
+				| 'END'
+				| 'QUIT'
+				| 'LET'? assignment
+				;
+
+assignment		: l-value '=' expression
+				;
+
+range			: INTEGER ('-' INTEGER)?
+				;
+
+condition		: or-operands
+				;
+
+or-operands		: or-operand ('OR' | 'XOR' or-operands)?
+				;
+
+or-operand		: and-operands
+				;
+
+and-operands	: and-operand ('AND' and-operands)?
+				;
+
+and-operand		: not-operand
+				;
+
+not-operand		: 'NOT' not-operand
+				| '(' condition ');
+				| relation
+				;
+
+relation		: expression '=' expression
+				| expression '<>' expression
+				| expression '<' expression
+				| expression '>' expression
+				| expression '<=' expression
+				| expression '>=' expression
+				;
+
+expressions		: expression (',' expressions)?
+				;
+
+expression		: add-operands
+				;
+
+add-operands	: add-operand ('+' | '-' add-operands)?
+				;
+
+add-operand		: mul-operands
+				;
+
+mul-operands	: mul-operand ('*' | '/' | 'MOD' mul-operands)?
+				;
+
+mul-operand		: un-operand
+				;
+
+un-operand		: value ('^' pow-operands)?
+
+pow-operands	: pow-operand ('^' pow-operands)?
+				;
+
+
+pow-operand		: '-' mul-operand
+				| '+' mul-operand
+				| value
+
+value			: constant
+				| l-value
+				| function '(' expressions? ')'
+				| '(' expression ')'
+				;
+
+l-value			: IDENTIFIER array-suffix?
+				;
+
+array-suffix	: '[' expressions ']'
+				;
+
+constant		: INTEGER
+				| FLOAT
+				| STRING
+				;
+
+function		: 'RND'
+				| 'LEN'
+				| 'STR'
+				| 'CHR'
+				| 'ASC'
+				| 'MID'
+				| 'UPPER'
+				| 'LOWER'
+				| 'TRIM'
+				| 'INSTR'
+				| 'INSTRREV'
+				| 'REPLACE'
+				| 'JOIN'
+				| 'SPLIT'
+				| 'ABS'
+				| 'SIGN'
+				| 'MAX'
+				| 'MIN'
+				| 'EXP'
+				| 'LN'
+				| 'LOG'
+				| 'SQRT'
+				| 'SIN'
+				| 'COS'
+				| 'TAN'
+				| 'ASIN'
+				| 'ACOS'
+				| 'ATAN'
+				| 'ATAN2'
+				| 'CEIL'
+				| 'FLOOR'
+				;
