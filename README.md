@@ -13,12 +13,13 @@ The solution contains four projects:
 
 `LearningInterpreter`&ndash;&mdash; is the domain module implementing
 `RunEvaluatePrintLoop` and `RunTimeEnvironment` with `Variables` and `Program`.
+It implements general core for the any program language with the line numbers.
 
 `LearningInterpreter.Console`&ndash;&mdash; implements console input and output,
 and saving/loading to/from disk files.
 
 Also, the project is the **composition root** of the entire solution, so it has
-the entry point, it assembles all together, and starts.
+the entry point, assembles all together, and starts.
 
 `LearningInterpreter.Basic`&ndash;&mdash; implement BASIC specific classes
 like `BasicParser`, or `Print`.
