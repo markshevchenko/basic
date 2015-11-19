@@ -7,7 +7,7 @@
     /// <summary>
     /// Implements the sorted list of the program lines.
     /// </summary>
-    public class SortedLineList : IReadOnlyList<ILine>
+    public class Program : IReadOnlyList<ILine>
     {
         private readonly IComparer<string> labelComparer;
         private readonly List<string> labels;
@@ -36,7 +36,7 @@
             get { return lines.Count; }
         }
 
-        public SortedLineList(IComparer<string> labelComparer)
+        public Program(IComparer<string> labelComparer)
         {
             if (labelComparer == null)
                 throw new ArgumentNullException("labelComparer");

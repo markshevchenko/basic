@@ -68,7 +68,7 @@
     <Compile Include="RunTime\ProgramRunner.cs" />
     <Compile Include="RunTime\RunTimeEnvironment.cs" />
     <Compile Include="RunTime\RunTimeException.cs" />
-    <Compile Include="RunTime\SortedLineList.cs" />
+    <Compile Include="RunTime\Program.cs" />
     <Compile Include="RunTime\Variables.cs" />
   </ItemGroup>
   <ItemGroup>
