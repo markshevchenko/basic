@@ -31,10 +31,10 @@
         /// <summary>
         /// Gets the list of the program lines.
         /// </summary>
-        public virtual List<ILine> Lines { get; private set; }
+        public virtual List<IAstNode> Lines { get; private set; }
 
         /// <inheritdoc />
-        IReadOnlyList<ILine> IRunTimeEnvironment.Lines { get { return Lines; } }
+        IReadOnlyList<IAstNode> IRunTimeEnvironment.Lines { get { return Lines; } }
 
         /// <inheritdoc />
         public bool IsDisposed { get; private set; }
@@ -68,30 +68,24 @@
             this.variables = new Variables();
 
             IsDisposed = false;
-            Lines = new List<ILine>();
+            Lines = new List<IAstNode>();
             StackOfLoops = new Stack<MultilineLoop>();
         }
 
         /// <inheritdoc />
-        public int BinarySearch(ILine line)
+        public int BinarySearch(IAstNode line)
         {
             if (line == null)
                 throw new ArgumentNullException("line");
-
-            if (string.IsNullOrEmpty(line.Label))
-                throw new ArgumentException(ErrorMessages.EmptyLabel, "line");
 
             return Lines.BinarySearch(line);
         }
 
         /// <inheritdoc />
-        public void AddOrUpdate(ILine line)
+        public void AddOrUpdate(IAstNode line)
         {
             if (line == null)
                 throw new ArgumentNullException("line");
-
-            if (string.IsNullOrEmpty(line.Label))
-                throw new ArgumentException(ErrorMessages.EmptyLabel, "line");
 
             var index = Lines.BinarySearch(line);
 

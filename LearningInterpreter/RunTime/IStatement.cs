@@ -1,9 +1,11 @@
 ﻿namespace LearningInterpreter.RunTime
 {
+    using LearningInterpreter.Parsing;
+
     /// <summary>
     /// Declares a statement that can be runned within a <see cref="IRunTimeEnvironment">run-time environment</see>.
     /// </summary>
-    public interface IStatement
+    public interface IStatement : IAstNode
     {
         /// <summary>
         /// Executes the statement in the context of the specified <see cref="IRunTimeEnvironment"/>.

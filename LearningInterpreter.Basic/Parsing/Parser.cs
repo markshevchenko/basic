@@ -27,7 +27,7 @@
         }
 
         /// <inheritdoc />
-        ILine ILineParser.Parse(string line)
+        IAstNode ILineParser.Parse(string line)
         {
             return Parse(line);
         }

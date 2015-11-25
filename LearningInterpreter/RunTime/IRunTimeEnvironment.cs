@@ -31,7 +31,7 @@
         /// <summary>
         /// Gets the program lines.
         /// </summary>
-        IReadOnlyList<ILine> Lines { get; }
+        IReadOnlyList<IAstNode> Lines { get; }
 
         /// <summary>
         /// Searches the entire sorted list of lines for a specified line and returns
@@ -44,13 +44,13 @@
         /// line that is larger than a line or, if there is no larger line, the bitwise
         /// complement of the count of <see cref="Lines"/>.
         /// </returns>
-        int BinarySearch(ILine line);
+        int BinarySearch(IAstNode line);
 
         /// <summary>
         /// Adds the specified line to the program, or updates existing line, if it has the same label.
         /// </summary>
         /// <param name="line">The program line.</param>
-        void AddOrUpdate(ILine line);
+        void AddOrUpdate(IAstNode line);
 
         /// <summary>
         /// Removes a range of element form the list of lines.

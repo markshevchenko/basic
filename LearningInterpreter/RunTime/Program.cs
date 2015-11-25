@@ -3,11 +3,12 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using LearningInterpreter.Parsing;
 
     /// <summary>
     /// Implements the sorted list of the program lines.
     /// </summary>
-    public class Program : IReadOnlyList<ILine>
+    public class Program : IReadOnlyList<IAstNode>
     {
         private readonly IComparer<string> labelComparer;
         private readonly List<string> labels;

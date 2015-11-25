@@ -66,7 +66,7 @@
 
         public static IReadOnlyList<ILine> Parse(ILineParser parser, IEnumerable<string> lines)
         {
-            return lines.Select(parser.Parse)
+            return ines.Select(parser.Parse)
                         .ToArray();
         }
 

@@ -12,6 +12,6 @@
         /// </summary>
         /// <param name="line">The single program line.</param>
         /// <returns>The parsed line.</returns>
-        ILine Parse(string line);
+        IAstNode Parse(string line);
     }
 }

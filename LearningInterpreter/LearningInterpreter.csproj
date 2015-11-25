@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="IO\IInputOutput.cs" />
     <Compile Include="IO\IProgramRepository.cs" />
+    <Compile Include="RunTime\IAstNode.cs" />
     <Compile Include="Parsing\ILineParser.cs" />
     <Compile Include="Parsing\IScanner.cs" />
     <Compile Include="Parsing\IScannerFactory.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Parsing\TextReaderExtensions.cs" />
     <Compile Include="Properties\Version.cs" />
     <Compile Include="RunTime\EvaluateResult.cs" />
-    <Compile Include="RunTime\ILine.cs" />
+    <Compile Include="RunTime\ICompiler.cs" />
     <Compile Include="RunTime\ILoop.cs" />
     <Compile Include="IO\IOException.cs" />
     <Compile Include="RunTime\IRunTimeEnvironment.cs" />
