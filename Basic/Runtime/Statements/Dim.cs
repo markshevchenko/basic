@@ -38,10 +38,20 @@
             if (indexes.Length < 1 || indexes.Length > 4)
                 throw new InvalidOperationException(ErrorMessages.UnsupportedArrayDimension);
 
-            rte.Variables[name] = System.Array.CreateInstance(typeof(object), indexes);
+            rte.Variables[name] = CreateArrayAndFillWithZeros(indexes);
 
             var format = evaluateResultFormats[indexes.Length];
             return new EvaluateResult(name + format, indexesAsObjects);
+        }
+
+        private System.Array CreateArrayAndFillWithZeros(int[] indexes)
+        {
+            var array = System.Array
+                              .CreateInstance(typeof(object), indexes);
+
+            array.Fill(0);
+
+            return array;
         }
 
         public override string ToString()
