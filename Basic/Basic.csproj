@@ -89,4 +89,13 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="fibonacci.bas">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="quadratic.bas">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
