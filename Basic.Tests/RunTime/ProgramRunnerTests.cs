@@ -1,16 +1,16 @@
-﻿namespace LearningInterpreter.RunTime
+﻿namespace Basic.Tests.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using LearningInterpreter.Basic.Code;
-    using LearningInterpreter.Basic.Code.Expressions;
-    using LearningInterpreter.Basic.Code.Statements;
+    using Basic.Runtime;
+    using Basic.Runtime.Expressions;
+    using Basic.Runtime.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ProgramRunnerTests
     {
-        private readonly static IReadOnlyList<ILine> lines = new[]
+        private readonly static IReadOnlyList<Line> lines = new[]
         {
             new Line("10", new Rem("Fibonacci sequence")),
             new Line("20", new Print(new[] {new Constant("1") })),

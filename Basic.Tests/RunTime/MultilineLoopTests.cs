@@ -1,7 +1,7 @@
-﻿namespace LearningInterpreter.RunTime
+﻿namespace Basic.Tests.Runtime
 {
     using System;
-    using LearningInterpreter.Basic.Code;
+    using Basic.Runtime;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -11,7 +11,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void MultilineLoop_WithNullLine_ThrowsArgumentNullException()
         {
-            ILine line = null;
+            Line line = null;
             ILoop loop = MakeLoop(100);
 
             var value = new MultilineLoop(line, loop);
@@ -21,7 +21,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void MultilineLoop_WithNullLoop_ThrowsArgumentNullException()
         {
-            ILine line = new Line("10", MakeStatement());
+            Line line = new Line("10", MakeStatement());
             ILoop loop = null;
 
             var value = new MultilineLoop(line, loop);
@@ -31,7 +31,7 @@
         public void IsOver_AtStart_IsFalse()
         {
             const int countOfIterations = 2;
-            ILine line = new Line("10", MakeStatement());
+            Line line = new Line("10", MakeStatement());
             ILoop loop = MakeLoop(countOfIterations);
 
             var value = new MultilineLoop(line, loop);
@@ -43,7 +43,7 @@
         public void IsOver_AtEnd_IsTrue()
         {
             const int countOfIterations = 2;
-            ILine line = new Line("10", MakeStatement());
+            Line line = new Line("10", MakeStatement());
             ILoop loop = MakeLoop(countOfIterations);
 
             var value = new MultilineLoop(line, loop);

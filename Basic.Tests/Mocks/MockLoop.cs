@@ -1,7 +1,6 @@
-﻿namespace LearningInterpreter.Mocks
+﻿namespace Basic.Tests.Mocks
 {
-    using System;
-    using LearningInterpreter.RunTime;
+    using Basic.Runtime;
 
     public class MockLoop : ILoop
     {

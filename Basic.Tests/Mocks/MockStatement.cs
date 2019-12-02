@@ -1,7 +1,7 @@
-﻿namespace LearningInterpreter.Mocks
+﻿namespace Basic.Tests.Mocks
 {
     using System;
-    using LearningInterpreter.RunTime;
+    using Basic.Runtime;
 
     public class MockStatement : IStatement
     {
@@ -26,7 +26,7 @@
             this.result = EvaluateResult.None;
         }
 
-        public EvaluateResult Execute(IRunTimeEnvironment rte)
+        public EvaluateResult Execute(RunTimeEnvironment rte)
         {
             action();
             return result;

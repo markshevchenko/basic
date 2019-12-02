@@ -144,7 +144,7 @@
             return result;
         }
 
-        private static IExpression ReadValue(this Scanner scanner)
+        internal static IExpression ReadValue(this Scanner scanner)
         {
             if (scanner.TryReadConstant(out IExpression expression))
                 return expression;

@@ -1,8 +1,8 @@
-﻿namespace LearningInterpreter.Parsing
+﻿namespace Basic.Tests.Parsing
 {
-    using LearningInterpreter.Basic.Code.Statements;
-    using LearningInterpreter.Basic.Parsing;
-    using LearningInterpreter.RunTime;
+    using Basic.Parsing;
+    using Basic.Runtime;
+    using Basic.Runtime.Statements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -11,107 +11,91 @@
         [TestMethod]
         public void ReadToken_WithExpectedToken_MovesCurrentTokenToNextToken()
         {
-            using (var scanner = MakeScanner("PRINT 123"))
-            {
-                scanner.ReadToken(Token.Print);
+            var scanner = new Scanner("PRINT 123");
 
-                Assert.AreEqual(Token.Integer, scanner.CurrentToken);
-            }
+            scanner.ReadToken(Token.Print);
+
+            Assert.AreEqual(Token.Integer, scanner.CurrentToken);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void ReadToken_WithUnexpectedToken_ThrowsParserException()
         {
-            using (var scanner = MakeScanner("PRINT 123"))
-            {
-                scanner.ReadToken(Token.Input);
-            }
+            var scanner = new Scanner("PRINT 123");
+
+            scanner.ReadToken(Token.Input);
         }
 
         [TestMethod]
         public void ReadToken_WithExpectedTokenAndText_SetsText()
         {
-            using (var scanner = MakeScanner("  Identifier1 + Identifier2 - 3"))
-            {
-                string text = "initial value";
+            var scanner = new Scanner("  Identifier1 + Identifier2 - 3");
+            string text = "initial value";
 
-                scanner.ReadToken(Token.Identifier, out text);
+            scanner.ReadToken(Token.Identifier, out text);
 
-                Assert.AreEqual("Identifier1", text);
-            }
+            Assert.AreEqual("Identifier1", text);
         }
 
         [TestMethod]
         public void TryReadToken_WithExpectedToken_ReturnsTrue()
         {
-            using (var scanner = MakeScanner("PRINT 123"))
-            {
-                var actual = scanner.TryReadToken(Token.Print);
+            var scanner = new Scanner("PRINT 123");
+            var actual = scanner.TryReadToken(Token.Print);
 
-                Assert.IsTrue(actual);
-            }
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
         public void TryReadToken_WithUnexpectedToken_ReturnsFalse()
         {
-            using (var scanner = MakeScanner("PRINT 123"))
-            {
-                var actual = scanner.TryReadToken(Token.Input);
+            var scanner = new Scanner("PRINT 123");
+            var actual = scanner.TryReadToken(Token.Input);
 
-                Assert.IsFalse(actual);
-            }
+            Assert.IsFalse(actual);
         }
 
         [TestMethod]
         public void TryReadToken_WithExpectedTokenAndText_SetsText()
         {
-            using (var scanner = MakeScanner("  Identifier1 + Identifier2 - 3"))
-            {
-                string text = "initial value";
+            var scanner = new Scanner("  Identifier1 + Identifier2 - 3");
+            string text = "initial value";
 
-                scanner.TryReadToken(Token.Identifier, out text);
+            scanner.TryReadToken(Token.Identifier, out text);
 
-                Assert.AreEqual("Identifier1", text);
-            }
+            Assert.AreEqual("Identifier1", text);
         }
 
         [TestMethod]
         public void TryReadToken_WithUnexpectedTokenAndText_SetsTextToEmptyString()
         {
-            using (var scanner = MakeScanner("  Identifier1 + Identifier2 - 3"))
-            {
-                string text = "initial value";
+            var scanner = new Scanner("  Identifier1 + Identifier2 - 3");
+            string text = "initial value";
 
-                scanner.TryReadToken(Token.Integer, out text);
+            scanner.TryReadToken(Token.Integer, out text);
 
-                Assert.AreEqual(string.Empty, text);
-            }
+            Assert.AreEqual(string.Empty, text);
         }
 
         [TestMethod]
         public void TryReadToken_WithExpectedTokenAndFactory_SetsValueOfFactory()
         {
-            using (var scanner = MakeScanner("NEXT"))
-            {
-                IStatement value;
-                scanner.TryReadToken(Token.Next, () => new Next(), out value);
+            var scanner = new Scanner("NEXT");
+            IStatement value;
+            scanner.TryReadToken(Token.Next, () => new Next(), out value);
 
-                Assert.IsInstanceOfType(value, typeof(Next));
-            }
+            Assert.IsInstanceOfType(value, typeof(Next));
         }
 
         [TestMethod]
         public void TryReadToken_WithUnexpectedTokenAndFactory_SetsDefaultValue()
         {
-            using (var scanner = MakeScanner("QUIT"))
-            {
-                IStatement value;
-                scanner.TryReadToken(Token.Next, () => new Next(), out value);
+            var scanner = new Scanner("QUIT");
+            IStatement value;
+            scanner.TryReadToken(Token.Next, () => new Next(), out value);
 
-                Assert.IsNull(value);
-            }
+            Assert.IsNull(value);
         }
     }
 }

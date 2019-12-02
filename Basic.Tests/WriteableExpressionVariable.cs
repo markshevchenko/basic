@@ -1,4 +1,4 @@
-﻿namespace LearningInterpreter
+﻿namespace Basic.Tests
 {
     using System.Linq.Expressions;
 

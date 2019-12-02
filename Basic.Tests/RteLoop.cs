@@ -1,9 +1,8 @@
-﻿namespace LearningInterpreter
+﻿namespace Basic.Tests
 {
-    using LearningInterpreter.Basic.Code;
-    using LearningInterpreter.Basic.Code.Statements;
-    using LearningInterpreter.Mocks;
-    using LearningInterpreter.RunTime;
+    using Basic.Runtime;
+    using Basic.Runtime.Statements;
+    using Basic.Tests.Mocks;
 
     /// <summary>
     /// Helper object to represent run-time environment with runned loop.

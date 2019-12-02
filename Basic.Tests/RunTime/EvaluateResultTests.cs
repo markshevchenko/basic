@@ -1,7 +1,7 @@
-﻿namespace LearningInterpreter
+﻿namespace Basic.Tests.Runtime
 {
     using System;
-    using LearningInterpreter.RunTime;
+    using Basic.Runtime;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

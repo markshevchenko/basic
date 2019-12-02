@@ -1,8 +1,8 @@
-﻿namespace LearningInterpreter.Mocks
+﻿namespace Basic.Tests.Mocks
 {
     using System;
     using System.Collections.Generic;
-    using LearningInterpreter.IO;
+    using Basic.IO;
 
     public class MockInputOutput : IInputOutput
     {

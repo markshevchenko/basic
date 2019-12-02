@@ -1,39 +1,18 @@
-﻿namespace LearningInterpreter
+﻿namespace Basic.Tests
 {
+    using Basic.IO;
+    using Basic.Runtime;
+    using Basic.Runtime.Expressions;
+    using Basic.Runtime.Statements;
+    using Basic.Tests.Mocks;
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using LearningInterpreter.Basic.Code.Statements;
-    using LearningInterpreter.Basic.Code.Expressions;
-    using LearningInterpreter.Basic.Code;
-    using LearningInterpreter.Basic.Parsing;
-    using LearningInterpreter.IO;
-    using LearningInterpreter.Mocks;
-    using LearningInterpreter.RunTime;
-    using LearningInterpreter.Parsing;
 
     /// <summary>
     /// Implements helper methods for unit tests.
     /// </summary>
     public abstract class BaseTests
     {
-        protected static TextReader MakeReader(string inputString)
-        {
-            return new StringReader(inputString);
-        }
-
-        protected static Scanner MakeScanner(string inputString)
-        {
-            var reader = MakeReader(inputString);
-
-            return new Scanner(reader);
-        }
-
-        protected static Parser MakeParser()
-        {
-            return new Parser(new ScannerFactory());
-        }
-
         protected static MockInputOutput MakeInputOutput()
         {
             return new MockInputOutput();
@@ -44,7 +23,7 @@
             return new MockInputOutput(inputString);
         }
 
-        private static IReadOnlyList<ILine> lines = new List<ILine>
+        private static IReadOnlyList<Line> lines = new List<Line>
         {
             new Line("10", new Input(new ScalarVariable("A"))),
             new Line("20", new Let(new ScalarVariable("B"), new ScalarVariable("A"))),
